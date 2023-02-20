@@ -13,7 +13,7 @@ class Sangjishik extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      debugShowCheckedModeBanner: kDebugMode,
+      debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
     );
   }

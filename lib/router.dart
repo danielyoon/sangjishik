@@ -18,5 +18,6 @@ final appRouter = GoRouter(
 );
 
 String? _handleRedirect(BuildContext context, GoRouterState state) {
+  debugPrint('Navigate to: ${state.location}');
   return null;
 }
