@@ -192,8 +192,12 @@ Map<int, dynamic> quotes = {
     'author': 'Bill Burr'
   },
   41: {
+    'quote': 'Constantly talking isn’t necessarily communicating.',
+    'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
+  },
+  42: {
     'quote':
-        'Everyone goes through hard time... just in different phases of their lives. Some old, some young, some short period, some long. Beat it, then you’re free!',
-    'author': 'Daniel Yoon'
+        'What a loss to spend that much time with someone, only to find out that she’s a stranger.',
+    'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
   },
 };

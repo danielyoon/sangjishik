@@ -1,25 +1,25 @@
 import 'package:sangjishik/core_packages.dart';
 
 class HomePostButtons extends StatelessWidget {
-  final bool isMobile;
+  final bool isSmallScreen;
 
-  const HomePostButtons({Key? key, required this.isMobile}) : super(key: key);
+  const HomePostButtons({Key? key, required this.isSmallScreen})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return isMobile
-        ? Text('Latest Post')
-        : ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 900),
-            child: Row(
+    return Center(
+      child: isSmallScreen
+          ? Text('Latest Post')
+          : Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text('TEST'),
-                Text('TEST2'),
-                Text('TEST3'),
-                Text('TEST4'),
+              children: const [
+                Text('Latest'),
+                Text('Laugh'),
+                Text('Learn'),
+                Text('Landom'),
               ],
             ),
-          );
+    );
   }
 }

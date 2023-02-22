@@ -18,12 +18,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _controller;
-  bool seenHomeBanner = false;
+  final ValueNotifier<bool> seenHomeBanner = ValueNotifier<bool>(false);
+  late double screenHeight;
 
   String quote = '';
   String author = '';
 
-  void _onScrollPosition() {}
+  void _onScrollPosition() {
+    _controller.animateTo(screenHeight,
+        duration: $styles.times.fast, curve: Curves.ease);
+  }
 
   @override
   void initState() {
@@ -47,12 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     quote = list[i]['quote'];
     author = list[i]['author'];
+    // quote = list[10]['quote'];
+    // author = list[10]['author'];
   }
 
   @override
   Widget build(BuildContext context) {
     double height = context.heightPx;
     double width = context.widthPx;
+
+    screenHeight = height;
 
     bool isSmallScreen = context.widthPx < 700;
     DateTime currentDate = DateTime.now();
@@ -72,14 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
       return list[i];
     }
 
-    void scrollToContent() {}
-
     bool removeHomeBanner(double offset) {
-      print(offset);
-      if (offset > 925) {
-        setState(() {
-          seenHomeBanner = true;
-        });
+      if (offset == height) {
+        seenHomeBanner.value = true;
         return true;
       }
 
@@ -91,16 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: ListView(
         controller: _controller,
         children: [
-          ValueListenableBuilder(
-              valueListenable: valueListenable, builder: builder),
-          seenHomeBanner
-              ? Container()
-              : HomeBanner(
-                  background: getBackground(),
-                  height: height,
-                  width: width,
-                  onTap: _onScrollPosition,
-                ),
+          _buildHomeBanner(getBackground, height, width),
           SizedBox(
             height: height,
             child: Stack(
@@ -113,77 +107,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: PageScrollPhysics(),
                     children: [
                       Center(
-                        child: Column(
-                          children: const [
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                            Text('TEST'),
-                          ],
+                        child: SizedBox(
+                          width: isSmallScreen ? width / 1.5 : width / 2,
+                          child: Column(
+                            children: [
+                              VSpace.med,
+                              QuoteText(text: '"$quote"'),
+                              VSpace.med,
+                              AuthorText(text: '- $author'),
+                            ],
+                          ),
                         ),
                       ),
+                      VSpace.xl,
+                      HomePostButtons(isSmallScreen: isSmallScreen),
                     ],
                   ),
                 ),
@@ -195,58 +132,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar buildHomeAppBar(bool isSmallScreen) {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.black,
-      centerTitle: true,
-      leading: !isSmallScreen ? Center(child: Text('LOGO')) : Container(),
-      title: isSmallScreen ? Text('LOGO') : Container(),
-      actions: [
-        if (isSmallScreen == true)
-          //FIXME: Add open drawer screen!
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-                splashRadius: 1,
-                onPressed: () => print('TEST'),
-                icon: Icon(Icons.menu)),
-          )
-        else
-          //FIXME: Should fix this to make it presentable...
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              Text('About'),
-              Text('Blogs'),
-              Text('Get In Touch'),
-              Text('Login'),
-            ],
-          ),
-      ],
+  ValueListenableBuilder<bool> _buildHomeBanner(
+      String Function() getBackground, double height, double width) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: seenHomeBanner,
+      builder: (BuildContext context, bool value, _) {
+        return value
+            ? Container()
+            : HomeBanner(
+                background: getBackground(),
+                height: height,
+                width: width,
+                onTap: _onScrollPosition,
+              );
+      },
     );
   }
 }
-
-// seenHomeBanner
-// ? Container()
-//     : HomeBanner(
-// background: getBackground(),
-// height: height,
-// width: width,
-// onTap: _onScrollPosition,
-// ),
-
-// Column(
-// children: [
-// Column(
-// children: [
-// VSpace.med,
-// QuoteText(text: '"$quote"'),
-// VSpace.med,
-// AuthorText(text: '- $author'),
-// ],
-// ),
-// ],
-// ),
