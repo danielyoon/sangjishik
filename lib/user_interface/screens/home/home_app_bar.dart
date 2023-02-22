@@ -1,24 +1,24 @@
 import 'package:sangjishik/core_packages.dart';
 
 class HomeAppBar extends StatelessWidget {
-  final bool isMobile;
+  final bool isSmallScreen;
 
-  const HomeAppBar({Key? key, required this.isMobile}) : super(key: key);
+  const HomeAppBar({Key? key, required this.isSmallScreen}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      //FIXME: Make a correctly sized container for app bar
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         centerTitle: true,
-        leading: !isMobile ? Text('LOGO') : Container(),
-        title: isMobile ? Text('LOGO') : Container(),
+        leading: !isSmallScreen ? Center(child: Text('LOGO')) : Container(),
+        title: isSmallScreen ? Text('LOGO') : Container(),
         actions: [
-          if (isMobile == true)
+          if (isSmallScreen == true)
+            //FIXME: Add open drawer screen!
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
@@ -27,6 +27,7 @@ class HomeAppBar extends StatelessWidget {
                   icon: Icon(Icons.menu)),
             )
           else
+            //FIXME: Should fix this to make it presentable...
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [

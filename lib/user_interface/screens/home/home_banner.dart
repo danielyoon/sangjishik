@@ -1,35 +1,69 @@
 import 'package:sangjishik/core_packages.dart';
 
 class HomeBanner extends StatelessWidget {
-  final bool isSmallScreen;
-  final bool isNightTime;
+  final String background;
   final double height;
   final double width;
+  final VoidCallback onTap;
 
   const HomeBanner(
       {Key? key,
-      required this.isSmallScreen,
-      required this.isNightTime,
+      required this.background,
       required this.height,
-      required this.width})
+      required this.width,
+      required this.onTap})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Use Random R seed to generate image from list
-    String getBackground() {
-      return 'https://images.pexels.com/photos/13611178/pexels-photo-13611178.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load';
-    }
-
-    //FIXME: Add padding to give a "boxed" feeling
-    //TODO: Add scroll down button
-    //TODO: Add logo to the center or white text
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        height: height,
-        width: width,
-        child: Image.network(getBackground()),
+    return SizedBox(
+      height: height,
+      width: width,
+      child: Padding(
+        padding: EdgeInsets.all($styles.insets.md),
+        child: Stack(
+          children: [
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Image.network(
+                background,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Center(
+              child: Text('LOGO'),
+            ),
+            GestureDetector(
+              onTap: onTap,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: $styles.insets.xl,
+                      width: $styles.insets.xl,
+                      // padding: EdgeInsets.all($styles.insets.sm),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(
+                              color: $styles.colors.white, width: 2)),
+                      child: Center(
+                        child: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: $styles.colors.white,
+                          size: $styles.insets.lg,
+                        ),
+                      ),
+                    ),
+                  ),
+                  VSpace.lg,
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
