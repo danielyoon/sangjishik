@@ -121,6 +121,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       VSpace.xl,
                       HomePostButtons(isSmallScreen: isSmallScreen),
+                      VSpace.med,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
+                        child: Container(
+                          color: Colors.blueAccent,
+                          width: width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('TEST'),
+                              Text('TEST'),
+                              Text('TEST'),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

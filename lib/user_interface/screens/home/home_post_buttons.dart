@@ -11,6 +11,7 @@ class HomePostButtons extends StatelessWidget {
     return Center(
       child: isSmallScreen
           ? Text('Latest Post')
+          //TODO: Work on spacing, whether same as appbar or as is now....
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
