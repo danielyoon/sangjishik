@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:sangjishik/business_logic/data/quotes.dart';
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/user_interface/screens/contact/contact_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
 import 'package:sangjishik/user_interface/screens/home/quoted_text.dart';
-import 'package:sangjishik/user_interface/styled_widgets/styled_navigation.dart';
 import 'package:sized_context/sized_context.dart';
 import 'package:sangjishik/user_interface/screens/home/home_banner.dart';
 import 'package:sangjishik/business_logic/data/backgrounds.dart';
@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _controller;
   final ValueNotifier<bool> seenHomeBanner = ValueNotifier<bool>(false);
   late double screenHeight;
+
+  int _index = 0;
 
   String quote = '';
   String author = '';
@@ -54,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
     author = list[i]['author'];
   }
 
-  void openDrawer() {}
+  void openDrawer() {
+    print('No drawer yet');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
       return false;
     }
 
+    List<Row> rowOfPosts = [];
+
     return NotificationListener(
       onNotification: (t) => removeHomeBanner(_controller.offset),
       child: ListView(
@@ -107,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: HomeAppBar(
                           isSmallScreen: isSmallScreen, onTap: openDrawer),
                     ),
+                    //FIXME: Everything below this is the "body" of the blog
                     Padding(
                       padding: const EdgeInsets.only(top: 65),
                       child: SingleChildScrollView(
@@ -128,8 +135,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             VSpace.xl,
                             HomePostButtons(isSmallScreen: isSmallScreen),
                             VSpace.med,
-                            StyledPosts(isSmallScreen: isSmallScreen),
+                            StyledPosts(
+                                post1: 'POST1', post2: 'POST2', post3: null),
                             VSpace.med,
+                            ...rowOfPosts,
+                            ElevatedButton(
+                              onPressed: () => print('TEST'),
+                              child: Text('LOAD MORE'),
+                            ),
+                            ContactMeScreen(),
                           ],
                         ),
                       ),

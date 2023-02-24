@@ -1,5 +1,6 @@
 import 'package:sangjishik/core_packages.dart';
 
+//TODO: Consider using dialog.fullscreen with hero tag on icon button
 class StyledNavigation extends StatelessWidget {
   final double height;
   final double width;

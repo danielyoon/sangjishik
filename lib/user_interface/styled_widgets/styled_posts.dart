@@ -2,52 +2,95 @@ import 'package:sangjishik/business_logic/utils/device_info.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sized_context/sized_context.dart';
 
+//TODO: Will have to readjust size to show posts even in small screens. Maybe add padding?
+//TODO: Import posts instead of Strings!
 class StyledPosts extends StatelessWidget {
-  final bool isSmallScreen;
+  final String post1;
+  final String? post2;
+  final String? post3;
 
-  const StyledPosts({Key? key, required this.isSmallScreen}) : super(key: key);
+  const StyledPosts({Key? key, required this.post1, this.post2, this.post3})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double width = context.widthPx;
-    double height = context.heightPx;
 
-    // DeviceScreen.isTablet(context);
+    bool isMobile = DeviceScreen.isPhone(context);
+    bool isTablet = DeviceScreen.isTablet(context);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return isSmallScreen
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: width / 1.5,
-                    height: width / 1.5,
-                    color: Colors.redAccent,
+    return LayoutBuilder(builder: (context, constraints) {
+      return isMobile
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: width / 1.5,
+                  height: width / 1.5,
+                  color: Colors.redAccent,
+                  child: Center(
+                    child: Text(post1),
                   ),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: width / 5,
-                    height: width / 4.5,
-                    color: Colors.redAccent,
-                  ),
-                  Container(
-                    width: width / 5,
-                    height: width / 4.5,
-                    color: Colors.greenAccent,
-                  ),
-                  Container(
-                    width: width / 5,
-                    height: width / 4.5,
-                    color: Colors.blueAccent,
-                  ),
-                ],
-              );
-      },
-    );
+                ),
+              ],
+            )
+          : isTablet
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: width / 5,
+                      height: width / 4.5,
+                      color: Colors.redAccent,
+                      child: Center(
+                        child: Text(post1),
+                      ),
+                    ),
+                    post2 == null
+                        ? Container()
+                        : Container(
+                            width: width / 5,
+                            height: width / 4.5,
+                            color: Colors.greenAccent,
+                            child: Center(
+                              child: Text(post2!),
+                            ),
+                          ),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: width / 5,
+                      height: width / 4.5,
+                      color: Colors.redAccent,
+                      child: Center(
+                        child: Text(post1),
+                      ),
+                    ),
+                    post2 == null
+                        ? Container()
+                        : Container(
+                            width: width / 5,
+                            height: width / 4.5,
+                            color: Colors.greenAccent,
+                            child: Center(
+                              child: Text(post2!),
+                            ),
+                          ),
+                    post3 == null
+                        ? Container()
+                        : Container(
+                            width: width / 5,
+                            height: width / 4.5,
+                            color: Colors.greenAccent,
+                            child: Center(
+                              child: Text(post3!),
+                            ),
+                          ),
+                  ],
+                );
+    });
   }
 }
