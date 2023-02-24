@@ -20,7 +20,11 @@ class HomeBanner extends StatelessWidget {
       height: height,
       width: width,
       child: Padding(
-        padding: EdgeInsets.all($styles.insets.md),
+        padding: EdgeInsets.only(
+            top: $styles.insets.md,
+            left: $styles.insets.md,
+            right: $styles.insets.md,
+            bottom: width < 700 ? $styles.insets.xxl : $styles.insets.md),
         child: Stack(
           children: [
             SizedBox(

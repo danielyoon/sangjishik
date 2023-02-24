@@ -4,6 +4,7 @@ import 'package:sangjishik/business_logic/data/quotes.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
 import 'package:sangjishik/user_interface/screens/home/quoted_text.dart';
+import 'package:sangjishik/user_interface/styled_widgets/styled_navigation.dart';
 import 'package:sized_context/sized_context.dart';
 import 'package:sangjishik/user_interface/screens/home/home_banner.dart';
 import 'package:sangjishik/business_logic/data/backgrounds.dart';
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String author = '';
 
   void _onScrollPosition() {
-    _controller.animateTo(screenHeight,
+    _controller.animateTo(screenHeight - 50,
         duration: $styles.times.fast, curve: Curves.ease);
   }
 
@@ -51,9 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     quote = list[i]['quote'];
     author = list[i]['author'];
-    // quote = list[10]['quote'];
-    // author = list[10]['author'];
   }
+
+  void openDrawer() {}
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     bool removeHomeBanner(double offset) {
-      if (offset == height) {
+      if (offset >= height) {
         seenHomeBanner.value = true;
         return true;
       }
@@ -95,53 +96,49 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _controller,
         children: [
           _buildHomeBanner(getBackground, height, width),
-          SizedBox(
-            height: height,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                    top: 0, child: HomeAppBar(isSmallScreen: isSmallScreen)),
-                Padding(
-                  padding: const EdgeInsets.only(top: 65),
-                  child: ListView(
-                    physics: PageScrollPhysics(),
-                    children: [
-                      Center(
-                        child: SizedBox(
-                          width: isSmallScreen ? width / 1.5 : width / 2,
-                          child: Column(
-                            children: [
-                              VSpace.med,
-                              QuoteText(text: '"$quote"'),
-                              VSpace.med,
-                              AuthorText(text: '- $author'),
-                            ],
-                          ),
+          Stack(
+            children: [
+              SizedBox(
+                height: height,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      top: 0,
+                      child: HomeAppBar(
+                          isSmallScreen: isSmallScreen, onTap: openDrawer),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 65),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width: isSmallScreen ? width / 1.5 : width / 2,
+                                child: Column(
+                                  children: [
+                                    VSpace.med,
+                                    QuoteText(text: '"$quote"'),
+                                    VSpace.med,
+                                    AuthorText(text: '- $author'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            VSpace.xl,
+                            HomePostButtons(isSmallScreen: isSmallScreen),
+                            VSpace.med,
+                            StyledPosts(isSmallScreen: isSmallScreen),
+                            VSpace.med,
+                          ],
                         ),
                       ),
-                      VSpace.xl,
-                      HomePostButtons(isSmallScreen: isSmallScreen),
-                      VSpace.med,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: Container(
-                          color: Colors.blueAccent,
-                          width: width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('TEST'),
-                              Text('TEST'),
-                              Text('TEST'),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              // StyledNavigation(height: height, width: width),
+            ],
           ),
         ],
       ),

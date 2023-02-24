@@ -2,8 +2,10 @@ import 'package:sangjishik/core_packages.dart';
 
 class HomeAppBar extends StatelessWidget {
   final bool isSmallScreen;
+  final VoidCallback onTap;
 
-  const HomeAppBar({Key? key, required this.isSmallScreen}) : super(key: key);
+  const HomeAppBar({Key? key, required this.isSmallScreen, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,11 @@ class HomeAppBar extends StatelessWidget {
         title: isSmallScreen ? Text('LOGO') : Container(),
         actions: [
           if (isSmallScreen == true)
-            //FIXME: Add open drawer screen!
             Padding(
               padding: const EdgeInsets.all(8.0),
+              //TODO: Change this to animatedIcon?
               child: IconButton(
-                  splashRadius: 1,
-                  onPressed: () => print('TEST'),
-                  icon: Icon(Icons.menu)),
+                  splashRadius: 1, onPressed: onTap, icon: Icon(Icons.menu)),
             )
           else
             //FIXME: Should fix this to make it presentable...

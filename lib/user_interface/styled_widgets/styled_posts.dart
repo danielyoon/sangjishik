@@ -1,21 +1,53 @@
+import 'package:sangjishik/business_logic/utils/device_info.dart';
 import 'package:sangjishik/core_packages.dart';
+import 'package:sized_context/sized_context.dart';
 
-//FIXME: Can probably have set width/height since columns numbers are all that matters
 class StyledPosts extends StatelessWidget {
-  const StyledPosts({Key? key}) : super(key: key);
+  final bool isSmallScreen;
+
+  const StyledPosts({Key? key, required this.isSmallScreen}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-      ),
-      children: [
-        Image.network('https://picsum.photos/250?image=1'),
-        Image.network('https://picsum.photos/250?image=2'),
-        Image.network('https://picsum.photos/250?image=3'),
-        Image.network('https://picsum.photos/250?image=4'),
-      ],
+    double width = context.widthPx;
+    double height = context.heightPx;
+
+    // DeviceScreen.isTablet(context);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return isSmallScreen
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: width / 1.5,
+                    height: width / 1.5,
+                    color: Colors.redAccent,
+                  ),
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: width / 5,
+                    height: width / 4.5,
+                    color: Colors.redAccent,
+                  ),
+                  Container(
+                    width: width / 5,
+                    height: width / 4.5,
+                    color: Colors.greenAccent,
+                  ),
+                  Container(
+                    width: width / 5,
+                    height: width / 4.5,
+                    color: Colors.blueAccent,
+                  ),
+                ],
+              );
+      },
     );
   }
 }
