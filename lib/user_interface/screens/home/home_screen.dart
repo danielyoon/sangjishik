@@ -30,8 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
     ContactMeScreen(),
   ];
 
+  //FIXME: This does this weird bouncing thing...
   void _onScrollPosition() {
-    _controller.animateTo(screenHeight - 50,
+    _controller.animateTo(screenHeight - 1,
         duration: $styles.times.fast, curve: Curves.ease);
   }
 
@@ -53,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void navigateScreen(int index) {
+    //FIXME: Maybe instead of navigating, push to new page? That way, people can click the back button on mobile?
     _index = index;
+    setState(() {});
   }
 
   @override
@@ -105,7 +108,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Positioned.fill(
                       top: 0,
                       child: HomeAppBar(
-                          isSmallScreen: isSmallScreen, onTap: openDrawer),
+                          isSmallScreen: isSmallScreen,
+                          onTap: navigateScreen,
+                          onDrawerTap: openDrawer),
                     ),
                     Positioned(
                       bottom: 10,

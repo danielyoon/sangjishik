@@ -2,9 +2,14 @@ import 'package:sangjishik/core_packages.dart';
 
 class HomeAppBar extends StatelessWidget {
   final bool isSmallScreen;
-  final VoidCallback onTap;
+  final VoidCallback onDrawerTap;
+  final Function(int) onTap;
 
-  const HomeAppBar({Key? key, required this.isSmallScreen, required this.onTap})
+  const HomeAppBar(
+      {Key? key,
+      required this.isSmallScreen,
+      required this.onDrawerTap,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -24,17 +29,20 @@ class HomeAppBar extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               //TODO: Change this to animatedIcon?
               child: IconButton(
-                  splashRadius: 1, onPressed: onTap, icon: Icon(Icons.menu)),
+                  splashRadius: 1,
+                  onPressed: onDrawerTap,
+                  icon: Icon(Icons.menu)),
             )
           else
             //FIXME: Should fix this to make it presentable...
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                Text('About'),
-                Text('Blogs'),
-                Text('Get In Touch'),
-                Text('Login'),
+              children: [
+                StyledTextButton(onPressed: () => onTap(1), text: 'About'),
+                StyledTextButton(onPressed: () => onTap(2), text: 'Blogs'),
+                StyledTextButton(
+                    onPressed: () => onTap(3), text: 'Get In Touch'),
+                //FIXME: This should open a popup banner
+                StyledTextButton(onPressed: () => onTap(0), text: 'Login'),
               ],
             ),
         ],

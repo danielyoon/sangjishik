@@ -7,7 +7,7 @@ class QuoteText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text);
+    return Text(text, textAlign: TextAlign.center);
   }
 }
 

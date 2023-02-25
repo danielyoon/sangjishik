@@ -200,4 +200,13 @@ Map<int, dynamic> quotes = {
         'What a loss to spend that much time with someone, only to find out that she’s a stranger.',
     'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
   },
+  43: {
+    'quote': 'Be weird, but be exquisitely weird.',
+    'author': 'Daniel Yoon',
+  },
+  44: {
+    'quote':
+        'Don’t put it in your pocket. It’s your lucky quarter... Anywhere. Not in your pocket, where it’ll get mixed in with the others and become just a coin, which it is.',
+    'author': 'Anton Chigurh (No Country for Old Men)'
+  },
 };
