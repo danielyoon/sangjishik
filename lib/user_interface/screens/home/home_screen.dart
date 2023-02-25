@@ -1,14 +1,13 @@
 import 'dart:math';
 
-import 'package:sangjishik/business_logic/data/quotes.dart';
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/user_interface/screens/about/about_screen.dart';
 import 'package:sangjishik/user_interface/screens/contact/contact_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
-import 'package:sangjishik/user_interface/screens/home/quoted_text.dart';
-import 'package:sized_context/sized_context.dart';
+import 'package:sangjishik/user_interface/screens/home/front_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_banner.dart';
 import 'package:sangjishik/business_logic/data/backgrounds.dart';
-import 'package:sangjishik/user_interface/screens/home/home_post_buttons.dart';
+import 'package:sangjishik/user_interface/screens/blog/blog_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,8 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _index = 0;
 
-  String quote = '';
-  String author = '';
+  List<Widget> screens = [
+    FrontScreen(),
+    AboutScreen(),
+    BlogScreen(),
+    ContactMeScreen(),
+  ];
 
   void _onScrollPosition() {
     _controller.animateTo(screenHeight - 50,
@@ -37,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _controller = ScrollController();
-    getQuote();
   }
 
   @override
@@ -46,18 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void getQuote() {
-    Map<int, dynamic> list = quotes;
-    final random = Random();
-
-    var i = random.nextInt(list.length);
-
-    quote = list[i]['quote'];
-    author = list[i]['author'];
-  }
-
   void openDrawer() {
     print('No drawer yet');
+  }
+
+  void navigateScreen(int index) {
+    _index = index;
   }
 
   @override
@@ -94,8 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
       return false;
     }
 
-    List<Row> rowOfPosts = [];
-
     return NotificationListener(
       onNotification: (t) => removeHomeBanner(_controller.offset),
       child: ListView(
@@ -113,41 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: HomeAppBar(
                           isSmallScreen: isSmallScreen, onTap: openDrawer),
                     ),
-                    //FIXME: Everything below this is the "body" of the blog
-                    Padding(
-                      padding: const EdgeInsets.only(top: 65),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Center(
-                              child: SizedBox(
-                                width: isSmallScreen ? width / 1.5 : width / 2,
-                                child: Column(
-                                  children: [
-                                    VSpace.med,
-                                    QuoteText(text: '"$quote"'),
-                                    VSpace.med,
-                                    AuthorText(text: '- $author'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            VSpace.xl,
-                            HomePostButtons(isSmallScreen: isSmallScreen),
-                            VSpace.med,
-                            StyledPosts(
-                                post1: 'POST1', post2: 'POST2', post3: null),
-                            VSpace.med,
-                            ...rowOfPosts,
-                            ElevatedButton(
-                              onPressed: () => print('TEST'),
-                              child: Text('LOAD MORE'),
-                            ),
-                            ContactMeScreen(),
-                          ],
-                        ),
+                    Positioned(
+                      bottom: 10,
+                      right: 10,
+                      child: FloatingActionButton(
+                        onPressed: () => print('BLOG!'),
+                        child: Icon(Icons.add),
                       ),
                     ),
+                    //FIXME: Everything below this is the "body" of the blog
+                    screens.elementAt(_index),
                   ],
                 ),
               ),
