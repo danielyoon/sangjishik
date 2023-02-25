@@ -112,6 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: navigateScreen,
                           onDrawerTap: openDrawer),
                     ),
+
+                    //FIXME: Everything below this is the "body" of the blog
+                    Padding(
+                      padding: EdgeInsets.only(top: 65),
+                      child: screens.elementAt(_index),
+                    ),
                     Positioned(
                       bottom: 10,
                       right: 10,
@@ -120,8 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Icon(Icons.add),
                       ),
                     ),
-                    //FIXME: Everything below this is the "body" of the blog
-                    screens.elementAt(_index),
                   ],
                 ),
               ),

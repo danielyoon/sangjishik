@@ -41,36 +41,37 @@ class _FrontScreenState extends State<FrontScreen> {
 
     List<Row> rowOfPosts = [];
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 65),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Center(
-              child: SizedBox(
-                width: isSmallScreen ? width / 1.5 : width / 2,
-                child: Column(
-                  children: [
-                    VSpace.med,
-                    QuoteText(text: '"$quote"'),
-                    VSpace.med,
-                    AuthorText(text: '- $author'),
-                  ],
-                ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Center(
+            child: SizedBox(
+              width: isSmallScreen ? width / 1.5 : width / 2,
+              child: Column(
+                children: [
+                  VSpace.med,
+                  QuoteText(text: '"$quote"'),
+                  VSpace.med,
+                  AuthorText(text: '- $author'),
+                ],
               ),
             ),
-            VSpace.xl,
-            HomePostButtons(isSmallScreen: isSmallScreen),
-            VSpace.med,
-            StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
-            VSpace.med,
-            ...rowOfPosts,
-            ElevatedButton(
-              onPressed: () => print('TEST'),
-              child: Text('LOAD MORE'),
-            ),
-          ],
-        ),
+          ),
+          VSpace.xl,
+          HomePostButtons(isSmallScreen: isSmallScreen),
+          VSpace.med,
+          StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
+          VSpace.med,
+          StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
+          VSpace.med,
+          StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
+          VSpace.med,
+          ...rowOfPosts,
+          ElevatedButton(
+            onPressed: () => print('TEST'),
+            child: Text('LOAD MORE'),
+          ),
+        ],
       ),
     );
   }
