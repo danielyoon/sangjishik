@@ -62,10 +62,6 @@ class _FrontScreenState extends State<FrontScreen> {
           VSpace.med,
           StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
           VSpace.med,
-          StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
-          VSpace.med,
-          StyledPosts(post1: 'POST1', post2: 'POST2', post3: 'POST3'),
-          VSpace.med,
           ...rowOfPosts,
           ElevatedButton(
             onPressed: () => print('TEST'),

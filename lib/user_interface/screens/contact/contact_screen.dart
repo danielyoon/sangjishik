@@ -5,10 +5,9 @@ class ContactMeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [],
-      ),
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: $styles.insets.xxl),
+      children: [],
     );
   }
 }
