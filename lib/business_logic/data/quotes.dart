@@ -1,7 +1,7 @@
 Map<int, dynamic> quotes = {
   0: {
     'quote':
-        'Many men die at twenty-five and aren’t buried until they are seventy-five.',
+        "Many men die at twenty-five and aren't buried until they are seventy-five.",
     'author': 'G. E. Marchand',
   },
   1: {
@@ -18,35 +18,35 @@ Map<int, dynamic> quotes = {
   },
   4: {
     'quote':
-        'The only time you look in your neighbor’s bowl is to make sure that they have enough. You don’t look in your neighbor’s bowl to see if you have as much as them.',
+        "The only time you look in your neighbor's bowl is to make sure that they have enough. You don't look in your neighbor's bowl to see if you have as much as them.",
     'author': 'Louis C.K.'
   },
   5: {
-    'quote': 'Everything’s amazing right now, and nobody’s happy.',
+    'quote': "Everything's amazing right now, and nobody's happy.",
     'author': 'Louis C.K.'
   },
   6: {
-    'quote': 'Man’s chief end is to glorify God, and to enjoy him forever.',
+    'quote': "Man's chief end is to glorify God, and to enjoy him forever.",
     'author': 'Westminster Shorter Catechism'
   },
   7: {
     'quote':
-        'And have you found your ’joy’, in this nearly dead world of ours?',
+        "And have you found your 'joy', in this nearly dead world of ours?",
     'author': 'Kefka (FFVI)'
   },
   8: {
     'quote':
-        'So many people walk around with a meaningless life. They seem half-asleep, even when they’re busy doing things they think are important. This is because they’re chasing the wrong things. The way you get meaning into your life is to devote yourself to loving others, devote yourself to your community around you, and devote yourself to creating something that gives you purpose and meaning.',
-    'author': 'Morrie Schwartz (Tuesday’s With Morrie)'
+        "So many people walk around with a meaningless life. They seem half-asleep, even when they're busy doing things they think are important. This is because they're chasing the wrong things. The way you get meaning into your life is to devote yourself to loving others, devote yourself to your community around you, and devote yourself to creating something that gives you purpose and meaning.",
+    'author': "Morrie Schwartz (Tuesday's With Morrie)"
   },
   9: {
     'quote':
         'Dying is only one thing to be sad over. Living unhappily is something else.',
-    'author': 'Morrie Schwartz (Tuesday’s With Morrie)'
+    'author': "Morrie Schwartz (Tuesday's With Morrie)"
   },
   10: {
     'quote':
-        'Pressure, nah. Fam, this is just playing ball. Pressure is the homeless man, who doesn’t know where his next meal is coming from. Pressure is the single mom, who is trying to scuffle and pay her rent. We get paid a lot of money to play a game. Don’t get me wrong — there are challenges. But to call it pressure is almost an insult to regular people.',
+        "Pressure, nah. Fam, this is just playing ball. Pressure is the homeless man, who doesn't know where his next meal is coming from. Pressure is the single mom, who is trying to scuffle and pay her rent. We get paid a lot of money to play a game. Don't get me wrong — there are challenges. But to call it pressure is almost an insult to regular people.",
     'author': 'Damian Lillard'
   },
   11: {
@@ -61,17 +61,17 @@ Map<int, dynamic> quotes = {
   },
   13: {
     'quote':
-        'You spend your whole life looking for answers because you think the next answer will solve all your problems: make you a little less miserable, because when you run out of questions you don’t just run out of answers... you run out hope',
+        "You spend your whole life looking for answers because you think the next answer will solve all your problems: make you a little less miserable, because when you run out of questions you don't just run out of answers... you run out hope",
     'author': 'Gregory House (House MD)'
   },
   14: {
     'quote':
-        'I know you got him, I know you got him picked... But the man’s in trouble. I’mma show YOU how great I am',
+        "I know you got him, I know you got him picked... But the man's in trouble. I'mma show YOU how great I am",
     'author': 'Muhammad Ali'
   },
   15: {
     'quote':
-        'Open the Bible every day, and don’t let go of it until God shows up to make it precious to you.',
+        "Open the Bible every day, and don't let go of it until God shows up to make it precious to you.",
     'author': 'John Piper',
   },
   16: {
@@ -103,12 +103,12 @@ Map<int, dynamic> quotes = {
   },
   22: {
     'quote':
-        'From here on out, I know things might be hard sometimes. But no matter what may await, please don’t regret meeting me',
+        "From here on out, I know things might be hard sometimes. But no matter what may await, please don't regret meeting me",
     'author': 'Nagisa Furukawa (Clannad: After Story)'
   },
   23: {
     'quote':
-        'Was I able to live inside someone’s heart? Was I able to live inside your heart? Do you think you’ll remember me at least a little? You’d better not hit "reset!" Don’t forget me, okay? That’s a promise, okay? I’m glad it’s you, after all. Will I reach you? I hope I can reach you.',
+        "Was I able to live inside someone's heart? Was I able to live inside your heart? Do you think you'll remember me at least a little? You'd better not hit reset! Don't forget me, okay? That's a promise, okay? I'm glad it's you, after all. Will I reach you? I hope I can reach you.",
     'author': 'Kaori Miyazono (Your Lie In April)'
   },
   24: {
@@ -140,7 +140,7 @@ Map<int, dynamic> quotes = {
   },
   30: {
     'quote':
-        'I think that’s the single best piece of advice: Constantly think about how you could be doing things better and questioning yourself.',
+        "I think that's the single best piece of advice: Constantly think about how you could be doing things better and questioning yourself.",
     'author': 'Elon Musk'
   },
   31: {
@@ -149,7 +149,7 @@ Map<int, dynamic> quotes = {
   },
   32: {
     'quote':
-        'You’re going to pay a price for every bloody thing you do and everything you don’t do. You don’t get to choose to not pay a price. You get to choose which poison you’re going to take. That’s it.',
+        "You're going to pay a price for every bloody thing you do and everything you don't do. You don't get to choose to not pay a price. You get to choose which poison you're going to take. That's it.",
     'author': 'Jordan B. Peterson'
   },
   33: {
@@ -168,36 +168,36 @@ Map<int, dynamic> quotes = {
   },
   36: {
     'quote':
-        'Sometimes I think I’ve felt everything I’m ever gonna feel, and from here on out, I’m not gonna feel anything new… just… lesser versions of what I’ve already felt.',
+        "Sometimes I think I've felt everything I'm ever gonna feel, and from here on out, I'm not gonna feel anything new… just… lesser versions of what I've already felt.",
     'author': 'Theodore Twombly (Her)'
   },
   37: {
     'quote':
-        'But the heart’s not like a box that gets filled up; it expands in size the more you love.',
+        "But the heart's not like a box that gets filled up; it expands in size the more you love.",
     'author': 'Samantha (Her)'
   },
   38: {
     'quote':
-        'People call these things imperfections, but they’re not, that’s the good stuff. And then we get to choose who we let into our weird little worlds.',
+        "People call these things imperfections, but they're not, that's the good stuff. And then we get to choose who we let into our weird little worlds.",
     'author': 'Sean Maguire (Good Will Hunting)'
   },
   39: {
     'quote':
-        'I don’t want to stay in the bad place, where no one believes in silver linings or love or happy endings.',
+        "I don't want to stay in the bad place, where no one believes in silver linings or love or happy endings.",
     'author': 'Matthew Quick (The Silver Linings Playbook)'
   },
   40: {
     'quote':
-        'My favorite kind of humor is basically, if it was happening to you, it wouldn’t be funny, but to observe it, it’s hilarious.',
+        "My favorite kind of humor is basically, if it was happening to you, it wouldn't be funny, but to observe it, it's hilarious.",
     'author': 'Bill Burr'
   },
   41: {
-    'quote': 'Constantly talking isn’t necessarily communicating.',
+    'quote': "Constantly talking isn't necessarily communicating.",
     'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
   },
   42: {
     'quote':
-        'What a loss to spend that much time with someone, only to find out that she’s a stranger.',
+        "What a loss to spend that much time with someone, only to find out that she's a stranger.",
     'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
   },
   43: {
@@ -206,7 +206,43 @@ Map<int, dynamic> quotes = {
   },
   44: {
     'quote':
-        'Don’t put it in your pocket. It’s your lucky quarter... Anywhere. Not in your pocket, where it’ll get mixed in with the others and become just a coin, which it is.',
+        "Don't put it in your pocket. It's your lucky quarter... Anywhere. Not in your pocket, where it'll get mixed in with the others and become just a coin, which it is.",
     'author': 'Anton Chigurh (No Country for Old Men)'
+  },
+  45: {
+    'quote':
+        "It's ironic we love dreaming when we're sleeping, but we don't dare to dream when we're awake.",
+    'author': 'Daniel Yoon',
+  },
+  46: {
+    'quote':
+        "Sometimes the things you love don't always love you back. And you can give, and you can give, and you can give, and sometimes you get nothing.",
+    'author': 'Dolph Ziggler'
+  },
+  47: {
+    'quote': "That's not the last feeling I want to experience.",
+    'author': 'Amber Volakis (House M.D.)'
+  },
+  48: {
+    'quote': "People's dreams have no ends",
+    'author': 'Marshall D. Teach (One Piece)'
+  },
+  49: {
+    'quote': 'The hardest choices require the strongest wills.',
+    'author': 'Thanos (Avengers: Infinity War)'
+  },
+  50: {
+    'quote':
+        'When a good person dies, there should be an impact on the world. Somebody should notice. Somebody should be upset.',
+    'author': 'Dr. Cameron (House M.D.)'
+  },
+  51: {
+    'quote':
+        'To me, lies are love. And in my own way, I thought I was expressing love.',
+    'author': 'Ai Hoshino (Oshi No Ko)'
+  },
+  52: {
+    'quote': 'Success is my complete happiness',
+    'author': 'Daniel Yoon',
   },
 };

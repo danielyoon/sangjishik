@@ -1,13 +1,8 @@
-import 'dart:math';
-
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/about/about_screen.dart';
 import 'package:sangjishik/user_interface/screens/contact/contact_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
 import 'package:sangjishik/user_interface/screens/home/front_screen.dart';
-import 'package:sangjishik/user_interface/screens/home/home_banner.dart';
-import 'package:sangjishik/business_logic/data/backgrounds.dart';
-import 'package:sangjishik/user_interface/screens/blog/blog_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = [
     FrontScreen(),
     AboutScreen(),
-    BlogScreen(),
     ContactMeScreen(),
   ];
 
@@ -70,20 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime currentDate = DateTime.now();
     bool isNightTime = currentDate.hour >= 17;
 
-    String getBackground() {
-      List<String> list = [];
-      final random = Random();
-
-      if (isNightTime && isSmallScreen) list = nightPortrait;
-      if (isNightTime && !isSmallScreen) list = nightLandscape;
-      if (!isNightTime && isSmallScreen) list = lightPortrait;
-      if (!isNightTime && !isSmallScreen) list = lightLandscape;
-
-      var i = random.nextInt(list.length);
-
-      return list[i];
-    }
-
     bool removeHomeBanner(double offset) {
       if (offset >= height) {
         seenHomeBanner.value = true;
@@ -98,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: ListView(
         controller: _controller,
         children: [
-          _buildHomeBanner(getBackground, height, width),
           Stack(
             children: [
               SizedBox(
@@ -134,23 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  ValueListenableBuilder<bool> _buildHomeBanner(
-      String Function() getBackground, double height, double width) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: seenHomeBanner,
-      builder: (BuildContext context, bool value, _) {
-        return value
-            ? Container()
-            : HomeBanner(
-                background: getBackground(),
-                height: height,
-                width: width,
-                onTap: _onScrollPosition,
-              );
-      },
     );
   }
 }
