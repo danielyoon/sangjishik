@@ -27,7 +27,6 @@ class AppStyle {
     } else {
       scale = .85; // small phone
     }
-    debugPrint('screenSize=$screenSize, scale=$scale');
   }
 
   late final double scale;
@@ -52,35 +51,35 @@ class _Text {
   final double _scale;
 
   late final TextStyle h1 =
-      _createFont(GoogleFonts.raleway(), sizePx: 64, heightPx: 64);
+      _createFont(GoogleFonts.lora(), sizePx: 64, heightPx: 64);
   late final TextStyle h2 =
-      _createFont(GoogleFonts.raleway(), sizePx: 32, heightPx: 46);
-  late final TextStyle h3 = _createFont(GoogleFonts.raleway(),
+      _createFont(GoogleFonts.lora(), sizePx: 32, heightPx: 46);
+  late final TextStyle h3 = _createFont(GoogleFonts.lora(),
       sizePx: 24, heightPx: 36, weight: FontWeight.w600);
-  late final TextStyle h4 = _createFont(GoogleFonts.raleway(),
+  late final TextStyle h4 = _createFont(GoogleFonts.lora(),
       sizePx: 14,
       heightPx: 23,
       spacingPc: 5,
       weight: FontWeight.w600,
       color: $styles.colors.background);
 
-  late final TextStyle title1 = _createFont(GoogleFonts.raleway(),
-      sizePx: 16, heightPx: 26, spacingPc: 5);
+  late final TextStyle title1 =
+      _createFont(GoogleFonts.lora(), sizePx: 16, heightPx: 26, spacingPc: 5);
 
-  late final TextStyle body = _createFont(GoogleFonts.raleway(),
+  late final TextStyle body = _createFont(GoogleFonts.lora(),
       sizePx: 16, heightPx: 26, color: Colors.black);
-  late final TextStyle bodyBold = _createFont(GoogleFonts.raleway(),
+  late final TextStyle bodyBold = _createFont(GoogleFonts.lora(),
       sizePx: 16, heightPx: 26, weight: FontWeight.w600);
-  late final TextStyle bodySmall = _createFont(GoogleFonts.raleway(),
+  late final TextStyle bodySmall = _createFont(GoogleFonts.lora(),
       sizePx: 12, heightPx: 23, color: Colors.black);
-  late final TextStyle bodySmallBold = _createFont(GoogleFonts.raleway(),
+  late final TextStyle bodySmallBold = _createFont(GoogleFonts.lora(),
       sizePx: 14, heightPx: 23, weight: FontWeight.w600);
 
-  late final TextStyle caption = _createFont(GoogleFonts.raleway(),
+  late final TextStyle caption = _createFont(GoogleFonts.lora(),
           sizePx: 14, heightPx: 20, weight: FontWeight.w500)
       .copyWith(fontStyle: FontStyle.italic);
 
-  late final TextStyle btn = _createFont(GoogleFonts.raleway(),
+  late final TextStyle btn = _createFont(GoogleFonts.lora(),
       sizePx: 14,
       weight: FontWeight.w500,
       spacingPc: 2,

@@ -99,7 +99,7 @@ Map<int, dynamic> quotes = {
   },
   21: {
     'quote': 'You were my new dream.',
-    'author': 'Eugene Fitzherbert',
+    'author': 'Eugene Fitzherbert (Tangled)',
   },
   22: {
     'quote':
@@ -242,7 +242,26 @@ Map<int, dynamic> quotes = {
     'author': 'Ai Hoshino (Oshi No Ko)'
   },
   52: {
-    'quote': 'Success is my complete happiness',
-    'author': 'Daniel Yoon',
+    'quote': 'The only way to do great work is to love what you do.',
+    'author': 'Steve Jobs',
+  },
+  53: {
+    'quote':
+        'The heart of man plans his way, but the LORD establishes his steps.',
+    'author': 'Psalm 16:9 (ESV)',
+  },
+  54: {
+    'quote':
+        'Forgetting is like a wound. The wound may heal, but it has already left a scar.',
+    'author': 'Monkey D. Luffy (One Piece)',
+  },
+  55: {
+    'quote': 'If your life can change once, your life can change again',
+    'author': 'Sanae Furukawa (Clannad)',
+  },
+  56: {
+    'quote':
+        "I've always said that I don't respect people who don't proselytize. I don't respect that at all. If you believe that there's a heaven and a hell, and people could be going to hell or not getting eternal life, and you think that it's not really worth telling them this because it would make it socially awkward—and atheists who think people shouldn't proselytize and who say just leave me along and keep your religion to yourself—how much do you have to hate somebody to not proselytize? How much do you have to hate somebody to believe everlasting life is possible and not tell them that? I mean, if I believed, beyond the shadow of a doubt, that a truck was coming at you, and you didn't believe that truck was bearing down on you, there is a certain point where I tackle you. And this is more important than that.",
+    'author': 'Penn Jillette'
   },
 };
