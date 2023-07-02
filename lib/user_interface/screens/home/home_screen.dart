@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:sangjishik/business_logic/data/quotes.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
-import 'package:sangjishik/user_interface/screens/home/home_date_scrollbar.dart';
+import 'package:sangjishik/user_interface/screens/posts/posts_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,34 +36,24 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         HomeAppBar(),
         VSpace.xl,
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
-          child: SizedBox(
-            width: (width > 780) ? width / 3 : width / 1.2,
-            child: Text(
-              qotd['quote'] + '\n\n      -  ' + qotd['author'],
-              style: $styles.text.caption,
-              softWrap: true,
-            ),
-          ),
-        ),
+        _quotesWidget(width),
         VSpace.xl,
-        Row(
-          children: [
-            Expanded(
-              flex: 40,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
-                child: Text('TEST'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: HomeDateScrollbar(),
-            ),
-          ],
-        ),
+        PostsScreen(),
       ],
+    );
+  }
+
+  Padding _quotesWidget(double width) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
+      child: SizedBox(
+        width: (width > 780) ? width / 3 : width / 1.2,
+        child: Text(
+          qotd['quote'] + '\n\n      -  ' + qotd['author'],
+          style: $styles.text.caption,
+          softWrap: true,
+        ),
+      ),
     );
   }
 }

@@ -264,4 +264,9 @@ Map<int, dynamic> quotes = {
         "I've always said that I don't respect people who don't proselytize. I don't respect that at all. If you believe that there's a heaven and a hell, and people could be going to hell or not getting eternal life, and you think that it's not really worth telling them this because it would make it socially awkward—and atheists who think people shouldn't proselytize and who say just leave me along and keep your religion to yourself—how much do you have to hate somebody to not proselytize? How much do you have to hate somebody to believe everlasting life is possible and not tell them that? I mean, if I believed, beyond the shadow of a doubt, that a truck was coming at you, and you didn't believe that truck was bearing down on you, there is a certain point where I tackle you. And this is more important than that.",
     'author': 'Penn Jillette'
   },
+  57: {
+    'quote':
+        'I guess it comes down to a simple choice, really: Get busy living, or get busy dying.',
+    'author': 'Andy Dufresne (Shawshank Redemption)'
+  },
 };
