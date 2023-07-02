@@ -5,6 +5,8 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = context.widthPx;
+
     return SizedBox(
       height: 55,
       child: AppBar(
@@ -15,7 +17,29 @@ class HomeAppBar extends StatelessWidget {
           padding: EdgeInsets.all($styles.insets.sm),
           child: Text('LOGO HERE'),
         ),
-        actions: [],
+        actions: (width > 780)
+            ? [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
+                  child: StyledTextButton(
+                      text: 'About', onPressed: () => print('ABOUT')),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
+                  child: StyledTextButton(
+                      text: 'Login', onPressed: () => print('Login')),
+                ),
+              ]
+            : [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
+                  child: IconButton(
+                    icon: Icon(Icons.menu),
+                    splashRadius: 1,
+                    onPressed: () => print('MENU!'),
+                  ),
+                ),
+              ],
       ),
     );
   }
