@@ -11,23 +11,37 @@ class _DateScrollbarState extends State<DateScrollbar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 45,
+      width: 60,
       height: double.infinity,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: rulerPin(350),
+          children: buildRulerMarks(),
         ),
       ),
     );
   }
 
-  List<Divider> rulerPin(int count) {
-    return List.generate(count, (i) {
-      return Divider(
-        height: 6.299,
-        thickness: 1,
+  List<Widget> buildRulerMarks() {
+    List<Widget> marks = [];
+    for (int i = 0; i <= 100; i++) {
+      marks.add(
+        Row(
+          children: [
+            Text('$i'),
+            HSpace.sm, // Adjust spacing between number and divider
+            Expanded(
+              child: Divider(
+                thickness: 1.0,
+                height: 1.0,
+                indent: (i % 2 == 0) ? 10 : 1,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
       );
-    }).toList();
+    }
+    return marks;
   }
 }

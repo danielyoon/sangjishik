@@ -94,18 +94,33 @@ Card getPost(String image, int number) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: 200, // Set the desired height of the image
-            child: Image.network(
-              image,
-              fit: BoxFit.fill,
+          Flexible(
+            flex: 1,
+            child: SizedBox(
+              width: double.infinity,
+              child: Image.network(
+                image,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           VSpace.sm,
-          Text('TITLE $number', style: $styles.text.h3),
+          Flexible(
+            flex: 1,
+            child: Text(
+              'TITLE $number',
+              style: $styles.text.h3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
           VSpace.sm,
-          Text('Some text describing the post and stuff...'),
+          Flexible(
+            flex: 1,
+            child: Text(
+              'Some text describing the post and stuff...',
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     ),
