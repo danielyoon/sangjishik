@@ -11,6 +11,7 @@ final appRouter = GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) => HomeScreen(),
+          routes: [],
         ),
       ],
     ),

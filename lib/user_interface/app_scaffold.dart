@@ -12,17 +12,23 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     _style = AppStyle(screenSize: context.sizePx);
     return Scaffold(
-      body: Stack(
-        clipBehavior: Clip.antiAlias,
-        children: [
-          SafeArea(
-            top: false,
-            bottom: false,
-            child: Container(
-              child: child,
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          scrollbarTheme: ScrollbarThemeData(
+              thumbColor: MaterialStateProperty.all((Colors.transparent))),
+        ),
+        child: Stack(
+          clipBehavior: Clip.antiAlias,
+          children: [
+            SafeArea(
+              top: false,
+              bottom: false,
+              child: Container(
+                child: child,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
