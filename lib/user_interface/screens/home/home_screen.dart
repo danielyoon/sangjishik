@@ -31,14 +31,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double width = context.widthPx;
+    double height = context.heightPx;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HomeAppBar(),
-        VSpace.xl,
-        _quotesWidget(width),
-        VSpace.xl,
-        PostsScreen(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: height,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  VSpace.xl,
+                  _quotesWidget(width),
+                  VSpace.xl,
+                  PostsScreen(),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

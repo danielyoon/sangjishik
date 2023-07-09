@@ -269,4 +269,8 @@ Map<int, dynamic> quotes = {
         'I guess it comes down to a simple choice, really: Get busy living, or get busy dying.',
     'author': 'Andy Dufresne (Shawshank Redemption)'
   },
+  58: {
+    'quote': 'Take my hand. Take my whole life, too.',
+    'author': "Elvis Presley (Can't Help Falling In Love)",
+  },
 };
