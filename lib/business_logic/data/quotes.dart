@@ -284,7 +284,7 @@ Map<int, dynamic> quotes = {
   },
   61: {
     'quote':
-        'I love stating the obvious; often times we think ourselves too highly to accept simple answers',
+        'I love stating the obvious; often times we think ourselves too highly to accept simple answers.',
     'author': 'Daniel Yoon'
   },
 };
