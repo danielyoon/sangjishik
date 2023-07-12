@@ -32,35 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double width = context.widthPx;
     double height = context.heightPx;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HomeAppBar(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: height,
-              child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                children: [
-                  VSpace.xl,
-                  _quotesWidget(width),
-                  VSpace.xl,
-                  PostsScreen(),
-                ],
-              ),
-            ),
-          ),
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            VSpace.xl,
+            _quotesWidget(width),
+            VSpace.xl,
+            PostsScreen(),
+          ],
         ),
-      ],
+      ),
     );
   }
 
   Padding _quotesWidget(double width) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: $styles.insets.lg),
+      padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
       child: SizedBox(
         width: (width > 780) ? width / 3 : width / 1.2,
         child: Text(
