@@ -41,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SizedBox(
               height: height,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
                 children: [
                   VSpace.xl,
                   _quotesWidget(width),
@@ -58,7 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Padding _quotesWidget(double width) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
+      padding: EdgeInsets.symmetric(
+          horizontal: $styles.insets.lg),
       child: SizedBox(
         width: (width > 780) ? width / 3 : width / 1.2,
         child: Text(

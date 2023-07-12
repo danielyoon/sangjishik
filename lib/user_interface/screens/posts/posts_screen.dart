@@ -65,7 +65,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   children: [
                     Expanded(
                       child: GridView.count(
-                        crossAxisCount: 4,
+                        crossAxisCount: 3,
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                         childAspectRatio: 1.3,
