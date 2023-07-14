@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:sangjishik/business_logic/data/quotes.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
 import 'package:sangjishik/user_interface/screens/posts/posts_screen.dart';
 
 class HomeScreen extends StatefulWidget {

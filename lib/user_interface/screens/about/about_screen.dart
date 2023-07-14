@@ -8,39 +8,35 @@ class AboutScreen extends StatelessWidget {
     double width = context.widthPx;
 
     int age = calculateAge();
-    return Expanded(
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: SizedBox(
-          width: width / 1.5,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                VSpace.xl,
-                Text(
-                  '상지식',
-                  style: $styles.text.h2,
-                ),
-                Text('[sahng-ji-shik]',
-                    style: $styles.text.title1),
-                VSpace.xs,
-                Text('noun', style: $styles.text.caption),
-                Text(
-                    '1.  상 (Sang) means above, or up top. It can also mean an award.',
-                    style: $styles.text.body),
-                Text('2.  지식 (Ji Shik) means knowledge.',
-                    style: $styles.text.body),
-                Text(
-                    '3.  상지식 (Sang Ji Shik) means, higher knowledge.',
-                    style: $styles.text.body),
-                VSpace.lg,
-                Text(
-                    "Hi! My name is Sang Ji (상지), or Daniel. I am currently $age year's old.\n\nI have a belief that everyone has something to give back to the world, or leave an imprint on the world. Therefore, this blog is dedicated to recording some knowledge and opinions I've gathered in hopes that someone will benefit form them. Some thoughts of mine are stupid, immature, and inconceivably imaginative... but I hope you can still leave with some semblance of newfound knowledge!",
-                    style: $styles.text.body),
-                VSpace.xl,
-              ],
-            ),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SizedBox(
+        width: width / 1.5,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VSpace.xl,
+              Text(
+                '상지식',
+                style: $styles.text.h2,
+              ),
+              Text('[sahng-ji-shik]', style: $styles.text.title1),
+              VSpace.xs,
+              Text('noun', style: $styles.text.caption),
+              Text(
+                  '1.  상 (Sang) means above, or up top. It can also mean an award.',
+                  style: $styles.text.body),
+              Text('2.  지식 (Ji Shik) means knowledge.',
+                  style: $styles.text.body),
+              Text('3.  상지식 (Sang Ji Shik) means, higher knowledge.',
+                  style: $styles.text.body),
+              VSpace.lg,
+              Text(
+                  "Hi! My name is Sang Ji (상지), or Daniel. I am currently $age year's old.\n\nI have a belief that everyone has something to give back to the world, or leave an imprint on the world. Therefore, this blog is dedicated to recording some knowledge and opinions I've gathered in hopes that someone will benefit form them. Some thoughts of mine are stupid, immature, and inconceivably imaginative... but I hope you can still leave with some semblance of newfound knowledge!",
+                  style: $styles.text.body),
+              VSpace.xl,
+            ],
           ),
         ),
       ),
@@ -53,8 +49,7 @@ class AboutScreen extends StatelessWidget {
     int age = now.year - birthday.year;
 
     if (now.month < birthday.month ||
-        (now.month == birthday.month &&
-            now.day < birthday.day)) {
+        (now.month == birthday.month && now.day < birthday.day)) {
       age--;
     }
 

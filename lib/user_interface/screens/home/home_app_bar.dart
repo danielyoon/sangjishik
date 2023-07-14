@@ -1,7 +1,10 @@
 import 'package:sangjishik/core_packages.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+  final int currentIndex;
+  final ValueChanged<int>? onTap;
+
+  const HomeAppBar({super.key, this.currentIndex = 0, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +18,20 @@ class HomeAppBar extends StatelessWidget {
         foregroundColor: $styles.colors.primary,
         title: Padding(
           padding: EdgeInsets.all($styles.insets.sm),
-          child: Text('LOGO HERE'),
+          child:
+              GestureDetector(onTap: () => onTap!(0), child: Text('LOGO HERE')),
         ),
         actions: (width > 780)
             ? [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                   child: StyledTextButton(
-                      text: 'About', onPressed: () => print('ABOUT')),
+                      text: 'About', onPressed: () => onTap!(1)),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                   child: StyledTextButton(
-                      text: 'Login', onPressed: () => print('Login')),
+                      text: 'Login', onPressed: () => print('LOGIN')),
                 ),
               ]
             : [
