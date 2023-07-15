@@ -287,4 +287,9 @@ Map<int, dynamic> quotes = {
         'I love stating the obvious; often times we think ourselves too highly to accept simple answers.',
     'author': 'Daniel Yoon'
   },
+  62: {
+    'quote':
+        "You don't know how lucky you are being a monkey. Because consciousness is a terrible curse. I think. I feel. I suffer. And all I ask in return is the opportunity to do my work. And they won't allow it... because I raise issues.",
+    'author': 'Craig Schwartz (Being John Malkovich)'
+  },
 };

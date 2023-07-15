@@ -28,8 +28,17 @@ class _PostsState extends State<Posts> {
   void initState() {
     super.initState();
 
-    topicWidgets =
-        widget.topics.map((String topic) => TopicBox(topic: topic)).toList();
+    if (widget.topics.length > 2) {
+      topicWidgets = [
+        ...widget.topics
+            .sublist(0, 2)
+            .map((String topic) => TopicBox(topic: topic)),
+        TopicBox(topic: '${widget.topics.length - 2}+'),
+      ];
+    } else {
+      topicWidgets =
+          widget.topics.map((String topic) => TopicBox(topic: topic)).toList();
+    }
   }
 
   @override
@@ -100,7 +109,12 @@ class TopicBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MaterialColor getColor(String topic) {
+    Color? getColor(String topic) {
+      switch (topic) {
+        case 'Personal':
+          return Colors.green[300];
+      }
+
       return Colors.grey;
     }
 
@@ -109,12 +123,13 @@ class TopicBox extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: Colors.pink,
+          color: getColor(topic),
         ),
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all($styles.insets.xxs),
-            child: Text(topic),
+        child: Padding(
+          padding: EdgeInsets.all($styles.insets.xxs),
+          child: Text(
+            topic,
+            style: $styles.text.body.copyWith(color: Colors.white),
           ),
         ),
       ),

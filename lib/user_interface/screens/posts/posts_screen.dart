@@ -52,6 +52,8 @@ class _PostsScreenState extends State<PostsScreen> {
                             topics: [
                               'Personal',
                               'Chaewon',
+                              'Something',
+                              'Else'
                             ],
                           ),
                           Posts(
