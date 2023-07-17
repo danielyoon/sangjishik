@@ -1,5 +1,7 @@
 import 'package:sangjishik/core_packages.dart';
 
+import 'login_popup.dart';
+
 class HomeAppBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int>? onTap;
@@ -31,7 +33,7 @@ class HomeAppBar extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                   child: StyledTextButton(
-                      text: 'Login', onPressed: () => print('LOGIN')),
+                      text: 'Login', onPressed: () => showLoginDialog(context)),
                 ),
               ]
             : [
