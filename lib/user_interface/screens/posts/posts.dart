@@ -5,14 +5,12 @@ class Posts extends StatefulWidget {
   final String image;
   final String title;
   final DateTime date;
-  final List<String> topics;
 
   const Posts({
     super.key,
     required this.image,
     required this.title,
     required this.date,
-    required this.topics,
   });
 
   @override
@@ -20,26 +18,8 @@ class Posts extends StatefulWidget {
 }
 
 class _PostsState extends State<Posts> {
-  List<Widget> topicWidgets = [];
-
   bool isHover = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.topics.length > 2) {
-      topicWidgets = [
-        ...widget.topics
-            .sublist(0, 2)
-            .map((String topic) => TopicBox(topic: topic)),
-        TopicBox(topic: '${widget.topics.length - 2}+'),
-      ];
-    } else {
-      topicWidgets =
-          widget.topics.map((String topic) => TopicBox(topic: topic)).toList();
-    }
-  }
+  bool isBtnHover = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +34,10 @@ class _PostsState extends State<Posts> {
         onTap: () => print('TEST'),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular($styles.insets.xs),
-            color: isHover ? Colors.grey.withOpacity(.2) : Colors.transparent,
+            borderRadius: BorderRadius.circular($styles.insets.sm),
+            color: isHover
+                ? Color.fromARGB(75, 192, 184, 171)
+                : Colors.transparent,
           ),
           child: SizedBox(
             child: Column(
@@ -78,58 +60,56 @@ class _PostsState extends State<Posts> {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-                  child: Text(widget.title, style: $styles.text.bodyBold),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-                  child:
-                      Text(widget.date.toString(), style: $styles.text.caption),
-                ),
-                VSpace.sm,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                   child: Row(
-                    children: topicWidgets,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(widget.title, style: $styles.text.bodyBold),
+                          Text(widget.date.toString(),
+                              style: $styles.text.caption),
+                        ],
+                      ),
+                      !isHover
+                          ? Container()
+                          : Flexible(
+                              child: MouseRegion(
+                                onEnter: (PointerEnterEvent event) =>
+                                    setState(() {
+                                  isBtnHover = true;
+                                }),
+                                onExit: (PointerExitEvent event) =>
+                                    setState(() {
+                                  isBtnHover = false;
+                                }),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        $styles.insets.xxs),
+                                    color: isBtnHover
+                                        ? Colors.white
+                                        : Color.fromARGB(255, 235, 235, 230),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all($styles.insets.xs),
+                                    child: Text(
+                                      'View Post',
+                                      style: isBtnHover
+                                          ? $styles.text.body
+                                          : $styles.text.body.copyWith(
+                                              color: Colors.grey[400]),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
                   ),
                 ),
                 VSpace.sm,
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TopicBox extends StatelessWidget {
-  final String topic;
-
-  const TopicBox({super.key, required this.topic});
-
-  @override
-  Widget build(BuildContext context) {
-    Color? getColor(String topic) {
-      switch (topic) {
-        case 'Personal':
-          return Colors.green[300];
-      }
-
-      return Colors.grey;
-    }
-
-    return Padding(
-      padding: EdgeInsets.only(right: $styles.insets.sm),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
-          color: getColor(topic),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all($styles.insets.xxs),
-          child: Text(
-            topic,
-            style: $styles.text.body.copyWith(color: Colors.white),
           ),
         ),
       ),

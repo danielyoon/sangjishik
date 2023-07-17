@@ -64,22 +64,22 @@ class _Text {
       color: $styles.colors.background);
 
   late final TextStyle title1 =
-      _createFont(GoogleFonts.lora(), sizePx: 16, heightPx: 26, spacingPc: 5);
+      _createFont(GoogleFonts.roboto(), sizePx: 16, heightPx: 26, spacingPc: 5);
 
-  late final TextStyle body = _createFont(GoogleFonts.lora(),
+  late final TextStyle body = _createFont(GoogleFonts.roboto(),
       sizePx: 16, heightPx: 26, color: Colors.black);
-  late final TextStyle bodyBold = _createFont(GoogleFonts.lora(),
+  late final TextStyle bodyBold = _createFont(GoogleFonts.roboto(),
       sizePx: 16, heightPx: 26, weight: FontWeight.w600);
-  late final TextStyle bodySmall = _createFont(GoogleFonts.lora(),
+  late final TextStyle bodySmall = _createFont(GoogleFonts.roboto(),
       sizePx: 12, heightPx: 23, color: Colors.black);
-  late final TextStyle bodySmallBold = _createFont(GoogleFonts.lora(),
+  late final TextStyle bodySmallBold = _createFont(GoogleFonts.roboto(),
       sizePx: 14, heightPx: 23, weight: FontWeight.w600);
 
-  late final TextStyle caption = _createFont(GoogleFonts.lora(),
+  late final TextStyle caption = _createFont(GoogleFonts.roboto(),
           sizePx: 14, heightPx: 20, weight: FontWeight.w500)
       .copyWith(fontStyle: FontStyle.italic);
 
-  late final TextStyle btn = _createFont(GoogleFonts.lora(),
+  late final TextStyle btn = _createFont(GoogleFonts.roboto(),
       sizePx: 14,
       weight: FontWeight.w500,
       spacingPc: 2,

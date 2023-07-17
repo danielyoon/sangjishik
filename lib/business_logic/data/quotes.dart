@@ -9,7 +9,7 @@ Map<int, dynamic> quotes = {
     'author': 'Mark 10:21 (NIV)',
   },
   2: {
-    'quote': 'Success is lonely',
+    'quote': 'Success is lonely.',
     'author': 'Daniel Yoon',
   },
   3: {
@@ -56,7 +56,7 @@ Map<int, dynamic> quotes = {
   },
   12: {
     'quote':
-        'I wish there was a way to know you were in the good old days before you actually left them',
+        'I wish there was a way to know you were in the good old days before you actually left them.',
     'author': 'Andy Bernard (The Office)'
   },
   13: {
@@ -66,7 +66,7 @@ Map<int, dynamic> quotes = {
   },
   14: {
     'quote':
-        "I know you got him, I know you got him picked... But the man's in trouble. I'mma show YOU how great I am",
+        "I know you got him, I know you got him picked... But the man's in trouble. I'mma show YOU how great I am.",
     'author': 'Muhammad Ali'
   },
   15: {
@@ -103,7 +103,7 @@ Map<int, dynamic> quotes = {
   },
   22: {
     'quote':
-        "From here on out, I know things might be hard sometimes. But no matter what may await, please don't regret meeting me",
+        "From here on out, I know things might be hard sometimes. But no matter what may await, please don't regret meeting me.",
     'author': 'Nagisa Furukawa (Clannad: After Story)'
   },
   23: {
@@ -163,7 +163,7 @@ Map<int, dynamic> quotes = {
   },
   35: {
     'quote':
-        "There are no two words in the English language more harmful than 'good job'",
+        "There are no two words in the English language more harmful than 'good job'.",
     'author': 'Terence Fletcher (Whiplash)'
   },
   36: {
@@ -224,7 +224,7 @@ Map<int, dynamic> quotes = {
     'author': 'Amber Volakis (House M.D.)'
   },
   48: {
-    'quote': "People's dreams have no ends",
+    'quote': "People's dreams have no ends.",
     'author': 'Marshall D. Teach (One Piece)'
   },
   49: {
@@ -234,7 +234,7 @@ Map<int, dynamic> quotes = {
   50: {
     'quote':
         'When a good person dies, there should be an impact on the world. Somebody should notice. Somebody should be upset.',
-    'author': 'Dr. Cameron (House M.D.)'
+    'author': 'Allison Cameron (House M.D.)'
   },
   51: {
     'quote':
@@ -256,7 +256,7 @@ Map<int, dynamic> quotes = {
     'author': 'Monkey D. Luffy (One Piece)',
   },
   55: {
-    'quote': 'If your life can change once, your life can change again',
+    'quote': 'If your life can change once, your life can change again.',
     'author': 'Sanae Furukawa (Clannad)',
   },
   56: {
@@ -291,5 +291,23 @@ Map<int, dynamic> quotes = {
     'quote':
         "You don't know how lucky you are being a monkey. Because consciousness is a terrible curse. I think. I feel. I suffer. And all I ask in return is the opportunity to do my work. And they won't allow it... because I raise issues.",
     'author': 'Craig Schwartz (Being John Malkovich)'
+  },
+  63: {
+    'quote':
+        "They say people can change, but is that really true? If they decide they want to fly, will they grow wings? I don't think so. You don't change yourself, you change how you do things. You have to make your own way. You have to create a way to fly, even while you stay the same.",
+    'author': 'Sora (No Game, No Life)'
+  },
+  64: {
+    'quote': "Only idiots start fights they can't win.",
+    'author': 'Sora (No Game, No Life)'
+  },
+  65: {
+    'quote': 'Life is not a game of luck. If you wanna win, work hard.',
+    'author': 'Sora (No Game, No Life)'
+  },
+  66: {
+    'quote':
+        "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
+    'author': 'Sora (No Game, No Life)'
   },
 };
