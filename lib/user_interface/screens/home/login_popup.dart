@@ -3,7 +3,11 @@ import 'package:sangjishik/core_packages.dart';
 Future<void> showLoginDialog<T>(BuildContext context) async => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Login', style: $styles.text.h3),
+        title: Text(
+          'Login',
+          style: $styles.text.h3,
+          textAlign: TextAlign.center,
+        ),
         content: LoginForm(),
       ),
     );
@@ -47,6 +51,13 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      color: $styles.colors.background,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
