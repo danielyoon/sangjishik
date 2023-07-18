@@ -35,6 +35,11 @@ class HomeAppBar extends StatelessWidget {
                   child: StyledTextButton(
                       text: 'Login', onPressed: () => showLoginDialog(context)),
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
+                  child: StyledTextButton(
+                      text: 'Create', onPressed: () => onTap!(2)),
+                ),
               ]
             : [
                 Padding(
