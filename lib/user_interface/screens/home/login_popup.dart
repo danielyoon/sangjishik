@@ -1,6 +1,6 @@
 import 'package:sangjishik/core_packages.dart';
 
-Future<void> showLoginDialog<T>(BuildContext context) async => showDialog(
+void showLoginDialog<T>(BuildContext context) async => showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(

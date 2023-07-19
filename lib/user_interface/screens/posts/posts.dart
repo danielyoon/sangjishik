@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:sangjishik/core_packages.dart';
 
+//FIXME: Must fix this for mobile -- the Visit button gets squished
 class Posts extends StatefulWidget {
   final String image;
   final String title;

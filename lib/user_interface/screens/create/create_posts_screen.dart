@@ -1,4 +1,5 @@
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
 
 class CreatePostsScreen extends StatefulWidget {
   const CreatePostsScreen({super.key});
@@ -8,9 +9,49 @@ class CreatePostsScreen extends StatefulWidget {
 }
 
 class _CreatePostsScreenState extends State<CreatePostsScreen> {
+  late TextEditingController _titleController;
+  late TextEditingController _postController;
+  late TextEditingController _tagController;
+
+  final List<String> tags = [
+    'Personal',
+    'Bible',
+    'KPOP',
+    'Programming',
+    'Fashion',
+    'Tetris',
+    'Books',
+    'Food',
+    'History',
+    'Random',
+    'Funny',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController(text: '');
+    _postController = TextEditingController(text: '');
+    _tagController = TextEditingController(text: '');
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _postController.dispose();
+    _tagController.dispose();
+    super.dispose();
+  }
+
+  void _showPostDialog(context) async {
+    final List<String>? results = await showDialog(
+        context: context, builder: (BuildContext context) => TagPopup());
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = context.widthPx;
+    double height = context.widthPx;
 
     return Align(
       alignment: Alignment.topCenter,
@@ -26,7 +67,44 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> {
                 style: $styles.text.h2,
               ),
               VSpace.med,
-              Text('Enter A Title'),
+              StyledTextField(
+                label: 'Title',
+                style: $styles.text.body,
+                labelStyle: $styles.text.bodyBold,
+                onChanged: (_) => setState(() {}),
+                controller: _titleController,
+                autoFocus: true,
+              ),
+              VSpace.med,
+              StyledTextField(
+                label: 'Post',
+                style: $styles.text.body,
+                labelStyle: $styles.text.bodyBold,
+                onChanged: (_) => setState(() {}),
+                controller: _postController,
+                textInputType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                //TODO: Adjust numLines depending on height
+                numLines: 18,
+              ),
+              VSpace.med,
+              GestureDetector(
+                onTap: () => _showPostDialog(context),
+                child: StyledTextField(
+                  label: 'Tag',
+                  style: $styles.text.body,
+                  labelStyle: $styles.text.bodyBold,
+                  text: _tagController.text,
+                  enabled: false,
+                ),
+              ),
+              VSpace.med,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [
+                  Text('TEST'),
+                ],
+              ),
               VSpace.xl,
             ],
           ),
