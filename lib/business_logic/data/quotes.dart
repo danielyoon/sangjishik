@@ -310,4 +310,19 @@ Map<int, dynamic> quotes = {
         "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
     'author': 'Sora (No Game, No Life)'
   },
+  67: {
+    'quote':
+        "What is the most resilient parasite? Bacteria? A virus? An intestinal worm? An idea. Resilient... highly contagious. Once an idea has taken hold of the brain it's almost impossible to eradicate. An idea that is fully formed - fully understood - that sticks; right in there somewhere.",
+    'author': 'Cobb (Inception)',
+  },
+  68: {
+    'quote':
+        "You're waiting for a train. A train that'll take you far away. You know where you hope this train will take you. But you can't know for sure. Yet it doesn't matter. Now, tell me why?",
+    'author': 'Cobb (Inception)',
+  },
+  69: {
+    'quote':
+        'Love is patient and kind; love does not envy or boast; it is not arrogant or rude. It does not insist on its own way; it is not irritable or resentful; it does not rejoice at wrongdoing, but rejoices with the truth. Love bears all things, believes all things, hopes all things, endures all things. Love never ends.',
+    'author': '1 Corinthians 13: 4-8 (ESV)',
+  },
 };

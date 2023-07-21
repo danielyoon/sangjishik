@@ -13,20 +13,6 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> {
   late TextEditingController _postController;
   late TextEditingController _tagController;
 
-  final List<String> tags = [
-    'Personal',
-    'Bible',
-    'KPOP',
-    'Programming',
-    'Fashion',
-    'Tetris',
-    'Books',
-    'Food',
-    'History',
-    'Random',
-    'Funny',
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -41,11 +27,6 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> {
     _postController.dispose();
     _tagController.dispose();
     super.dispose();
-  }
-
-  void _showPostDialog(context) async {
-    final List<String>? results = await showDialog(
-        context: context, builder: (BuildContext context) => TagPopup());
   }
 
   @override
@@ -89,7 +70,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> {
               ),
               VSpace.med,
               GestureDetector(
-                onTap: () => _showPostDialog(context),
+                onTap: () => showTagDialog(context),
                 child: StyledTextField(
                   label: 'Tag',
                   style: $styles.text.body,
