@@ -1,3 +1,4 @@
 class NodeJs {
-  final Map<String, String> _headers = {'Content-type': 'application/json'};
+  final _baseUrl = 'www.sangjishik.com';
+  final Map<String, String> _headers = {};
 }

@@ -1,4 +1,5 @@
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/user_interface/styles/styles.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
@@ -6,7 +7,8 @@ class AppScaffold extends StatelessWidget {
   static AppStyle get style => _style;
   static AppStyle _style = AppStyle();
 
-  const AppScaffold({Key? key, required this.child}) : super(key: key);
+  const AppScaffold({Key? key, required this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,8 @@ class AppScaffold extends StatelessWidget {
       body: Theme(
         data: Theme.of(context).copyWith(
           scrollbarTheme: ScrollbarThemeData(
-              thumbColor: MaterialStateProperty.all((Colors.transparent))),
+              thumbColor: MaterialStateProperty.all(
+                  (Colors.transparent))),
         ),
         child: Stack(
           clipBehavior: Clip.antiAlias,
