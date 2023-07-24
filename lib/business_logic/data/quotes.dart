@@ -325,4 +325,8 @@ Map<int, dynamic> quotes = {
         'Love is patient and kind; love does not envy or boast; it is not arrogant or rude. It does not insist on its own way; it is not irritable or resentful; it does not rejoice at wrongdoing, but rejoices with the truth. Love bears all things, believes all things, hopes all things, endures all things. Love never ends.',
     'author': '1 Corinthians 13: 4-8 (ESV)',
   },
+  70: {
+    'quote': 'The inner machinations of my mind are an enigma.',
+    'author': 'Patrick Star (Spongebob Squarepants)',
+  },
 };

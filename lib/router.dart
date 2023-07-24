@@ -37,7 +37,7 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/create',
-              pageBuilder: (context, state) => const NoTransitionPage(
+              pageBuilder: (context, state) => NoTransitionPage(
                 child: CreatePostsScreen(),
               ),
             ),

@@ -26,6 +26,7 @@ class _TagPopupState extends State<TagPopup> {
     'Random',
     'Funny',
   ];
+
   final List<String> _selectedItems = [];
 
   void _itemChange(String itemValue, bool isSelected) {
@@ -38,11 +39,21 @@ class _TagPopupState extends State<TagPopup> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+
+    for (int i = 0; i < appModel.postTags.value.length; i++) {
+      _itemChange(appModel.postTags.value[i], true);
+    }
+  }
+
   void _cancel() {
     Navigator.pop(context);
   }
 
   void _submit() {
+    appModel.updatePostTags(_selectedItems);
     Navigator.pop(context);
   }
 

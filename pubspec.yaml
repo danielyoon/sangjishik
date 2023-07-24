@@ -20,6 +20,7 @@ dependencies:
   go_router: ^9.0.3
   google_fonts: ^5.1.0
   http: ^1.1.0
+  image_picker: ^1.0.1
   shared_preferences: ^2.0.15
   sized_context: ^1.0.0+1
 

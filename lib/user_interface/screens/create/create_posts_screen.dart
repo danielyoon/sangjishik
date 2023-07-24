@@ -1,17 +1,23 @@
+import 'package:image_picker/image_picker.dart';
+import 'package:sangjishik/business_logic/logic/app_model.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
 
-class CreatePostsScreen extends StatefulWidget {
-  const CreatePostsScreen({super.key});
+class CreatePostsScreen extends StatefulWidget with GetItStatefulWidgetMixin {
+  CreatePostsScreen({super.key});
 
   @override
   State<CreatePostsScreen> createState() => _CreatePostsScreenState();
 }
 
-class _CreatePostsScreenState extends State<CreatePostsScreen> {
+class _CreatePostsScreenState extends State<CreatePostsScreen>
+    with GetItStateMixin {
   late TextEditingController _titleController;
   late TextEditingController _postController;
   late TextEditingController _tagController;
+
+  final ImagePicker picker = ImagePicker();
+  XFile? image;
 
   @override
   void initState() {
@@ -29,8 +35,16 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> {
     super.dispose();
   }
 
+  void _uploadImage() async {
+    image = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<String> tags = watchX((AppModel m) => m.postTags);
+    _tagController.text = tags.toString();
+
     double width = context.widthPx;
     double height = context.widthPx;
 
@@ -71,14 +85,38 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> {
               VSpace.med,
               GestureDetector(
                 onTap: () => showTagDialog(context),
-                child: StyledTextField(
-                  label: 'Tag',
-                  style: $styles.text.body,
-                  labelStyle: $styles.text.bodyBold,
-                  text: _tagController.text,
-                  enabled: false,
-                ),
+                child: tags.isEmpty
+                    ? StyledTextField(
+                        label: 'Tag',
+                        style: $styles.text.body,
+                        labelStyle: $styles.text.bodyBold,
+                        text: '',
+                        enabled: false,
+                      )
+                    : StyledTextField(
+                        label: 'Tag',
+                        controller: _tagController,
+                        style: $styles.text.body,
+                        labelStyle: $styles.text.bodyBold,
+                        enabled: false),
               ),
+              VSpace.med,
+              image == null
+                  ? GestureDetector(
+                      onTap: () => _uploadImage(),
+                      child: StyledTextField(
+                        label: 'Image',
+                        labelStyle: $styles.text.bodyBold,
+                        style: $styles.text.body,
+                        text: '',
+                        enabled: false,
+                        numLines: 3,
+                      ),
+                    )
+                  : SizedBox(
+                      width: double.infinity,
+                      child: Image.network(image!.path),
+                    ),
               VSpace.med,
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
