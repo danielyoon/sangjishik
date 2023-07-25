@@ -120,8 +120,14 @@ class _CreatePostsScreenState extends State<CreatePostsScreen>
               VSpace.med,
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  Text('TEST'),
+                children: [
+                  SizedBox(
+                    width: width / 6.5,
+                    child: StyledElevatedButton(
+                      text: 'Submit',
+                      onPressed: () => print('TEST'),
+                    ),
+                  ),
                 ],
               ),
               VSpace.xl,

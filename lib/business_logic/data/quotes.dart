@@ -329,4 +329,18 @@ Map<int, dynamic> quotes = {
     'quote': 'The inner machinations of my mind are an enigma.',
     'author': 'Patrick Star (Spongebob Squarepants)',
   },
+  71: {
+    'quote': "If grace is an ocean, we're all sinking.",
+    'author': 'John Mark McMillan (How He Loves)'
+  },
+  72: {
+    'quote':
+        'No power of hell, no scheme of man, can ever pluck, me from His hand.',
+    'author': 'Stuart Townend',
+  },
+  73: {
+    'quote':
+        'I see you there hanging on a tree. You bled and then you died. And then you rose again for me',
+    'author': "Phil Wickham (You're Beautiful)"
+  },
 };
