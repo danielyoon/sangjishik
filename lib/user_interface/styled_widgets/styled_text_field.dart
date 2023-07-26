@@ -22,26 +22,26 @@ class StyledTextField extends StatefulWidget {
   final TextInputFormatter? textInputFormatter;
   final TextInputAction? textInputAction;
 
-  const StyledTextField(
-      {Key? key,
-      this.label = '',
-      this.text,
-      this.style,
-      this.labelStyle,
-      this.numLines = 1,
-      this.maxLength,
-      this.onChanged,
-      this.onSubmit,
-      this.hintText,
-      this.enabled = true,
-      this.focusNode,
-      this.controller,
-      this.autofillHints,
-      this.autoFocus = false,
-      this.textInputType = TextInputType.text,
-      this.textInputFormatter,
-      this.textInputAction})
-      : super(key: key);
+  const StyledTextField({
+    Key? key,
+    this.label = '',
+    this.text,
+    this.style,
+    this.labelStyle,
+    this.numLines = 1,
+    this.maxLength,
+    this.onChanged,
+    this.onSubmit,
+    this.hintText,
+    this.enabled = true,
+    this.focusNode,
+    this.controller,
+    this.autofillHints,
+    this.autoFocus = false,
+    this.textInputType = TextInputType.text,
+    this.textInputFormatter,
+    this.textInputAction,
+  }) : super(key: key);
 
   @override
   State<StyledTextField> createState() => _StyledTextFieldState();
@@ -80,20 +80,16 @@ class _StyledTextFieldState extends State<StyledTextField> {
             hintText: widget.hintText ?? '',
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(
-                  color: Colors.grey, width: 1, style: BorderStyle.solid),
+              borderSide: BorderSide(color: Colors.grey, width: 1, style: BorderStyle.solid),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(
-                  color: Colors.grey, width: 1, style: BorderStyle.solid),
+              borderSide: BorderSide(color: Colors.grey, width: 1, style: BorderStyle.solid),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(
-                  color: $styles.colors.primary,
-                  width: 1,
-                  style: BorderStyle.solid),
+              borderSide:
+                  BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
             ),
             contentPadding: EdgeInsets.only(
               left: $styles.insets.xs,

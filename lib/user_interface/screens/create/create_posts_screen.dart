@@ -98,7 +98,8 @@ class _CreatePostsScreenState extends State<CreatePostsScreen>
                         controller: _tagController,
                         style: $styles.text.body,
                         labelStyle: $styles.text.bodyBold,
-                        enabled: false),
+                        enabled: false,
+                      ),
               ),
               VSpace.med,
               image == null

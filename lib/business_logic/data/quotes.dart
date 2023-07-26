@@ -343,4 +343,12 @@ Map<int, dynamic> quotes = {
         'I see you there hanging on a tree. You bled and then you died. And then you rose again for me',
     'author': "Phil Wickham (You're Beautiful)"
   },
+  74: {
+    'quote': 'Everybody knows you never go full retard.',
+    'author': 'Kirk Lazarus (Tropic Thunder)'
+  },
+  75: {
+    'quote': 'Bring your sorrows and trade them for joy.',
+    'author': 'O Come To The Alter (Elevation Worship)'
+  },
 };

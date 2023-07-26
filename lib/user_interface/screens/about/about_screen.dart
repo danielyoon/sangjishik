@@ -33,7 +33,7 @@ class AboutScreen extends StatelessWidget {
                   style: $styles.text.body),
               VSpace.lg,
               Text(
-                  "Hi! My name is Sang Ji (상지), or Daniel. I am currently $age year's old.\n\nI have a belief that everyone has something to give back to the world, or leave an imprint on the world. Therefore, this blog is dedicated to recording some knowledge and opinions I've gathered in hopes that someone will benefit form them. Some thoughts of mine are stupid, immature, and inconceivably imaginative... but I hope you can still leave with some semblance of newfound knowledge!",
+                  "Hi! My name is Sang Ji (상지), or Daniel. I am currently $age year's old.\n\nEnjoy my weird thoughts.",
                   style: $styles.text.body),
               VSpace.xl,
             ],
