@@ -6,11 +6,6 @@ import 'package:sangjishik/business_logic/utils/string_utils.dart';
 void showLoginDialog<T>(BuildContext context) async => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(
-          'Login',
-          style: $styles.text.h3,
-          textAlign: TextAlign.center,
-        ),
         content: LoginForm(),
       ),
     );
@@ -24,6 +19,7 @@ class LoginForm extends StatefulWidget {
 
 enum FormMode { LOGIN, SIGNUP }
 
+//TODO: Add userService functions here
 class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
   FormMode _formMode = FormMode.LOGIN;
 
@@ -35,6 +31,8 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
 
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+
+  late TextEditingController _verificationController;
 
   String _errorText = '';
 
@@ -49,12 +47,14 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
     super.initState();
     _emailController = TextEditingController(text: '');
     _passwordController = TextEditingController(text: '');
+    _verificationController = TextEditingController(text: '');
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _verificationController.dispose();
     super.dispose();
   }
 
@@ -87,7 +87,46 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
 
     return SizedBox(
       width: 375,
-      child: _buildLoginForm(mainBtn, bottomText, signUp),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Text(
+                'Verify Email',
+                style: $styles.text.h3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            VSpace.med,
+            StyledTextField(
+              label: 'Verification Code',
+              style: $styles.text.body,
+              labelStyle: $styles.text.bodyBold,
+              onChanged: (_) => setState(() {}),
+              controller: _verificationController,
+              autoFocus: true,
+            ),
+            if (_errorText.isNotEmpty) ...[
+              VSpace.xs,
+              Text(
+                errorText,
+                style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
+              ),
+              VSpace.xs,
+            ],
+            VSpace.xs,
+            VSpace.med,
+            isLoading
+                ? Center(
+                    child: CircularProgressIndicator(color: $styles.colors.primary),
+                  )
+                : StyledElevatedButton(text: 'Create', onPressed: () => print('LOGIN')),
+            VSpace.med,
+          ],
+        ),
+      ),
+      // _buildLoginForm(mainBtn, bottomText, signUp),
     );
   }
 
@@ -99,11 +138,20 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Text(
+                  'Login',
+                  style: $styles.text.h3,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              VSpace.med,
               StyledTextField(
                 label: 'Email',
                 style: $styles.text.body,
                 labelStyle: $styles.text.bodyBold,
                 onChanged: (_) => setState(() {}),
+                autofillHints: const [AutofillHints.email],
                 controller: _emailController,
                 autoFocus: true,
               ),
@@ -113,13 +161,11 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                 style: $styles.text.body,
                 labelStyle: $styles.text.bodyBold,
                 onChanged: (_) => setState(() {}),
+                autofillHints: const [AutofillHints.password],
                 controller: _passwordController,
                 obscureText: obscurePassword,
                 onPressed: _obscurePassword,
               ),
-
-              //TODO: Add form for verifying email
-
               if (_errorText.isNotEmpty) ...[
                 VSpace.xs,
                 Text(
@@ -129,7 +175,6 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                 VSpace.xs,
               ],
               VSpace.xs,
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -137,7 +182,6 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                 ],
               ),
               VSpace.med,
-
               isLoading
                   ? Center(
                       child: CircularProgressIndicator(color: $styles.colors.primary),
