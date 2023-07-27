@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
 import 'package:sangjishik/business_logic/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
@@ -17,7 +18,7 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
-enum FormMode { LOGIN, SIGNUP }
+enum FormMode { LOGIN, SIGNUP, VERIFY }
 
 //TODO: Add userService functions here
 class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
@@ -31,7 +32,6 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
 
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-
   late TextEditingController _verificationController;
 
   String _errorText = '';
@@ -59,10 +59,40 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
   }
 
   bool get enableSubmit {
-    return true;
+    bool emailAndPassAreValid =
+        EmailValidator.validate(_emailController.text) && _passwordController.text.length >= 6;
+    return emailAndPassAreValid;
   }
 
-  void _handleSubmitPressed() async {}
+  void _handleSubmitPressed() async {
+    if (enableSubmit == false) return;
+    errorText = '';
+
+    if (formMode == FormMode.SIGNUP) {
+      await load(() async => await userService.sendVerificationEmail(_emailController.text));
+
+      formMode = FormMode.VERIFY;
+      return;
+    }
+
+    if (formMode == FormMode.VERIFY) {
+      bool success = await load(() async =>
+          await userService.createAccount(_emailController.text, _passwordController.text));
+
+      if (!success) {
+        errorText = 'Wrong verification code';
+        return;
+      }
+    }
+
+    bool success = await load(() async =>
+        await userService.loginWithEmail(_emailController.text, _passwordController.text));
+
+    if (!success) {
+      errorText = 'Wrong email and password!';
+      return;
+    }
+  }
 
   void _obscurePassword() {
     setState(() {
@@ -79,54 +109,69 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    String passwordBtn = obscurePassword ? 'Show' : 'Hide';
-    String mainBtn = formMode == FormMode.LOGIN ? 'Submit' : 'Create';
+    String mainBtn = formMode == FormMode.LOGIN ? 'SUBMIT' : 'CREATE';
 
     String bottomText = formMode == FormMode.LOGIN ? 'Not registered?' : 'Already registered?';
     String signUp = formMode == FormMode.LOGIN ? 'Sign Up' : 'Login';
 
     return SizedBox(
       width: 375,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Text(
-                'Verify Email',
-                style: $styles.text.h3,
-                textAlign: TextAlign.center,
-              ),
+      child: formMode == FormMode.VERIFY
+          ? _buildVerificationForm()
+          : _buildLoginForm(mainBtn, bottomText, signUp),
+    );
+  }
+
+  SingleChildScrollView _buildVerificationForm() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Text(
+              'Verify Email',
+              style: $styles.text.h3,
+              textAlign: TextAlign.center,
             ),
-            VSpace.med,
-            StyledTextField(
-              label: 'Verification Code',
-              style: $styles.text.body,
-              labelStyle: $styles.text.bodyBold,
-              onChanged: (_) => setState(() {}),
-              controller: _verificationController,
-              autoFocus: true,
-            ),
-            if (_errorText.isNotEmpty) ...[
-              VSpace.xs,
-              Text(
-                errorText,
-                style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
-              ),
-              VSpace.xs,
-            ],
+          ),
+          VSpace.med,
+          StyledTextField(
+            label: 'Verification Code',
+            style: $styles.text.body,
+            labelStyle: $styles.text.bodyBold,
+            onChanged: (_) => setState(() {}),
+            controller: _verificationController,
+            autoFocus: true,
+          ),
+          if (_errorText.isNotEmpty) ...[
             VSpace.xs,
-            VSpace.med,
-            isLoading
-                ? Center(
-                    child: CircularProgressIndicator(color: $styles.colors.primary),
-                  )
-                : StyledElevatedButton(text: 'Create', onPressed: () => print('LOGIN')),
-            VSpace.med,
+            Text(
+              errorText,
+              style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
+            ),
+            VSpace.xs,
           ],
-        ),
+          VSpace.xs,
+          VSpace.med,
+          isLoading
+              ? Center(
+                  child: CircularProgressIndicator(color: $styles.colors.primary),
+                )
+              : StyledElevatedButton(
+                  text: 'CREATE ACCOUNT', onPressed: enableSubmit ? _handleSubmitPressed : null),
+          VSpace.med,
+          Row(
+            children: [
+              Text("Didn't receive email?", style: $styles.text.body),
+              HSpace.xs,
+              GestureDetector(
+                  onTap: () => userService.resendVerificationEmail(_emailController.text),
+                  child: Text('Send Again',
+                      style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
+            ],
+          ),
+        ],
       ),
-      // _buildLoginForm(mainBtn, bottomText, signUp),
     );
   }
 
@@ -157,7 +202,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
               ),
               VSpace.med,
               StyledPasswordTextField(
-                label: 'Password',
+                label: formMode == FormMode.LOGIN ? 'Password' : 'Would be password',
                 style: $styles.text.body,
                 labelStyle: $styles.text.bodyBold,
                 onChanged: (_) => setState(() {}),
@@ -175,18 +220,23 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                 VSpace.xs,
               ],
               VSpace.xs,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  StyledTextButton(text: 'Forgot Password', onPressed: () => print('Forgot')),
-                ],
-              ),
+              if (formMode == FormMode.LOGIN) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    StyledTextButton(
+                        text: 'Forgot Password',
+                        onPressed: () => userService.forgotPassword(_emailController.text)),
+                  ],
+                ),
+              ],
               VSpace.med,
               isLoading
                   ? Center(
                       child: CircularProgressIndicator(color: $styles.colors.primary),
                     )
-                  : StyledElevatedButton(text: mainBtn, onPressed: () => print('LOGIN')),
+                  : StyledElevatedButton(
+                      text: mainBtn, onPressed: enableSubmit ? _handleSubmitPressed : null),
               VSpace.med,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
