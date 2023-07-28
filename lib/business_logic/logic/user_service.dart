@@ -1,7 +1,7 @@
 import 'package:sangjishik/core_packages.dart';
 
 class UserService {
-  Future<void> loginWithTokens() async {}
+  Future<void> loginWithTokens(String token) async {}
 
   Future<bool> loginWithEmail(String email, String password) async {
     return false;
@@ -17,5 +17,5 @@ class UserService {
     return false;
   }
 
-  Future<void> createPost() async {}
+  Future<void> createPost(String title, String post, List<String> tags, String image) async {}
 }

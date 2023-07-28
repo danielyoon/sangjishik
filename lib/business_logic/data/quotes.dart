@@ -1,7 +1,6 @@
 Map<int, dynamic> quotes = {
   0: {
-    'quote':
-        "Many men die at twenty-five and aren't buried until they are seventy-five.",
+    'quote': "Many men die at twenty-five and aren't buried until they are seventy-five.",
     'author': 'G. E. Marchand',
   },
   1: {
@@ -21,17 +20,13 @@ Map<int, dynamic> quotes = {
         "The only time you look in your neighbor's bowl is to make sure that they have enough. You don't look in your neighbor's bowl to see if you have as much as them.",
     'author': 'Louis C.K.'
   },
-  5: {
-    'quote': "Everything's amazing right now, and nobody's happy.",
-    'author': 'Louis C.K.'
-  },
+  5: {'quote': "Everything's amazing right now, and nobody's happy.", 'author': 'Louis C.K.'},
   6: {
     'quote': "Man's chief end is to glorify God, and to enjoy him forever.",
     'author': 'Westminster Shorter Catechism'
   },
   7: {
-    'quote':
-        "And have you found your 'joy', in this nearly dead world of ours?",
+    'quote': "And have you found your 'joy', in this nearly dead world of ours?",
     'author': 'Kefka (Final Fantasy VI)'
   },
   8: {
@@ -40,8 +35,7 @@ Map<int, dynamic> quotes = {
     'author': "Morrie Schwartz (Tuesday's With Morrie)"
   },
   9: {
-    'quote':
-        'Dying is only one thing to be sad over. Living unhappily is something else.',
+    'quote': 'Dying is only one thing to be sad over. Living unhappily is something else.',
     'author': "Morrie Schwartz (Tuesday's With Morrie)"
   },
   10: {
@@ -74,10 +68,7 @@ Map<int, dynamic> quotes = {
         "Open the Bible every day, and don't let go of it until God shows up to make it precious to you.",
     'author': 'John Piper',
   },
-  16: {
-    'quote': 'I am a great sinner, but I have a greater Savior.',
-    'author': 'Jared C. Wilson'
-  },
+  16: {'quote': 'I am a great sinner, but I have a greater Savior.', 'author': 'Jared C. Wilson'},
   17: {
     'quote': 'Grace is free, never cheap.',
     'author': 'Dustin Benge',
@@ -88,8 +79,7 @@ Map<int, dynamic> quotes = {
     'author': 'C.S. Lewis (Screwtape Letters)'
   },
   19: {
-    'quote':
-        'Before you complain today, be grateful you have breath to complain with.',
+    'quote': 'Before you complain today, be grateful you have breath to complain with.',
     'author': 'Lecrae'
   },
   20: {
@@ -116,10 +106,7 @@ Map<int, dynamic> quotes = {
         'Dead people receive more flowers than living ones because regret is stronger than gratitude.',
     'author': 'Violet Evergarden (Violet Evergarden)'
   },
-  25: {
-    'quote': 'A man without fear cannot be wise.',
-    'author': 'Saber (Fate Stay/Night)'
-  },
+  25: {'quote': 'A man without fear cannot be wise.', 'author': 'Saber (Fate Stay/Night)'},
   26: {
     'quote': 'I shall grieve, and I shall weep. But I shall never regret.',
     'author': 'Rider (Fate/Zero)',
@@ -134,8 +121,7 @@ Map<int, dynamic> quotes = {
     'author': 'Elon Musk'
   },
   29: {
-    'quote':
-        'I think it is possible for ordinary people to choose to be extraordinary.',
+    'quote': 'I think it is possible for ordinary people to choose to be extraordinary.',
     'author': 'Elon Musk'
   },
   30: {
@@ -162,8 +148,7 @@ Map<int, dynamic> quotes = {
     'author': 'Mia (La La Land)'
   },
   35: {
-    'quote':
-        "There are no two words in the English language more harmful than 'good job'.",
+    'quote': "There are no two words in the English language more harmful than 'good job'.",
     'author': 'Terence Fletcher (Whiplash)'
   },
   36: {
@@ -223,10 +208,7 @@ Map<int, dynamic> quotes = {
     'quote': "That's not the last feeling I want to experience.",
     'author': 'Amber Volakis (House M.D.)'
   },
-  48: {
-    'quote': "People's dreams have no ends.",
-    'author': 'Marshall D. Teach (One Piece)'
-  },
+  48: {'quote': "People's dreams have no ends.", 'author': 'Marshall D. Teach (One Piece)'},
   49: {
     'quote': 'The hardest choices require the strongest wills.',
     'author': 'Thanos (Avengers: Infinity War)'
@@ -237,8 +219,7 @@ Map<int, dynamic> quotes = {
     'author': 'Allison Cameron (House M.D.)'
   },
   51: {
-    'quote':
-        'To me, lies are love. And in my own way, I thought I was expressing love.',
+    'quote': 'To me, lies are love. And in my own way, I thought I was expressing love.',
     'author': 'Ai Hoshino (Oshi No Ko)'
   },
   52: {
@@ -246,13 +227,11 @@ Map<int, dynamic> quotes = {
     'author': 'Steve Jobs',
   },
   53: {
-    'quote':
-        'The heart of man plans his way, but the LORD establishes his steps.',
+    'quote': 'The heart of man plans his way, but the LORD establishes his steps.',
     'author': 'Psalm 16:9 (ESV)',
   },
   54: {
-    'quote':
-        'Forgetting is like a wound. The wound may heal, but it has already left a scar.',
+    'quote': 'Forgetting is like a wound. The wound may heal, but it has already left a scar.',
     'author': 'Monkey D. Luffy (One Piece)',
   },
   55: {
@@ -297,17 +276,13 @@ Map<int, dynamic> quotes = {
         "They say people can change, but is that really true? If they decide they want to fly, will they grow wings? I don't think so. You don't change yourself, you change how you do things. You have to make your own way. You have to create a way to fly, even while you stay the same.",
     'author': 'Sora (No Game, No Life)'
   },
-  64: {
-    'quote': "Only idiots start fights they can't win.",
-    'author': 'Sora (No Game, No Life)'
-  },
+  64: {'quote': "Only idiots start fights they can't win.", 'author': 'Sora (No Game, No Life)'},
   65: {
     'quote': 'Life is not a game of luck. If you wanna win, work hard.',
     'author': 'Sora (No Game, No Life)'
   },
   66: {
-    'quote':
-        "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
+    'quote': "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
     'author': 'Sora (No Game, No Life)'
   },
   67: {
@@ -334,8 +309,7 @@ Map<int, dynamic> quotes = {
     'author': 'John Mark McMillan (How He Loves)'
   },
   72: {
-    'quote':
-        'No power of hell, no scheme of man, can ever pluck, me from His hand.',
+    'quote': 'No power of hell, no scheme of man, can ever pluck, me from His hand.',
     'author': 'Stuart Townend',
   },
   73: {
@@ -349,6 +323,6 @@ Map<int, dynamic> quotes = {
   },
   75: {
     'quote': 'Bring your sorrows and trade them for joy.',
-    'author': 'O Come To The Alter (Elevation Worship)'
+    'author': 'Elevation Worship (O Come To The Alter)'
   },
 };

@@ -18,7 +18,7 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
-enum FormMode { LOGIN, SIGNUP, VERIFY }
+enum FormMode { LOGIN, SIGNUP, VERIFY, PASSWORD }
 
 //TODO: Add userService functions here
 class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
@@ -102,6 +102,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
 
   void _switchForms() {
     errorText = '';
+
     formMode == FormMode.LOGIN ? formMode = FormMode.SIGNUP : formMode = FormMode.LOGIN;
     _emailController.text = '';
     _passwordController.text = '';
