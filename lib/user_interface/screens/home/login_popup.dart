@@ -20,7 +20,6 @@ class LoginForm extends StatefulWidget {
 
 enum FormMode { LOGIN, SIGNUP, VERIFY, PASSWORD }
 
-//TODO: Add userService functions here
 class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
   FormMode _formMode = FormMode.LOGIN;
 
@@ -108,6 +107,14 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
     _passwordController.text = '';
   }
 
+  void _forgotPassword() {
+    errorText = '';
+
+    formMode = FormMode.PASSWORD;
+    _emailController.text = '';
+    _passwordController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     String mainBtn = formMode == FormMode.LOGIN ? 'SUBMIT' : 'CREATE';
@@ -115,145 +122,153 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
     String bottomText = formMode == FormMode.LOGIN ? 'Not registered?' : 'Already registered?';
     String signUp = formMode == FormMode.LOGIN ? 'Sign Up' : 'Login';
 
+    String verificationTitle = formMode == FormMode.VERIFY ? 'Verify Email' : 'Forgot Password?';
+
     return SizedBox(
       width: 375,
-      child: formMode == FormMode.VERIFY
-          ? _buildVerificationForm()
-          : _buildLoginForm(mainBtn, bottomText, signUp),
-    );
-  }
-
-  SingleChildScrollView _buildVerificationForm() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Text(
-              'Verify Email',
-              style: $styles.text.h3,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          VSpace.med,
-          StyledTextField(
-            label: 'Verification Code',
-            style: $styles.text.body,
-            labelStyle: $styles.text.bodyBold,
-            onChanged: (_) => setState(() {}),
-            controller: _verificationController,
-            autoFocus: true,
-          ),
-          if (_errorText.isNotEmpty) ...[
-            VSpace.xs,
-            Text(
-              errorText,
-              style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
-            ),
-            VSpace.xs,
-          ],
-          VSpace.xs,
-          VSpace.med,
-          isLoading
-              ? Center(
-                  child: CircularProgressIndicator(color: $styles.colors.primary),
-                )
-              : StyledElevatedButton(
-                  text: 'CREATE ACCOUNT', onPressed: enableSubmit ? _handleSubmitPressed : null),
-          VSpace.med,
-          Row(
-            children: [
-              Text("Didn't receive email?", style: $styles.text.body),
-              HSpace.xs,
-              GestureDetector(
-                  onTap: () => userService.resendVerificationEmail(_emailController.text),
-                  child: Text('Send Again',
-                      style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  AutofillGroup _buildLoginForm(String mainBtn, String bottomText, String signUp) {
-    return AutofillGroup(
-      key: ValueKey(formMode),
-      child: Form(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'Login',
-                  style: $styles.text.h3,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              VSpace.med,
-              StyledTextField(
-                label: 'Email',
-                style: $styles.text.body,
-                labelStyle: $styles.text.bodyBold,
-                onChanged: (_) => setState(() {}),
-                autofillHints: const [AutofillHints.email],
-                controller: _emailController,
-                autoFocus: true,
-              ),
-              VSpace.med,
-              StyledPasswordTextField(
-                label: formMode == FormMode.LOGIN ? 'Password' : 'Would be password',
-                style: $styles.text.body,
-                labelStyle: $styles.text.bodyBold,
-                onChanged: (_) => setState(() {}),
-                autofillHints: const [AutofillHints.password],
-                controller: _passwordController,
-                obscureText: obscurePassword,
-                onPressed: _obscurePassword,
-              ),
-              if (_errorText.isNotEmpty) ...[
-                VSpace.xs,
-                Text(
-                  errorText,
-                  style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
-                ),
-                VSpace.xs,
-              ],
-              VSpace.xs,
-              if (formMode == FormMode.LOGIN) ...[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+      child: formMode == FormMode.VERIFY || formMode == FormMode.PASSWORD
+          ? Form(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StyledTextButton(
-                        text: 'Forgot Password',
-                        onPressed: () => userService.forgotPassword(_emailController.text)),
+                    Row(
+                      children: [
+                        BackButton(),
+                        HSpace.med,
+                        Center(
+                          child: Text(
+                            verificationTitle,
+                            style: $styles.text.h3,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    VSpace.med,
+                    StyledTextField(
+                      label: formMode == FormMode.VERIFY ? 'Verification Code' : 'Forgotten Email',
+                      style: $styles.text.body,
+                      labelStyle: $styles.text.bodyBold,
+                      onChanged: (_) => setState(() {}),
+                      controller:
+                          formMode == FormMode.VERIFY ? _verificationController : _emailController,
+                      autoFocus: true,
+                    ),
+                    if (_errorText.isNotEmpty) ...[
+                      VSpace.xs,
+                      Text(
+                        errorText,
+                        style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
+                      ),
+                      VSpace.xs,
+                    ],
+                    VSpace.xs,
+                    VSpace.med,
+                    isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(color: $styles.colors.primary),
+                          )
+                        : StyledElevatedButton(
+                            text: formMode == FormMode.VERIFY ? 'CREATE ACCOUNT' : 'RESET PASSWORD',
+                            onPressed: enableSubmit ? _handleSubmitPressed : null),
+                    VSpace.med,
+                    if (formMode == FormMode.VERIFY) ...[
+                      Row(
+                        children: [
+                          Text("Didn't receive email?", style: $styles.text.body),
+                          HSpace.xs,
+                          GestureDetector(
+                              onTap: () =>
+                                  userService.resendVerificationEmail(_emailController.text),
+                              child: Text('Send Again',
+                                  style: $styles.text.bodyBold
+                                      .copyWith(color: $styles.colors.primary))),
+                        ],
+                      ),
+                    ],
                   ],
                 ),
-              ],
-              VSpace.med,
-              isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(color: $styles.colors.primary),
-                    )
-                  : StyledElevatedButton(
-                      text: mainBtn, onPressed: enableSubmit ? _handleSubmitPressed : null),
-              VSpace.med,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(bottomText, style: $styles.text.body),
-                  HSpace.xs,
-                  GestureDetector(
-                      onTap: _switchForms,
-                      child: Text(signUp,
-                          style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
-                ],
               ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : AutofillGroup(
+              key: ValueKey(formMode),
+              child: Form(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Login',
+                          style: $styles.text.h3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      VSpace.med,
+                      StyledTextField(
+                        label: 'Email',
+                        style: $styles.text.body,
+                        labelStyle: $styles.text.bodyBold,
+                        onChanged: (_) => setState(() {}),
+                        autofillHints: const [AutofillHints.email],
+                        controller: _emailController,
+                        autoFocus: true,
+                      ),
+                      VSpace.med,
+                      StyledPasswordTextField(
+                        label: formMode == FormMode.LOGIN ? 'Password' : 'Would be password',
+                        style: $styles.text.body,
+                        labelStyle: $styles.text.bodyBold,
+                        onChanged: (_) => setState(() {}),
+                        autofillHints: const [AutofillHints.password],
+                        controller: _passwordController,
+                        obscureText: obscurePassword,
+                        onPressed: _obscurePassword,
+                      ),
+                      if (_errorText.isNotEmpty) ...[
+                        VSpace.xs,
+                        Text(
+                          errorText,
+                          style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
+                        ),
+                        VSpace.xs,
+                      ],
+                      VSpace.xs,
+                      if (formMode == FormMode.LOGIN) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            StyledTextButton(
+                                text: 'Forgot Password', onPressed: () => _forgotPassword()),
+                          ],
+                        ),
+                      ],
+                      VSpace.med,
+                      isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(color: $styles.colors.primary),
+                            )
+                          : StyledElevatedButton(
+                              text: mainBtn, onPressed: enableSubmit ? _handleSubmitPressed : null),
+                      VSpace.med,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(bottomText, style: $styles.text.body),
+                          HSpace.xs,
+                          GestureDetector(
+                              onTap: _switchForms,
+                              child: Text(signUp,
+                                  style: $styles.text.bodyBold
+                                      .copyWith(color: $styles.colors.primary))),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }

@@ -325,4 +325,8 @@ Map<int, dynamic> quotes = {
     'quote': 'Bring your sorrows and trade them for joy.',
     'author': 'Elevation Worship (O Come To The Alter)'
   },
+  76: {
+    'quote': "Don't you put that evil on me Ricky Bobby!",
+    'author': 'Lucius Washington (Talladega Nights: The Ballad of Ricky Bobby)'
+  },
 };

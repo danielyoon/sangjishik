@@ -1,3 +1,4 @@
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/business_logic/logic/user_service.dart';
 import 'package:sangjishik/business_logic/logic/app_model.dart';
@@ -8,8 +9,8 @@ import 'package:sangjishik/user_interface/app_scaffold.dart';
 import 'package:sangjishik/user_interface/styles/styles.dart';
 
 void main() {
-  WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
+  usePathUrlStrategy();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   registerSingletons();
 
   runApp(const Sangjishik());
@@ -28,13 +29,10 @@ class Sangjishik extends StatelessWidget {
 }
 
 void registerSingletons() {
-  GetIt.I
-      .registerLazySingleton<Bootstrap>(() => Bootstrap());
+  GetIt.I.registerLazySingleton<Bootstrap>(() => Bootstrap());
   GetIt.I.registerLazySingleton<AppModel>(() => AppModel());
-  GetIt.I.registerLazySingleton<UserService>(
-      () => UserService());
-  GetIt.I.registerLazySingleton<TokenStorage>(
-      () => TokenStorage());
+  GetIt.I.registerLazySingleton<UserService>(() => UserService());
+  GetIt.I.registerLazySingleton<TokenStorage>(() => TokenStorage());
   GetIt.I.registerLazySingleton<NodeJs>(() => NodeJs());
 }
 

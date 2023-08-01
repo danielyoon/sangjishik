@@ -20,25 +20,21 @@ class HomeAppBar extends StatelessWidget {
         foregroundColor: $styles.colors.primary,
         title: Padding(
           padding: EdgeInsets.all($styles.insets.sm),
-          child:
-              GestureDetector(onTap: () => onTap!(0), child: Text('LOGO HERE')),
+          child: GestureDetector(onTap: () => onTap!(0), child: Text('LOGO HERE')),
         ),
         actions: (width > 780)
             ? [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-                  child: StyledTextButton(
-                      text: 'About', onPressed: () => onTap!(1)),
+                  child: StyledTextButton(text: 'About', onPressed: () => onTap!(1)),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-                  child: StyledTextButton(
-                      text: 'Login', onPressed: () => showLoginDialog(context)),
+                  child: StyledTextButton(text: 'Login', onPressed: () => showLoginDialog(context)),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-                  child: StyledTextButton(
-                      text: 'Create', onPressed: () => onTap!(2)),
+                  child: StyledTextButton(text: 'Create', onPressed: () => onTap!(2)),
                 ),
               ]
             : [
