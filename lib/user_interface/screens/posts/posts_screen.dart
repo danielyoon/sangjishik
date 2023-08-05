@@ -43,44 +43,7 @@ class _PostsScreenState extends State<PostsScreen> {
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                         childAspectRatio: 1,
-                        children: [
-                          Posts(
-                            image:
-                                'https://1409791524.rsc.cdn77.org/data/images/full/585357/kim-chaewon.jpg',
-                            title: 'TEST',
-                            date: DateTime.now(),
-                          ),
-                          Posts(
-                            image:
-                                'https://1409791524.rsc.cdn77.org/data/images/full/585357/kim-chaewon.jpg',
-                            title: 'TEST',
-                            date: DateTime.now(),
-                          ),
-                          Posts(
-                            image:
-                                'https://1409791524.rsc.cdn77.org/data/images/full/585357/kim-chaewon.jpg',
-                            title: 'TEST',
-                            date: DateTime.now(),
-                          ),
-                          Posts(
-                            image:
-                                'https://1409791524.rsc.cdn77.org/data/images/full/585357/kim-chaewon.jpg',
-                            title: 'TEST',
-                            date: DateTime.now(),
-                          ),
-                          Posts(
-                            image:
-                                'https://1409791524.rsc.cdn77.org/data/images/full/585357/kim-chaewon.jpg',
-                            title: 'TEST',
-                            date: DateTime.now(),
-                          ),
-                          Posts(
-                            image:
-                                'https://1409791524.rsc.cdn77.org/data/images/full/585357/kim-chaewon.jpg',
-                            title: 'TEST',
-                            date: DateTime.now(),
-                          ),
-                        ],
+                        children: [],
                       ),
                     ),
                     VSpace.xl,

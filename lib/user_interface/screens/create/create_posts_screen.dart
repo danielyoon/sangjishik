@@ -10,8 +10,7 @@ class CreatePostsScreen extends StatefulWidget with GetItStatefulWidgetMixin {
   State<CreatePostsScreen> createState() => _CreatePostsScreenState();
 }
 
-class _CreatePostsScreenState extends State<CreatePostsScreen>
-    with GetItStateMixin {
+class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMixin {
   late TextEditingController _titleController;
   late TextEditingController _postController;
   late TextEditingController _tagController;
@@ -46,8 +45,6 @@ class _CreatePostsScreenState extends State<CreatePostsScreen>
     _tagController.text = tags.toString();
 
     double width = context.widthPx;
-    double height = context.widthPx;
-
     return Align(
       alignment: Alignment.topCenter,
       child: SizedBox(
@@ -79,7 +76,6 @@ class _CreatePostsScreenState extends State<CreatePostsScreen>
                 controller: _postController,
                 textInputType: TextInputType.multiline,
                 textInputAction: TextInputAction.newline,
-                //TODO: Adjust numLines depending on height
                 numLines: 18,
               ),
               VSpace.med,
@@ -122,11 +118,14 @@ class _CreatePostsScreenState extends State<CreatePostsScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    width: width / 6.5,
-                    child: StyledElevatedButton(
-                      text: 'Submit',
-                      onPressed: () => print('TEST'),
+                  Flexible(
+                    child: SizedBox(
+                      width: width / 4,
+                      child: StyledElevatedButton(
+                        text: 'Submit',
+                        onPressed: () => userService.createPost(
+                            _titleController.text, _postController.text, tags, image!),
+                      ),
                     ),
                   ),
                 ],

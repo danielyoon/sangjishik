@@ -115,6 +115,20 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
     _passwordController.text = '';
   }
 
+  void _backButtonFunction() {
+    if (formMode == FormMode.PASSWORD) {
+      formMode = FormMode.LOGIN;
+      _emailController.text = '';
+    }
+
+    if (formMode == FormMode.VERIFY) {
+      formMode = FormMode.SIGNUP;
+      _emailController.text = '';
+      _passwordController.text = '';
+      _verificationController.text = '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String mainBtn = formMode == FormMode.LOGIN ? 'SUBMIT' : 'CREATE';
@@ -134,7 +148,9 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                   children: [
                     Row(
                       children: [
-                        BackButton(),
+                        BackButton(
+                          onPressed: () => _backButtonFunction(),
+                        ),
                         HSpace.med,
                         Center(
                           child: Text(
