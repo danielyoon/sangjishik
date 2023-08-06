@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/service/nodejs.dart';

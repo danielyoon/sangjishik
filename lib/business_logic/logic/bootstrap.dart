@@ -9,6 +9,8 @@ class Bootstrap {
 
     await Cloudinary.init();
 
+    await userService.getPosts();
+
     if (tokens.token.refreshToken.isNotEmpty) {
       //If refreshToken is not empty, attempt background login with token -- then set appModel as logged in.
     }

@@ -17,6 +17,7 @@ class Posts extends StatefulWidget {
   State<Posts> createState() => _PostsState();
 }
 
+//FIXME: Make special sizing for Galaxy Fold
 class _PostsState extends State<Posts> {
   bool isHover = false;
   bool isBtnHover = false;
@@ -88,8 +89,8 @@ class _PostsState extends State<Posts> {
                                     child: Text(
                                       'View Post',
                                       style: isBtnHover
-                                          ? $styles.text.body
-                                          : $styles.text.body.copyWith(color: Colors.grey[400]),
+                                          ? $styles.text.bodyBold
+                                          : $styles.text.bodyBold.copyWith(color: Colors.grey[400]),
                                     ),
                                   ),
                                 ),

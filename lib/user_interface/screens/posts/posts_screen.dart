@@ -12,6 +12,8 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
+  late ScrollController _scrollController;
+
   List<Widget> generatePosts() {
     List<Widget> myPosts = [];
     for (int i = 0; i < tempPosts.length; i++) {
@@ -23,6 +25,18 @@ class _PostsScreenState extends State<PostsScreen> {
     }
 
     return myPosts;
+  }
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -41,6 +55,16 @@ class _PostsScreenState extends State<PostsScreen> {
 
     double height = context.heightPx;
     double width = context.widthPx;
+
+    _scrollController.addListener(() {
+      // Code to execute when the scroll position changes
+      double currentScrollOffset = _scrollController.position.pixels;
+      bool isAtTop = _scrollController.position.atEdge && _scrollController.position.pixels == 0;
+
+      print('Current Scroll Offset: $currentScrollOffset');
+      print('Is At Top: $isAtTop');
+    });
+
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(left: $styles.insets.lg),
@@ -54,6 +78,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   children: [
                     Expanded(
                       child: GridView.count(
+                        controller: _scrollController,
                         crossAxisCount: calculateNumberOfPosts(width as int),
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
