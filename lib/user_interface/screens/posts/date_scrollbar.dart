@@ -24,15 +24,14 @@ class _DateScrollbarState extends State<DateScrollbar> {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children:
-              buildScrollbar(currentMonth, startMonth, currentYear, startYear),
+          children: buildScrollbar(currentMonth, startMonth, currentYear, startYear),
         ),
       ),
     );
   }
 
-  List<Widget> buildScrollbar(
-      int currentMonth, int startMonth, int currentYear, int startYear) {
+  //TODO: Probably will have to make a longer box (with more dividers) if my posts exceed an x amount
+  List<Widget> buildScrollbar(int currentMonth, int startMonth, int currentYear, int startYear) {
     List<Widget> scrolls = [];
 
     int year = currentYear - startYear;

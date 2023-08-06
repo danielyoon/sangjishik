@@ -2,6 +2,8 @@ import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/posts/date_scrollbar.dart';
 import 'package:sangjishik/user_interface/screens/posts/posts.dart';
 
+import 'package:sangjishik/business_logic/data/temp_posts.dart';
+
 class PostsScreen extends StatefulWidget {
   const PostsScreen({super.key});
 
@@ -10,17 +12,30 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
+  List<Widget> generatePosts() {
+    List<Widget> myPosts = [];
+    for (int i = 0; i < tempPosts.length; i++) {
+      myPosts.add(Posts(
+        title: tempPosts[i]['title'],
+        image: tempPosts[i]['image'],
+        date: tempPosts[i]['date'],
+      ));
+    }
+
+    return myPosts;
+  }
+
   @override
   Widget build(BuildContext context) {
     int calculateNumberOfPosts(int screenWidth) {
-      if (screenWidth >= 1300) {
-        return 4; // Display 4 posts for larger screens
-      } else if (screenWidth >= 1000) {
-        return 3; // Display 3 posts for medium-sized screens
-      } else if (screenWidth >= 700) {
-        return 2; // Display 2 posts for smaller screens
+      if (screenWidth >= 1451) {
+        return 4;
+      } else if (screenWidth >= 1117) {
+        return 3;
+      } else if (screenWidth >= 696) {
+        return 2;
       } else {
-        return 1; // Display 1 post for the smallest screens
+        return 1;
       }
     }
 
@@ -43,7 +58,7 @@ class _PostsScreenState extends State<PostsScreen> {
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                         childAspectRatio: 1,
-                        children: [],
+                        children: generatePosts(),
                       ),
                     ),
                     VSpace.xl,

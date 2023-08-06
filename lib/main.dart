@@ -12,9 +12,10 @@ import 'package:sangjishik/user_interface/styles/styles.dart';
 void main() async {
   usePathUrlStrategy();
 
-  await Cloudinary.init();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   registerSingletons();
+
+  await bootstrap.init();
 
   runApp(const Sangjishik());
 }

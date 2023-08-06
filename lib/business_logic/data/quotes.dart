@@ -310,7 +310,7 @@ Map<int, dynamic> quotes = {
   },
   72: {
     'quote': 'No power of hell, no scheme of man, can ever pluck, me from His hand.',
-    'author': 'Stuart Townend',
+    'author': 'Stuart Townend (In Christ Alone)',
   },
   73: {
     'quote':

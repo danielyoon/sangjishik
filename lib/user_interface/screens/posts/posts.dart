@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:sangjishik/core_packages.dart';
 
-//FIXME: Must fix this for mobile -- the Visit button gets squished
 class Posts extends StatefulWidget {
   final String image;
   final String title;
@@ -36,9 +35,7 @@ class _PostsState extends State<Posts> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular($styles.insets.sm),
-            color: isHover
-                ? Color.fromARGB(75, 192, 184, 171)
-                : Colors.transparent,
+            color: isHover ? Color.fromARGB(75, 192, 184, 171) : Colors.transparent,
           ),
           child: SizedBox(
             child: Column(
@@ -47,14 +44,12 @@ class _PostsState extends State<Posts> {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.all($styles.insets.sm),
-                    child: LimitedBox(
-                      maxHeight: 300,
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Image.network(
-                          widget.image,
-                          fit: BoxFit.fitWidth,
-                        ),
+                    child: SizedBox(
+                      height: 300,
+                      width: 500,
+                      child: Image.network(
+                        widget.image,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -68,26 +63,22 @@ class _PostsState extends State<Posts> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(widget.title, style: $styles.text.bodyBold),
-                          Text(widget.date.toString(),
-                              style: $styles.text.caption),
+                          Text(widget.date.toString(), style: $styles.text.caption),
                         ],
                       ),
                       !isHover
                           ? Container()
                           : Flexible(
                               child: MouseRegion(
-                                onEnter: (PointerEnterEvent event) =>
-                                    setState(() {
+                                onEnter: (PointerEnterEvent event) => setState(() {
                                   isBtnHover = true;
                                 }),
-                                onExit: (PointerExitEvent event) =>
-                                    setState(() {
+                                onExit: (PointerExitEvent event) => setState(() {
                                   isBtnHover = false;
                                 }),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        $styles.insets.xxs),
+                                    borderRadius: BorderRadius.circular($styles.insets.xxs),
                                     color: isBtnHover
                                         ? Colors.white
                                         : Color.fromARGB(255, 235, 235, 230),
@@ -98,8 +89,7 @@ class _PostsState extends State<Posts> {
                                       'View Post',
                                       style: isBtnHover
                                           ? $styles.text.body
-                                          : $styles.text.body.copyWith(
-                                              color: Colors.grey[400]),
+                                          : $styles.text.body.copyWith(color: Colors.grey[400]),
                                     ),
                                   ),
                                 ),

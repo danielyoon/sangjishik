@@ -10,8 +10,7 @@ class UserService {
 
   Future<void> loginWithTokens(String token) async {}
 
-  Future<bool> loginWithEmail(
-      String email, String password) async {
+  Future<bool> loginWithEmail(String email, String password) async {
     return false;
   }
 
@@ -27,21 +26,20 @@ class UserService {
     print('Trying to Create pt.2');
   }
 
-  Future<bool> createAccount(
-      String email, String password) async {
+  Future<bool> createAccount(String email, String password) async {
     print('Created someone!');
     return false;
   }
 
-  Future<void> createPost(String title, String post,
-      List<String> tags, XFile image) async {
+  Future<void> createPost(String title, String post, List<String> tags, XFile image) async {
     var response = await cloudinary.uploadImage(image.path);
 
-    Map<String, dynamic>? data = await nodeJs.createPost(
-        title, post, tags, response.url);
+    Map<String, dynamic>? data = await nodeJs.createPost(title, post, tags, response.url);
 
     if (data != null) {
       Post post = Post.fromJson(data);
     }
   }
+
+  Future<void> getPosts() async {}
 }
