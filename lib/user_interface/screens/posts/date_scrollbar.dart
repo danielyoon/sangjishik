@@ -1,6 +1,7 @@
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/posts/january_box.dart';
 import 'package:sangjishik/user_interface/screens/posts/month_box.dart';
+import 'package:sangjishik/user_interface/screens/posts/scroll_indicator.dart';
 
 class DateScrollbar extends StatefulWidget {
   const DateScrollbar({super.key});
@@ -24,7 +25,20 @@ class _DateScrollbarState extends State<DateScrollbar> {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: buildScrollbar(currentMonth, startMonth, currentYear, startYear),
+          children: [
+            Stack(
+              children: [
+                Positioned(
+                  right: 0,
+                  top: 20,
+                  child: ScrollIndicator(),
+                ),
+                Column(
+                  children: buildScrollbar(currentMonth, startMonth, currentYear, startYear),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

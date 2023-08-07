@@ -23,13 +23,12 @@ final appRouter = GoRouter(
               ),
               routes: [
                 GoRoute(
-                    name: 'post',
-                    path: 'post/:id',
-                    pageBuilder: (context, GoRouterState state) {
-                      return NoTransitionPage(
-                        child: PostScreen(id: state.pathParameters['id']!),
-                      );
-                    }),
+                  name: 'post',
+                  path: 'post/:id',
+                  pageBuilder: (context, GoRouterState state) => NoTransitionPage(
+                    child: PostScreen(id: state.pathParameters['id']!),
+                  ),
+                ),
               ],
             ),
           ],
@@ -61,6 +60,7 @@ final appRouter = GoRouter(
 
 String? _handleRedirect(BuildContext context, GoRouterState state) {
   //TODO: Add redirection away from 'Create' if not logged in
+  //TODO: Create 'does not exist' page
   debugPrint('Navigate to: ${state.location}');
   return null;
 }
