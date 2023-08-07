@@ -5,12 +5,14 @@ class Posts extends StatefulWidget {
   final String image;
   final String title;
   final DateTime date;
+  final VoidCallback onTap;
 
   const Posts({
     super.key,
     required this.image,
     required this.title,
     required this.date,
+    required this.onTap,
   });
 
   @override
@@ -86,11 +88,15 @@ class _PostsState extends State<Posts> {
                                   ),
                                   child: Padding(
                                     padding: EdgeInsets.all($styles.insets.xs),
-                                    child: Text(
-                                      'View Post',
-                                      style: isBtnHover
-                                          ? $styles.text.bodyBold
-                                          : $styles.text.bodyBold.copyWith(color: Colors.grey[400]),
+                                    child: GestureDetector(
+                                      onTap: widget.onTap,
+                                      child: Text(
+                                        'View Post',
+                                        style: isBtnHover
+                                            ? $styles.text.bodyBold
+                                            : $styles.text.bodyBold
+                                                .copyWith(color: Colors.grey[400]),
+                                      ),
                                     ),
                                   ),
                                 ),
