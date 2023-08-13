@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class StringUtils {
   static bool isEmpty(String? s) => s == null || s.trim().isEmpty;
 
@@ -5,5 +7,9 @@ class StringUtils {
 
   static String replaceSpacesWithHyphens(String inputString) {
     return inputString.replaceAll(' ', '-');
+  }
+
+  static String formatDateTime(DateTime dateTime) {
+    return DateFormat('MMM dd yyyy').format(dateTime);
   }
 }

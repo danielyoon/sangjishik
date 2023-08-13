@@ -1,7 +1,7 @@
 import 'package:sangjishik/business_logic/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/posts/date_scrollbar.dart';
-import 'package:sangjishik/user_interface/screens/posts/posts.dart';
+import 'package:sangjishik/user_interface/screens/posts/post_widget.dart';
 
 import 'package:sangjishik/business_logic/data/temp_posts.dart';
 
@@ -14,25 +14,16 @@ class PostsScreen extends StatefulWidget {
 
 class _PostsScreenState extends State<PostsScreen> {
   late ScrollController _scrollController;
-
-  List<Widget> generatePosts() {
-    List<Widget> myPosts = [];
-    for (int i = 0; i < tempPosts.length; i++) {
-      String title = StringUtils.replaceSpacesWithHyphens(tempPosts[i]['title']);
-      myPosts.add(Posts(
-        title: tempPosts[i]['title'],
-        image: tempPosts[i]['image'],
-        date: tempPosts[i]['date'],
-        onTap: () => context.go('/post/$title'),
-      ));
-    }
-
-    return myPosts;
-  }
+  double currentScrollOffset = 0;
 
   @override
   void initState() {
     _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      setState(() {
+        currentScrollOffset = _scrollController.offset; // Update the scroll offset
+      });
+    });
     super.initState();
   }
 
@@ -56,15 +47,23 @@ class _PostsScreenState extends State<PostsScreen> {
       }
     }
 
+    List<Widget> generatePosts() {
+      List<Widget> myPosts = [];
+      for (int i = 0; i < tempPosts.length; i++) {
+        String title = StringUtils.replaceSpacesWithHyphens(tempPosts[i]['title']);
+        myPosts.add(PostWidget(
+          title: tempPosts[i]['title'],
+          image: tempPosts[i]['image'],
+          date: tempPosts[i]['date'],
+          onTap: () => context.go('/post/$title'),
+        ));
+      }
+
+      return myPosts;
+    }
+
     double height = context.heightPx;
     double width = context.widthPx;
-
-    _scrollController.addListener(() {
-      // Code to execute when the scroll position changes
-      double currentScrollOffset = _scrollController.position.pixels;
-
-      print('Current Scroll Offset: $currentScrollOffset');
-    });
 
     return Expanded(
       child: Padding(
@@ -91,8 +90,9 @@ class _PostsScreenState extends State<PostsScreen> {
                   ],
                 ),
               ),
-              HSpace.lg,
-              DateScrollbar(),
+              width < 380 ? HSpace.sm : HSpace.lg,
+              Expanded(child: CustomScrollIndicator(controller: _scrollController)),
+              // DateScrollbar(scroll: currentScrollOffset),
             ],
           ),
         ),

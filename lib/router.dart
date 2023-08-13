@@ -4,7 +4,7 @@ import 'package:sangjishik/user_interface/screens/about/about_screen.dart';
 import 'package:sangjishik/user_interface/screens/create/create_posts_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_wrapper.dart';
-import 'package:sangjishik/user_interface/screens/posts/post_screen.dart';
+import 'package:sangjishik/user_interface/screens/posts/one_post_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -26,7 +26,7 @@ final appRouter = GoRouter(
                   name: 'post',
                   path: 'post/:id',
                   pageBuilder: (context, GoRouterState state) => NoTransitionPage(
-                    child: PostScreen(id: state.pathParameters['id']!),
+                    child: OnePostScreen(id: state.pathParameters['id']!),
                   ),
                 ),
               ],

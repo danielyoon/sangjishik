@@ -31,17 +31,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double width = context.widthPx;
     double height = context.heightPx;
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            VSpace.xl,
-            _quotesWidget(width),
-            VSpace.xl,
-            PostsScreen(),
-          ],
+    return Theme(
+      data: Theme.of(context).copyWith(
+        scrollbarTheme:
+            ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
+      ),
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VSpace.xl,
+              _quotesWidget(width),
+              VSpace.xl,
+              PostsScreen(),
+            ],
+          ),
         ),
       ),
     );

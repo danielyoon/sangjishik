@@ -2,6 +2,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/service/nodejs.dart';
 import 'package:sangjishik/business_logic/models/post.dart';
+import 'package:sangjishik/business_logic/utils/string_utils.dart';
+
+import 'package:sangjishik/business_logic/data/temp_posts.dart';
 
 class UserService {
   NodeJs get nodeJs => GetIt.I.get<NodeJs>();
@@ -39,5 +42,19 @@ class UserService {
     }
   }
 
-  Future<void> getPosts() async {}
+  Future<void> getPosts() async {
+    List<Post> myPosts = [];
+
+    for (int i = 0; i < tempPosts.length; i++) {
+      String title = StringUtils.replaceSpacesWithHyphens(tempPosts[i]['title']);
+      myPosts.add(
+        Post(tempPosts[i]['title'], 'TEST', tempPosts[i]['image'], ['PERSONAL', 'TEST'], i,
+            tempPosts[i]['date'], null),
+      );
+    }
+
+    myPosts.sort((a, b) => b.date.compareTo(a.date));
+
+    appModel.updatePosts(myPosts);
+  }
 }

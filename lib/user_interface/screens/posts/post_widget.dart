@@ -1,13 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/business_logic/utils/string_utils.dart';
 
-class Posts extends StatefulWidget {
+//FIXME: Add POST and TAG here so this object can be passed on
+class PostWidget extends StatefulWidget {
   final String image;
   final String title;
   final DateTime date;
   final VoidCallback onTap;
 
-  const Posts({
+  const PostWidget({
     super.key,
     required this.image,
     required this.title,
@@ -16,11 +18,11 @@ class Posts extends StatefulWidget {
   });
 
   @override
-  State<Posts> createState() => _PostsState();
+  State<PostWidget> createState() => _PostWidgetState();
 }
 
 //FIXME: Make special sizing for Galaxy Fold
-class _PostsState extends State<Posts> {
+class _PostWidgetState extends State<PostWidget> {
   bool isHover = false;
   bool isBtnHover = false;
 
@@ -34,7 +36,7 @@ class _PostsState extends State<Posts> {
         isHover = false;
       }),
       child: GestureDetector(
-        onTap: () => print('TEST'),
+        onTap: widget.onTap,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular($styles.insets.sm),
@@ -66,7 +68,8 @@ class _PostsState extends State<Posts> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(widget.title, style: $styles.text.bodyBold),
-                          Text(widget.date.toString(), style: $styles.text.caption),
+                          Text(StringUtils.formatDateTime(widget.date),
+                              style: $styles.text.body.copyWith(color: Colors.grey)),
                         ],
                       ),
                       !isHover
