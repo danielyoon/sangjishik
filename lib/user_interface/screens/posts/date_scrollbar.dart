@@ -90,7 +90,6 @@ class CustomScrollIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Get the Scrollable widget's viewport dimension and scroll position
         final double viewportHeight = constraints.maxHeight;
         final double scrollPosition = controller.hasClients ? controller.offset : 0.0;
         final double maxScrollExtent =
@@ -98,9 +97,14 @@ class CustomScrollIndicator extends StatelessWidget {
         final double minScrollExtent =
             controller.hasClients ? controller.position.minScrollExtent : 0.0;
 
-        // Calculate the height and position of the thumb
-        final double thumbHeight =
+        // Calculate the "natural" thumb height (without scaling)
+        final double naturalThumbHeight =
             viewportHeight * viewportHeight / (maxScrollExtent - minScrollExtent + viewportHeight);
+
+        // Scale the thumb height by the specified factor
+        final double thumbHeight = naturalThumbHeight * .007;
+
+        // Calculate the thumb top position, accounting for the scale factor
         final double thumbTop =
             scrollPosition * (viewportHeight - thumbHeight) / (maxScrollExtent - minScrollExtent);
 
@@ -118,9 +122,9 @@ class CustomScrollIndicator extends StatelessWidget {
             child: Align(
               alignment: Alignment.topCenter,
               child: Container(
-                width: 16,
+                width: 36,
                 height: thumbHeight,
-                color: Colors.grey[700], // Set the thumb color
+                color: Colors.orange, // Set the thumb color
                 margin: EdgeInsets.only(top: thumbTop),
               ),
             ),
