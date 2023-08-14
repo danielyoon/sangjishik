@@ -91,7 +91,6 @@ class _PostsScreenState extends State<PostsScreen> {
                 ),
               ),
               width < 380 ? HSpace.sm : HSpace.lg,
-              Expanded(child: CustomScrollIndicator(controller: _scrollController)),
               // DateScrollbar(scroll: currentScrollOffset),
             ],
           ),

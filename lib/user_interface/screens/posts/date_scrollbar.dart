@@ -24,8 +24,6 @@ class _DateScrollbarState extends State<DateScrollbar> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.scroll);
-
     return SizedBox(
       width: 60,
       height: double.infinity,

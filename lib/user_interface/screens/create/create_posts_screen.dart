@@ -3,6 +3,7 @@ import 'package:sangjishik/business_logic/logic/app_model.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
 
+//TODO: Remove scrollbar from this screen... It just looks ugly ^^;;
 class CreatePostsScreen extends StatefulWidget with GetItStatefulWidgetMixin {
   CreatePostsScreen({super.key});
 

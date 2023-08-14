@@ -329,4 +329,12 @@ Map<int, dynamic> quotes = {
     'quote': "Don't you put that evil on me Ricky Bobby!",
     'author': 'Lucius Washington (Talladega Nights: The Ballad of Ricky Bobby)'
   },
+  77: {
+    'quote': 'Friendship means little when its convenient',
+    'author': 'Koji (John Wick 4)',
+  },
+  78: {
+    'quote': 'Ohana means family, and family means nobody is left behind or forgotten',
+    'author': 'Lilo (Lilo & Stitch)',
+  },
 };
