@@ -11,8 +11,7 @@ final appRouter = GoRouter(
   redirect: _handleRedirect,
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) =>
-          AppScaffold(child: HomeWrapper(navigationShell: navigationShell)),
+      builder: (context, state, navigationShell) => AppScaffold(child: HomeWrapper(navigationShell: navigationShell)),
       branches: [
         StatefulShellBranch(
           routes: [
@@ -59,8 +58,10 @@ final appRouter = GoRouter(
 );
 
 String? _handleRedirect(BuildContext context, GoRouterState state) {
-  //TODO: Add redirection away from 'Create' if not logged in
-  //TODO: Create 'does not exist' page
+  bool? isAdmin = appModel.isAdmin;
+
+  if (isAdmin == false && state.location == '/create') return '/';
+
   debugPrint('Navigate to: ${state.location}');
   return null;
 }

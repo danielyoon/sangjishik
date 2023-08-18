@@ -58,8 +58,12 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
   }
 
   bool get enableSubmit {
-    bool emailAndPassAreValid =
-        EmailValidator.validate(_emailController.text) && _passwordController.text.length >= 6;
+    bool emailAndPassAreValid = EmailValidator.validate(_emailController.text) && _passwordController.text.length >= 6;
+
+    if (formMode == FormMode.VERIFY) {
+      if (_verificationController.text.length > 2) return true;
+      return false;
+    }
     return emailAndPassAreValid;
   }
 
@@ -75,8 +79,8 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
     }
 
     if (formMode == FormMode.VERIFY) {
-      bool success = await load(() async =>
-          await userService.createAccount(_emailController.text, _passwordController.text));
+      bool success = await load(() async => await userService.createAccount(
+          _emailController.text, _passwordController.text, _verificationController.text));
 
       if (!success) {
         errorText = 'Wrong verification code';
@@ -84,12 +88,31 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
       }
     }
 
-    bool success = await load(() async =>
-        await userService.loginWithEmail(_emailController.text, _passwordController.text));
+    if (formMode == FormMode.LOGIN) {
+      bool success =
+          await load(() async => await userService.loginWithEmail(_emailController.text, _passwordController.text));
 
-    if (!success) {
-      errorText = 'Wrong email and password!';
-      return;
+      if (!success) {
+        errorText = 'Wrong email and password!';
+        return;
+      }
+
+      if (mounted) {
+        context.pop();
+      }
+    }
+
+    if (formMode == FormMode.PASSWORD) {
+      bool success = await load(() async => await userService.forgotPassword(_emailController.text));
+
+      if (!success) {
+        errorText = "Email doesn't exist!";
+        return;
+      }
+
+      if (mounted) {
+        context.pop();
+      }
     }
   }
 
@@ -167,8 +190,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                       style: $styles.text.body,
                       labelStyle: $styles.text.bodyBold,
                       onChanged: (_) => setState(() {}),
-                      controller:
-                          formMode == FormMode.VERIFY ? _verificationController : _emailController,
+                      controller: formMode == FormMode.VERIFY ? _verificationController : _emailController,
                       autoFocus: true,
                     ),
                     if (_errorText.isNotEmpty) ...[
@@ -195,11 +217,9 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                           Text("Didn't receive email?", style: $styles.text.body),
                           HSpace.xs,
                           GestureDetector(
-                              onTap: () =>
-                                  userService.resendVerificationEmail(_emailController.text),
+                              onTap: () => userService.sendVerificationEmail(_emailController.text),
                               child: Text('Send Again',
-                                  style: $styles.text.bodyBold
-                                      .copyWith(color: $styles.colors.primary))),
+                                  style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
                         ],
                       ),
                     ],
@@ -216,7 +236,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                     children: [
                       Center(
                         child: Text(
-                          'Login',
+                          formMode == FormMode.LOGIN ? 'Login' : 'Sign Up',
                           style: $styles.text.h3,
                           textAlign: TextAlign.center,
                         ),
@@ -255,8 +275,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            StyledTextButton(
-                                text: 'Forgot Password', onPressed: () => _forgotPassword()),
+                            StyledTextButton(text: 'Forgot Password', onPressed: () => _forgotPassword()),
                           ],
                         ),
                       ],
@@ -265,8 +284,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                           ? Center(
                               child: CircularProgressIndicator(color: $styles.colors.primary),
                             )
-                          : StyledElevatedButton(
-                              text: mainBtn, onPressed: enableSubmit ? _handleSubmitPressed : null),
+                          : StyledElevatedButton(text: mainBtn, onPressed: enableSubmit ? _handleSubmitPressed : null),
                       VSpace.med,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -275,9 +293,8 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                           HSpace.xs,
                           GestureDetector(
                               onTap: _switchForms,
-                              child: Text(signUp,
-                                  style: $styles.text.bodyBold
-                                      .copyWith(color: $styles.colors.primary))),
+                              child:
+                                  Text(signUp, style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
                         ],
                       ),
                     ],
@@ -378,8 +395,7 @@ class _StyledPasswordTextFieldState extends State<StyledPasswordTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide:
-                  BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
+              borderSide: BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
             ),
             contentPadding: EdgeInsets.only(
               left: $styles.insets.xs,

@@ -1,15 +1,17 @@
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/user_interface/screens/home/login_popup.dart';
+import 'package:sangjishik/business_logic/logic/app_model.dart';
 
-import 'login_popup.dart';
-
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatelessWidget with GetItMixin {
   final int currentIndex;
   final ValueChanged<int>? onTap;
 
-  const HomeAppBar({super.key, this.currentIndex = 0, required this.onTap});
+  HomeAppBar({super.key, this.currentIndex = 0, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    bool? isLoggedIn = watchOnly((AppModel m) => m.isLoggedIn);
+    bool? isAdmin = watchOnly((AppModel m) => m.isAdmin);
     double width = context.widthPx;
 
     return SizedBox(
@@ -32,10 +34,12 @@ class HomeAppBar extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                   child: StyledTextButton(text: 'Login', onPressed: () => showLoginDialog(context)),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
-                  child: StyledTextButton(text: 'Create', onPressed: () => onTap!(2)),
-                ),
+                isLoggedIn! && isAdmin!
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
+                        child: StyledTextButton(text: 'Create', onPressed: () => onTap!(2)),
+                      )
+                    : Container(),
               ]
             : [
                 Padding(

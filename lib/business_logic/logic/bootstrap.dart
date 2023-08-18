@@ -6,13 +6,13 @@ class Bootstrap {
 
   Future<void> init() async {
     await tokens.init();
-
     await Cloudinary.init();
-
     await userService.getPosts();
 
-    if (tokens.token.refreshToken.isNotEmpty) {
-      //If refreshToken is not empty, attempt background login with token -- then set appModel as logged in.
+    String token = tokens.token.refreshToken;
+
+    if (token.isNotEmpty) {
+      await userService.loginWithToken(token);
     }
 
     isBootstrapComplete = true;

@@ -1,17 +1,33 @@
-import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/business_logic/models/post.dart';
+import 'package:sangjishik/business_logic/models/user.dart';
+import 'package:sangjishik/business_logic/utils/easy_notifier.dart';
 
-class AppModel extends ChangeNotifier {
-  final postTags = ValueNotifier<List<String>>([]);
-  final listOfPosts = ValueNotifier<List<Post>>([]);
+abstract class AbstractModel extends EasyNotifier {}
 
-  void updatePostTags(List<String> tags) {
-    postTags.value = tags;
-    notifyListeners();
-  }
+class AppModel extends AbstractModel {
+  User? _currentUser;
 
-  void updatePosts(List<Post> posts) {
-    listOfPosts.value = posts;
-    notifyListeners();
+  User? get currentUser => _currentUser;
+
+  set currentUser(User? currentUser) => notify(() => _currentUser = currentUser);
+
+  bool? get isLoggedIn => currentUser != null ? currentUser!.id.isNotEmpty : false;
+
+  bool? get isAdmin => currentUser != null ? currentUser!.role == 'Admin' : false;
+
+  final List<Post> _posts = [];
+
+  List<Post> get posts => _posts;
+
+  List<String> _tags = [];
+
+  List<String> get tags => _tags;
+
+  set tags(List<String> tag) => notify(() => _tags = tag);
+
+  void addPosts(List<Post> newPosts) {
+    for (int i = 0; i < newPosts.length; i++) {
+      _posts.add(newPosts[i]);
+    }
   }
 }

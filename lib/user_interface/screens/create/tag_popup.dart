@@ -43,8 +43,8 @@ class _TagPopupState extends State<TagPopup> {
   void initState() {
     super.initState();
 
-    for (int i = 0; i < appModel.postTags.value.length; i++) {
-      _itemChange(appModel.postTags.value[i], true);
+    for (int i = 0; i < appModel.tags.length; i++) {
+      _itemChange(appModel.tags[i], true);
     }
   }
 
@@ -53,7 +53,7 @@ class _TagPopupState extends State<TagPopup> {
   }
 
   void _submit() {
-    appModel.updatePostTags(_selectedItems);
+    appModel.tags = _selectedItems;
     Navigator.pop(context);
   }
 

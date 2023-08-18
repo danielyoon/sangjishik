@@ -1,9 +1,6 @@
 import 'package:sangjishik/business_logic/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/screens/posts/date_scrollbar.dart';
 import 'package:sangjishik/user_interface/screens/posts/post_widget.dart';
-
-import 'package:sangjishik/business_logic/data/temp_posts.dart';
 
 class PostsScreen extends StatefulWidget {
   const PostsScreen({super.key});
@@ -14,22 +11,15 @@ class PostsScreen extends StatefulWidget {
 
 class _PostsScreenState extends State<PostsScreen> {
   late ScrollController _scrollController;
-  double currentScrollOffset = 0;
 
   @override
   void initState() {
     _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      setState(() {
-        currentScrollOffset = _scrollController.offset; // Update the scroll offset
-      });
-    });
     super.initState();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -47,14 +37,14 @@ class _PostsScreenState extends State<PostsScreen> {
       }
     }
 
-    List<Widget> generatePosts() {
-      List<Widget> myPosts = [];
-      for (int i = 0; i < tempPosts.length; i++) {
-        String title = StringUtils.replaceSpacesWithHyphens(tempPosts[i]['title']);
+    List<PostWidget> generatePosts() {
+      List<PostWidget> myPosts = [];
+      for (int i = 0; i < appModel.posts.length; i++) {
+        String title = StringUtils.replaceSpacesWithHyphens(appModel.posts[i].title);
         myPosts.add(PostWidget(
-          title: tempPosts[i]['title'],
-          image: tempPosts[i]['image'],
-          date: tempPosts[i]['date'],
+          title: appModel.posts[i].title,
+          image: appModel.posts[i].image,
+          date: appModel.posts[i].date,
           onTap: () => context.go('/post/$title'),
         ));
       }
@@ -62,7 +52,6 @@ class _PostsScreenState extends State<PostsScreen> {
       return myPosts;
     }
 
-    double height = context.heightPx;
     double width = context.widthPx;
 
     return Expanded(

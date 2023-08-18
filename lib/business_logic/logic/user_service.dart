@@ -3,32 +3,66 @@ import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/service/nodejs.dart';
 import 'package:sangjishik/business_logic/models/post.dart';
 import 'package:sangjishik/business_logic/utils/string_utils.dart';
+import 'package:sangjishik/business_logic/models/user.dart';
+import 'package:sangjishik/business_logic/data/token.dart';
 
 import 'package:sangjishik/business_logic/data/temp_posts.dart';
 
 class UserService {
   NodeJs get nodeJs => GetIt.I.get<NodeJs>();
 
-  Future<void> loginWithTokens(String token) async {}
+  Future<void> loginWithToken(String token) async {
+    Map<String, dynamic>? data = await nodeJs.loginWithToken(token);
+    if (data != null) {
+      Token token = Token(data['jwtToken'], data['refreshToken']);
+      tokens.updateToken(token);
+
+      Map<String, dynamic> userData = data['user'];
+      User user = User.fromJson(userData);
+      appModel.currentUser = user;
+    }
+  }
 
   Future<bool> loginWithEmail(String email, String password) async {
+    Map<String, dynamic>? data = await nodeJs.loginWithEmail(email, password);
+    if (data != null) {
+      Token token = Token(data['jwtToken'], data['refreshToken']);
+      tokens.updateToken(token);
+
+      Map<String, dynamic> userData = data['user'];
+      User user = User.fromJson(userData);
+      appModel.currentUser = user;
+
+      return true;
+    }
+
     return false;
   }
 
-  Future<void> forgotPassword(String email) async {
-    print('Forgot Password?');
+  Future<bool> forgotPassword(String email) async {
+    bool success = await nodeJs.forgotPassword(email);
+
+    return success;
   }
 
-  Future<void> sendVerificationEmail(String email) async {
-    print('Trying to Create!');
+  Future<bool> sendVerificationEmail(String email) async {
+    bool success = await nodeJs.sendVerificationEmail(email);
+
+    return success;
   }
 
-  Future<void> resendVerificationEmail(String email) async {
-    print('Trying to Create pt.2');
-  }
+  Future<bool> createAccount(String email, String password, String verification) async {
+    Map<String, dynamic>? data = await nodeJs.createAccount(email, password, verification);
+    if (data != null) {
+      Token token = Token(data['jwtToken'], data['refreshToken']);
+      tokens.updateToken(token);
 
-  Future<bool> createAccount(String email, String password) async {
-    print('Created someone!');
+      Map<String, dynamic> userData = data['user'];
+      User user = User.fromJson(userData);
+      appModel.currentUser = user;
+
+      return true;
+    }
     return false;
   }
 
@@ -48,13 +82,11 @@ class UserService {
     for (int i = 0; i < tempPosts.length; i++) {
       String title = StringUtils.replaceSpacesWithHyphens(tempPosts[i]['title']);
       myPosts.add(
-        Post(tempPosts[i]['title'], 'TEST', tempPosts[i]['image'], ['PERSONAL', 'TEST'], i,
-            tempPosts[i]['date'], null),
+        Post(tempPosts[i]['title'], 'TEST', tempPosts[i]['image'], ['PERSONAL', 'TEST'], i, tempPosts[i]['date'], null),
       );
     }
 
     myPosts.sort((a, b) => b.date.compareTo(a.date));
-
-    appModel.updatePosts(myPosts);
+    appModel.addPosts(myPosts);
   }
 }
