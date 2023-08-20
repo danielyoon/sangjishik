@@ -12,9 +12,11 @@ class UserService {
   NodeJs get nodeJs => GetIt.I.get<NodeJs>();
 
   Future<void> loginWithToken(String token) async {
-    Map<String, dynamic>? data = await nodeJs.loginWithToken(token);
+    Map<String, dynamic>? data =
+        await nodeJs.loginWithToken(token);
     if (data != null) {
-      Token token = Token(data['jwtToken'], data['refreshToken']);
+      Token token =
+          Token(data['jwtToken'], data['refreshToken']);
       tokens.updateToken(token);
 
       Map<String, dynamic> userData = data['user'];
@@ -23,10 +25,13 @@ class UserService {
     }
   }
 
-  Future<bool> loginWithEmail(String email, String password) async {
-    Map<String, dynamic>? data = await nodeJs.loginWithEmail(email, password);
+  Future<bool> loginWithEmail(
+      String email, String password) async {
+    Map<String, dynamic>? data =
+        await nodeJs.loginWithEmail(email, password);
     if (data != null) {
-      Token token = Token(data['jwtToken'], data['refreshToken']);
+      Token token =
+          Token(data['jwtToken'], data['refreshToken']);
       tokens.updateToken(token);
 
       Map<String, dynamic> userData = data['user'];
@@ -46,15 +51,19 @@ class UserService {
   }
 
   Future<bool> sendVerificationEmail(String email) async {
-    bool success = await nodeJs.sendVerificationEmail(email);
+    bool success =
+        await nodeJs.sendVerificationEmail(email);
 
     return success;
   }
 
-  Future<bool> createAccount(String email, String password, String verification) async {
-    Map<String, dynamic>? data = await nodeJs.createAccount(email, password, verification);
+  Future<bool> createAccount(String email, String password,
+      String verification) async {
+    Map<String, dynamic>? data = await nodeJs.createAccount(
+        email, password, verification);
     if (data != null) {
-      Token token = Token(data['jwtToken'], data['refreshToken']);
+      Token token =
+          Token(data['jwtToken'], data['refreshToken']);
       tokens.updateToken(token);
 
       Map<String, dynamic> userData = data['user'];
@@ -66,13 +75,17 @@ class UserService {
     return false;
   }
 
-  Future<void> createPost(String title, String post, List<String> tags, XFile image) async {
+  Future<void> createPost(String title, String post,
+      List<String> tags, XFile image) async {
     var response = await cloudinary.uploadImage(image.path);
 
-    Map<String, dynamic>? data = await nodeJs.createPost(title, post, tags, response.url);
+    Map<String, dynamic>? data = await nodeJs.createPost(
+        title, post, tags, response.url);
 
     if (data != null) {
       Post post = Post.fromJson(data);
+
+      appModel.posts.add(post);
     }
   }
 
@@ -80,9 +93,17 @@ class UserService {
     List<Post> myPosts = [];
 
     for (int i = 0; i < tempPosts.length; i++) {
-      String title = StringUtils.replaceSpacesWithHyphens(tempPosts[i]['title']);
+      String title = StringUtils.replaceSpacesWithHyphens(
+          tempPosts[i]['title']);
       myPosts.add(
-        Post(tempPosts[i]['title'], 'TEST', tempPosts[i]['image'], ['PERSONAL', 'TEST'], i, tempPosts[i]['date'], null),
+        Post(
+            title,
+            'TEST',
+            tempPosts[i]['image'],
+            tempPosts[i]['tags'],
+            i,
+            tempPosts[i]['date'],
+            null),
       );
     }
 

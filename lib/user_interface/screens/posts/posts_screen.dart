@@ -40,7 +40,8 @@ class _PostsScreenState extends State<PostsScreen> {
     List<PostWidget> generatePosts() {
       List<PostWidget> myPosts = [];
       for (int i = 0; i < appModel.posts.length; i++) {
-        String title = StringUtils.replaceSpacesWithHyphens(appModel.posts[i].title);
+        String title = StringUtils.replaceSpacesWithHyphens(
+            appModel.posts[i].title);
         myPosts.add(PostWidget(
           title: appModel.posts[i].title,
           image: appModel.posts[i].image,
@@ -68,7 +69,9 @@ class _PostsScreenState extends State<PostsScreen> {
                     Expanded(
                       child: GridView.count(
                         controller: _scrollController,
-                        crossAxisCount: calculateNumberOfPosts(width as int),
+                        crossAxisCount:
+                            calculateNumberOfPosts(
+                                width as int),
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                         childAspectRatio: 1,

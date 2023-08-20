@@ -1,6 +1,7 @@
 Map<int, dynamic> quotes = {
   0: {
-    'quote': "Many men die at twenty-five and aren't buried until they are seventy-five.",
+    'quote':
+        "Many men die at twenty-five and aren't buried until they are seventy-five.",
     'author': 'G. E. Marchand',
   },
   1: {
@@ -20,13 +21,19 @@ Map<int, dynamic> quotes = {
         "The only time you look in your neighbor's bowl is to make sure that they have enough. You don't look in your neighbor's bowl to see if you have as much as them.",
     'author': 'Louis C.K.'
   },
-  5: {'quote': "Everything's amazing right now, and nobody's happy.", 'author': 'Louis C.K.'},
+  5: {
+    'quote':
+        "Everything's amazing right now, and nobody's happy.",
+    'author': 'Louis C.K.'
+  },
   6: {
-    'quote': "Man's chief end is to glorify God, and to enjoy him forever.",
+    'quote':
+        "Man's chief end is to glorify God, and to enjoy him forever.",
     'author': 'Westminster Shorter Catechism'
   },
   7: {
-    'quote': "And have you found your 'joy', in this nearly dead world of ours?",
+    'quote':
+        "And have you found your 'joy', in this nearly dead world of ours?",
     'author': 'Kefka (Final Fantasy VI)'
   },
   8: {
@@ -35,7 +42,8 @@ Map<int, dynamic> quotes = {
     'author': "Morrie Schwartz (Tuesday's With Morrie)"
   },
   9: {
-    'quote': 'Dying is only one thing to be sad over. Living unhappily is something else.',
+    'quote':
+        'Dying is only one thing to be sad over. Living unhappily is something else.',
     'author': "Morrie Schwartz (Tuesday's With Morrie)"
   },
   10: {
@@ -68,7 +76,11 @@ Map<int, dynamic> quotes = {
         "Open the Bible every day, and don't let go of it until God shows up to make it precious to you.",
     'author': 'John Piper',
   },
-  16: {'quote': 'I am a great sinner, but I have a greater Savior.', 'author': 'Jared C. Wilson'},
+  16: {
+    'quote':
+        'I am a great sinner, but I have a greater Savior.',
+    'author': 'Jared C. Wilson'
+  },
   17: {
     'quote': 'Grace is free, never cheap.',
     'author': 'Dustin Benge',
@@ -79,7 +91,8 @@ Map<int, dynamic> quotes = {
     'author': 'C.S. Lewis (Screwtape Letters)'
   },
   19: {
-    'quote': 'Before you complain today, be grateful you have breath to complain with.',
+    'quote':
+        'Before you complain today, be grateful you have breath to complain with.',
     'author': 'Lecrae'
   },
   20: {
@@ -106,9 +119,13 @@ Map<int, dynamic> quotes = {
         'Dead people receive more flowers than living ones because regret is stronger than gratitude.',
     'author': 'Violet Evergarden (Violet Evergarden)'
   },
-  25: {'quote': 'A man without fear cannot be wise.', 'author': 'Saber (Fate Stay/Night)'},
+  25: {
+    'quote': 'A man without fear cannot be wise.',
+    'author': 'Saber (Fate Stay/Night)'
+  },
   26: {
-    'quote': 'I shall grieve, and I shall weep. But I shall never regret.',
+    'quote':
+        'I shall grieve, and I shall weep. But I shall never regret.',
     'author': 'Rider (Fate/Zero)',
   },
   27: {
@@ -121,7 +138,8 @@ Map<int, dynamic> quotes = {
     'author': 'Elon Musk'
   },
   29: {
-    'quote': 'I think it is possible for ordinary people to choose to be extraordinary.',
+    'quote':
+        'I think it is possible for ordinary people to choose to be extraordinary.',
     'author': 'Elon Musk'
   },
   30: {
@@ -130,8 +148,10 @@ Map<int, dynamic> quotes = {
     'author': 'Elon Musk'
   },
   31: {
-    'quote': 'When you have something to say, silence is a lie.',
-    'author': 'Jordan B. Peterson (12 Rules for Life: An Antidote to Chaos)'
+    'quote':
+        'When you have something to say, silence is a lie.',
+    'author':
+        'Jordan B. Peterson (12 Rules for Life: An Antidote to Chaos)'
   },
   32: {
     'quote':
@@ -141,14 +161,17 @@ Map<int, dynamic> quotes = {
   33: {
     'quote':
         'So, listen, to yourself and to those with whom you are speaking. Your wisdom then consists not of the knowledge you already have, but the continual search for knowledge, which is the highest form of wisdom.',
-    'author': 'Jordan B. Peterson (12 Rules for Life: An Antidote to Chaos)'
+    'author':
+        'Jordan B. Peterson (12 Rules for Life: An Antidote to Chaos)'
   },
   34: {
-    'quote': 'People love what other people are passionate about.',
+    'quote':
+        'People love what other people are passionate about.',
     'author': 'Mia (La La Land)'
   },
   35: {
-    'quote': "There are no two words in the English language more harmful than 'good job'.",
+    'quote':
+        "There are no two words in the English language more harmful than 'good job'.",
     'author': 'Terence Fletcher (Whiplash)'
   },
   36: {
@@ -177,13 +200,16 @@ Map<int, dynamic> quotes = {
     'author': 'Bill Burr'
   },
   41: {
-    'quote': "Constantly talking isn't necessarily communicating.",
-    'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
+    'quote':
+        "Constantly talking isn't necessarily communicating.",
+    'author':
+        'Joel Barish (Eternal Sunshine of the Spotless Mind)'
   },
   42: {
     'quote':
         "What a loss to spend that much time with someone, only to find out that she's a stranger.",
-    'author': 'Joel Barish (Eternal Sunshine of the Spotless Mind)'
+    'author':
+        'Joel Barish (Eternal Sunshine of the Spotless Mind)'
   },
   43: {
     'quote': 'Be weird, but be exquisitely weird.',
@@ -205,12 +231,17 @@ Map<int, dynamic> quotes = {
     'author': 'Dolph Ziggler'
   },
   47: {
-    'quote': "That's not the last feeling I want to experience.",
+    'quote':
+        "That's not the last feeling I want to experience.",
     'author': 'Amber Volakis (House M.D.)'
   },
-  48: {'quote': "People's dreams have no ends.", 'author': 'Marshall D. Teach (One Piece)'},
+  48: {
+    'quote': "People's dreams have no ends.",
+    'author': 'Marshall D. Teach (One Piece)'
+  },
   49: {
-    'quote': 'The hardest choices require the strongest wills.',
+    'quote':
+        'The hardest choices require the strongest wills.',
     'author': 'Thanos (Avengers: Infinity War)'
   },
   50: {
@@ -219,23 +250,28 @@ Map<int, dynamic> quotes = {
     'author': 'Allison Cameron (House M.D.)'
   },
   51: {
-    'quote': 'To me, lies are love. And in my own way, I thought I was expressing love.',
+    'quote':
+        'To me, lies are love. And in my own way, I thought I was expressing love.',
     'author': 'Ai Hoshino (Oshi No Ko)'
   },
   52: {
-    'quote': 'The only way to do great work is to love what you do.',
+    'quote':
+        'The only way to do great work is to love what you do.',
     'author': 'Steve Jobs',
   },
   53: {
-    'quote': 'The heart of man plans his way, but the LORD establishes his steps.',
+    'quote':
+        'The heart of man plans his way, but the LORD establishes his steps.',
     'author': 'Psalm 16:9 (ESV)',
   },
   54: {
-    'quote': 'Forgetting is like a wound. The wound may heal, but it has already left a scar.',
+    'quote':
+        'Forgetting is like a wound. The wound may heal, but it has already left a scar.',
     'author': 'Monkey D. Luffy (One Piece)',
   },
   55: {
-    'quote': 'If your life can change once, your life can change again.',
+    'quote':
+        'If your life can change once, your life can change again.',
     'author': 'Sanae Furukawa (Clannad)',
   },
   56: {
@@ -253,7 +289,8 @@ Map<int, dynamic> quotes = {
     'author': "Elvis Presley (Can't Help Falling In Love)",
   },
   59: {
-    'quote': 'If you see me in a fight with a bear, pray for the bear.',
+    'quote':
+        'If you see me in a fight with a bear, pray for the bear.',
     'author': 'Kobe Bryant'
   },
   60: {
@@ -276,13 +313,18 @@ Map<int, dynamic> quotes = {
         "They say people can change, but is that really true? If they decide they want to fly, will they grow wings? I don't think so. You don't change yourself, you change how you do things. You have to make your own way. You have to create a way to fly, even while you stay the same.",
     'author': 'Sora (No Game, No Life)'
   },
-  64: {'quote': "Only idiots start fights they can't win.", 'author': 'Sora (No Game, No Life)'},
+  64: {
+    'quote': "Only idiots start fights they can't win.",
+    'author': 'Sora (No Game, No Life)'
+  },
   65: {
-    'quote': 'Life is not a game of luck. If you wanna win, work hard.',
+    'quote':
+        'Life is not a game of luck. If you wanna win, work hard.',
     'author': 'Sora (No Game, No Life)'
   },
   66: {
-    'quote': "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
+    'quote':
+        "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
     'author': 'Sora (No Game, No Life)'
   },
   67: {
@@ -301,7 +343,8 @@ Map<int, dynamic> quotes = {
     'author': '1 Corinthians 13: 4-8 (ESV)',
   },
   70: {
-    'quote': 'The inner machinations of my mind are an enigma.',
+    'quote':
+        'The inner machinations of my mind are an enigma.',
     'author': 'Patrick Star (Spongebob Squarepants)',
   },
   71: {
@@ -309,7 +352,8 @@ Map<int, dynamic> quotes = {
     'author': 'John Mark McMillan (How He Loves)'
   },
   72: {
-    'quote': 'No power of hell, no scheme of man, can ever pluck, me from His hand.',
+    'quote':
+        'No power of hell, no scheme of man, can ever pluck, me from His hand.',
     'author': 'Stuart Townend (In Christ Alone)',
   },
   73: {
@@ -327,14 +371,16 @@ Map<int, dynamic> quotes = {
   },
   76: {
     'quote': "Don't you put that evil on me Ricky Bobby!",
-    'author': 'Lucius Washington (Talladega Nights: The Ballad of Ricky Bobby)'
+    'author':
+        'Lucius Washington (Talladega Nights: The Ballad of Ricky Bobby)'
   },
   77: {
-    'quote': 'Friendship means little when its convenient',
+    'quote': 'Friendship means little when its convenient.',
     'author': 'Koji (John Wick 4)',
   },
   78: {
-    'quote': 'Ohana means family, and family means nobody is left behind or forgotten',
+    'quote':
+        'Ohana means family, and family means nobody is left behind or forgotten.',
     'author': 'Lilo (Lilo & Stitch)',
   },
 };

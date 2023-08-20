@@ -11,22 +11,35 @@ final appRouter = GoRouter(
   redirect: _handleRedirect,
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) => AppScaffold(child: HomeWrapper(navigationShell: navigationShell)),
+      builder: (context, state, navigationShell) =>
+          AppScaffold(
+              child: HomeWrapper(
+                  navigationShell: navigationShell)),
       branches: [
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: '/',
-              pageBuilder: (context, state) => const NoTransitionPage(
+              pageBuilder: (context, state) =>
+                  const NoTransitionPage(
                 child: HomeScreen(),
               ),
               routes: [
                 GoRoute(
                   name: 'post',
-                  path: 'post/:id',
-                  pageBuilder: (context, GoRouterState state) => NoTransitionPage(
-                    child: OnePostScreen(id: state.pathParameters['id']!),
-                  ),
+                  path: 'post/:title',
+                  pageBuilder:
+                      (context, GoRouterState state) {
+                    state.pathParameters
+                        .forEach((key, value) {
+                      print('Key: $key, Value: $value');
+                    });
+
+                    return NoTransitionPage(
+                        child: OnePostScreen(
+                            title: state
+                                .pathParameters['title']!));
+                  },
                 ),
               ],
             ),
@@ -36,7 +49,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/about',
-              pageBuilder: (context, state) => const NoTransitionPage(
+              pageBuilder: (context, state) =>
+                  const NoTransitionPage(
                 child: AboutScreen(),
               ),
             ),
@@ -46,7 +60,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/create',
-              pageBuilder: (context, state) => NoTransitionPage(
+              pageBuilder: (context, state) =>
+                  NoTransitionPage(
                 child: CreatePostsScreen(),
               ),
             ),
@@ -57,10 +72,12 @@ final appRouter = GoRouter(
   ],
 );
 
-String? _handleRedirect(BuildContext context, GoRouterState state) {
+String? _handleRedirect(
+    BuildContext context, GoRouterState state) {
   bool? isAdmin = appModel.isAdmin;
 
-  if (isAdmin == false && state.location == '/create') return '/';
+  if (isAdmin == false && state.location == '/create')
+    return '/';
 
   debugPrint('Navigate to: ${state.location}');
   return null;
