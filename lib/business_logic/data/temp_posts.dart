@@ -7,7 +7,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'I just want',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -15,7 +15,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'To finish',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -23,7 +23,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'My blog',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -31,7 +31,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Hopefully by',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -39,7 +39,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Sometime next',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -47,7 +47,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Week or 2',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -55,7 +55,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'But I really',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -63,7 +63,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Doubt I will',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -71,7 +71,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Be able to',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -79,7 +79,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'But',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -87,7 +87,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Who knows',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
   {
     'image':
@@ -95,7 +95,7 @@ List<Map<String, dynamic>> tempPosts = [
     'title': 'Cute photo',
     'date': randomDateTime(
         DateTime(2022, 5, 1), DateTime(2023, 5, 31)),
-    'tags': ['Personal', 'KPOP', 'Books', 'Travel'],
+    'tags': getRandomStrings(),
   },
 ];
 
@@ -110,4 +110,28 @@ DateTime randomDateTime(
   final randomSeconds = random.nextInt(timeRange);
 
   return startDate.add(Duration(seconds: randomSeconds));
+}
+
+List<String> getRandomStrings() {
+  final List<String> categories = [
+    'Personal',
+    'Bible',
+    'KPOP',
+    'Programming',
+    'Fashion',
+    'Tetris',
+    'Books',
+    'Food',
+    'History',
+    'Random',
+    'Funny',
+  ];
+
+  final random = Random();
+  final count = random.nextInt(categories.length) + 1;
+
+  return List<String>.generate(
+      count,
+      (index) =>
+          categories[random.nextInt(categories.length)]);
 }

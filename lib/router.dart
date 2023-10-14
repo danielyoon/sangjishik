@@ -76,6 +76,7 @@ String? _handleRedirect(
     BuildContext context, GoRouterState state) {
   bool? isAdmin = appModel.isAdmin;
 
+  //TODO: Test creating post and retrieving post using flutter_quill
   if (isAdmin == false && state.location == '/create')
     return '/';
 

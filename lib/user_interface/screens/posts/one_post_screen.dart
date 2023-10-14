@@ -46,8 +46,6 @@ class _OnePostScreenState extends State<OnePostScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Some Long Title', style: $styles.text.h2),
-          VSpace.xs,
-          Row(children: generateTags()),
           VSpace.med,
           Expanded(
             child: Row(
@@ -63,48 +61,35 @@ class _OnePostScreenState extends State<OnePostScreen> {
                                   (Colors.transparent))),
                     ),
                     child: ListView(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: $styles.insets.xxl),
+                      padding: EdgeInsets.only(
+                          right: $styles.insets.xxl,
+                          left: $styles.insets.md),
                       children: [
-                        Container(
-                          color: Colors.amberAccent,
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                                maxWidth: width,
-                                maxHeight: height * 2),
-                            child: AspectRatio(
-                              aspectRatio: 16 / 9,
-                              child: Image.network(
-                                post.image,
-                                fit: BoxFit.contain,
-                              ),
+                        //TODO: Add Hero tag on Image
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxWidth: width,
+                              maxHeight: height * 2),
+                          child: AspectRatio(
+                            aspectRatio: 4 / 3,
+                            child: Image.network(
+                              post.image,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        Text('END!'),
+                        VSpace.med,
+                        Text(
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                          style: $styles.text.body,
+                        ),
+                        VSpace.med,
+                        Row(children: generateTags()),
                       ],
                     ),
                   ),
                 ),
+                HSpace.sm,
                 Expanded(
                   flex: 1,
                   child: Theme(
@@ -118,26 +103,6 @@ class _OnePostScreenState extends State<OnePostScreen> {
                       children: [
                         Text('Comments:',
                             style: $styles.text.h3),
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        VSpace.xl,
-                        Text('End!'),
                       ],
                     ),
                   ),
@@ -145,6 +110,7 @@ class _OnePostScreenState extends State<OnePostScreen> {
               ],
             ),
           ),
+          VSpace.xl,
         ],
       ),
     );
@@ -158,9 +124,19 @@ class TagWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Set some distinct colors for different tags
-    Color getColorFromString(String tag) {
-      if (tag == 'Personal') return Colors.black;
+    Color? getColorFromString(String tag) {
+      if (tag == 'Personal') return Colors.green;
+      if (tag == 'Bible') return Colors.brown[300];
+      if (tag == 'KPOP') return Colors.pinkAccent[100];
+      if (tag == 'Programming')
+        return Colors.blueAccent[200];
+      if (tag == 'Fashion') return Colors.amberAccent;
+      if (tag == 'Tetris') return Colors.purple[300];
+      if (tag == 'Books') return Colors.grey[400];
+      if (tag == 'Food') return Colors.red[300];
+      if (tag == 'History') return Colors.orangeAccent;
+      if (tag == 'Random') return Colors.black;
+      if (tag == 'Funny') return Colors.yellow;
 
       return Colors.redAccent;
     }

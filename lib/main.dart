@@ -12,7 +12,8 @@ import 'package:sangjishik/user_interface/styles/styles.dart';
 void main() async {
   usePathUrlStrategy();
 
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
   registerSingletons();
 
   await bootstrap.init();
@@ -33,22 +34,21 @@ class Sangjishik extends StatelessWidget {
 }
 
 void registerSingletons() {
-  GetIt.I.registerLazySingleton<Bootstrap>(() => Bootstrap());
+  GetIt.I
+      .registerLazySingleton<Bootstrap>(() => Bootstrap());
   GetIt.I.registerLazySingleton<AppModel>(() => AppModel());
-  GetIt.I.registerLazySingleton<UserService>(() => UserService());
-  GetIt.I.registerLazySingleton<TokenStorage>(() => TokenStorage());
+  GetIt.I.registerLazySingleton<UserService>(
+      () => UserService());
+  GetIt.I.registerLazySingleton<TokenStorage>(
+      () => TokenStorage());
   GetIt.I.registerLazySingleton<NodeJs>(() => NodeJs());
-  GetIt.I.registerLazySingleton<Cloudinary>(() => Cloudinary());
+  GetIt.I.registerLazySingleton<Cloudinary>(
+      () => Cloudinary());
 }
 
 Bootstrap get bootstrap => GetIt.I.get<Bootstrap>();
-
 AppModel get appModel => GetIt.I.get<AppModel>();
-
 UserService get userService => GetIt.I.get<UserService>();
-
 TokenStorage get tokens => GetIt.I.get<TokenStorage>();
-
 Cloudinary get cloudinary => GetIt.I.get<Cloudinary>();
-
 AppStyle get $styles => AppScaffold.style;

@@ -1,19 +1,26 @@
+import 'dart:convert';
+
+import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:image_picker/image_picker.dart';
 import 'package:sangjishik/business_logic/logic/app_model.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
 
-class CreatePostsScreen extends StatefulWidget with GetItStatefulWidgetMixin {
+class CreatePostsScreen extends StatefulWidget
+    with GetItStatefulWidgetMixin {
   CreatePostsScreen({super.key});
 
   @override
-  State<CreatePostsScreen> createState() => _CreatePostsScreenState();
+  State<CreatePostsScreen> createState() =>
+      _CreatePostsScreenState();
 }
 
-class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMixin {
+class _CreatePostsScreenState
+    extends State<CreatePostsScreen> with GetItStateMixin {
   late TextEditingController _titleController;
-  late TextEditingController _postController;
+  // late TextEditingController _postController;
   late TextEditingController _tagController;
+  late quill.QuillController _postController;
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
@@ -22,20 +29,23 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: '');
-    _postController = TextEditingController(text: '');
+    // _postController = TextEditingController(text: '');
+    _postController = quill.QuillController.basic();
     _tagController = TextEditingController(text: '');
   }
 
   @override
   void dispose() {
     _titleController.dispose();
+    // _postController.dispose();
     _postController.dispose();
     _tagController.dispose();
     super.dispose();
   }
 
   void _uploadImage() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
+    image =
+        await picker.pickImage(source: ImageSource.gallery);
     setState(() {});
   }
 
@@ -51,13 +61,15 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
         width: width / 1.5,
         child: Theme(
           data: Theme.of(context).copyWith(
-            scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
+            scrollbarTheme: ScrollbarThemeData(
+                thumbColor: MaterialStateProperty.all(
+                    (Colors.transparent))),
           ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VSpace.xl,
+                VSpace.med,
                 Text(
                   'Create A Post',
                   style: $styles.text.h2,
@@ -69,18 +81,27 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                   labelStyle: $styles.text.bodyBold,
                   onChanged: (_) => setState(() {}),
                   controller: _titleController,
-                  autoFocus: true,
                 ),
                 VSpace.med,
-                StyledTextField(
-                  label: 'Post',
-                  style: $styles.text.body,
-                  labelStyle: $styles.text.bodyBold,
-                  onChanged: (_) => setState(() {}),
-                  controller: _postController,
-                  textInputType: TextInputType.multiline,
-                  textInputAction: TextInputAction.newline,
-                  numLines: 18,
+                quill.QuillToolbar.basic(
+                    controller: _postController),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.black, width: .6),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(4)),
+                  ),
+                  height: 400,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.all($styles.insets.sm),
+                    child: quill.QuillEditor.basic(
+                      controller: _postController,
+                      readOnly: false,
+                      autoFocus: false,
+                    ),
+                  ),
                 ),
                 VSpace.med,
                 GestureDetector(
@@ -128,7 +149,14 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                         child: StyledElevatedButton(
                           text: 'Submit',
                           onPressed: () =>
-                              userService.createPost(_titleController.text, _postController.text, tags, image!),
+                              userService.createPost(
+                                  _titleController.text,
+                                  jsonEncode(_postController
+                                      .document
+                                      .toDelta()
+                                      .toJson()),
+                                  tags,
+                                  image!),
                         ),
                       ),
                     ),
