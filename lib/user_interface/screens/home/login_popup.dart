@@ -1,8 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
-import 'package:sangjishik/business_logic/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/business_logic/utils/string_utils.dart';
+import 'package:sangjishik/controller/models/enums.dart';
+import 'package:sangjishik/controller/utils/loading_state_mixin.dart';
+import 'package:sangjishik/controller/utils/string_utils.dart';
 
 void showLoginDialog<T>(BuildContext context) async => showDialog(
       context: context,
@@ -17,8 +18,6 @@ class LoginForm extends StatefulWidget {
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
-
-enum FormMode { LOGIN, SIGNUP, VERIFY, PASSWORD }
 
 class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
   FormMode _formMode = FormMode.LOGIN;
@@ -68,52 +67,52 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
   }
 
   void _handleSubmitPressed() async {
-    if (enableSubmit == false) return;
-    errorText = '';
-
-    if (formMode == FormMode.SIGNUP) {
-      await load(() async => await userService.sendVerificationEmail(_emailController.text));
-
-      formMode = FormMode.VERIFY;
-      return;
-    }
-
-    if (formMode == FormMode.VERIFY) {
-      bool success = await load(() async => await userService.createAccount(
-          _emailController.text, _passwordController.text, _verificationController.text));
-
-      if (!success) {
-        errorText = 'Wrong verification code';
-        return;
-      }
-    }
-
-    if (formMode == FormMode.LOGIN) {
-      bool success =
-          await load(() async => await userService.loginWithEmail(_emailController.text, _passwordController.text));
-
-      if (!success) {
-        errorText = 'Wrong email and password!';
-        return;
-      }
-
-      if (mounted) {
-        context.pop();
-      }
-    }
-
-    if (formMode == FormMode.PASSWORD) {
-      bool success = await load(() async => await userService.forgotPassword(_emailController.text));
-
-      if (!success) {
-        errorText = "Email doesn't exist!";
-        return;
-      }
-
-      if (mounted) {
-        context.pop();
-      }
-    }
+    // if (enableSubmit == false) return;
+    // errorText = '';
+    //
+    // if (formMode == FormMode.SIGNUP) {
+    //   await load(() async => await login.sendVerificationEmail(_emailController.text));
+    //
+    //   formMode = FormMode.VERIFY;
+    //   return;
+    // }
+    //
+    // if (formMode == FormMode.VERIFY) {
+    //   bool success = await load(() async =>
+    //       await login.createAccount(_emailController.text, _passwordController.text, _verificationController.text));
+    //
+    //   if (!success) {
+    //     errorText = 'Wrong verification code';
+    //     return;
+    //   }
+    // }
+    //
+    // if (formMode == FormMode.LOGIN) {
+    //   bool success =
+    //       await load(() async => await login.loginWithEmail(_emailController.text, _passwordController.text));
+    //
+    //   if (!success) {
+    //     errorText = 'Wrong email and password!';
+    //     return;
+    //   }
+    //
+    //   if (mounted) {
+    //     context.pop();
+    //   }
+    // }
+    //
+    // if (formMode == FormMode.PASSWORD) {
+    //   bool success = await load(() async => await login.forgotPassword(_emailController.text));
+    //
+    //   if (!success) {
+    //     errorText = "Email doesn't exist!";
+    //     return;
+    //   }
+    //
+    //   if (mounted) {
+    //     context.pop();
+    //   }
+    // }
   }
 
   void _obscurePassword() {
@@ -217,7 +216,7 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                           Text("Didn't receive email?", style: $styles.text.body),
                           HSpace.xs,
                           GestureDetector(
-                              onTap: () => userService.sendVerificationEmail(_emailController.text),
+                              // onTap: () => login.sendVerificationEmail(_emailController.text),
                               child: Text('Send Again',
                                   style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
                         ],

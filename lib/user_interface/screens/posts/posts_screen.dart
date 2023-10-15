@@ -1,6 +1,7 @@
-import 'package:sangjishik/business_logic/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/posts/post_widget.dart';
+
+import '../../../controller/utils/string_utils.dart';
 
 class PostsScreen extends StatefulWidget {
   const PostsScreen({super.key});
@@ -39,16 +40,16 @@ class _PostsScreenState extends State<PostsScreen> {
 
     List<PostWidget> generatePosts() {
       List<PostWidget> myPosts = [];
-      for (int i = 0; i < appModel.posts.length; i++) {
-        String title = StringUtils.replaceSpacesWithHyphens(
-            appModel.posts[i].title);
-        myPosts.add(PostWidget(
-          title: appModel.posts[i].title,
-          image: appModel.posts[i].image,
-          date: appModel.posts[i].date,
-          onTap: () => context.go('/post/$title'),
-        ));
-      }
+      // for (int i = 0; i < appModel.posts.length; i++) {
+      //   String title = StringUtils.replaceSpacesWithHyphens(
+      //       appModel.posts[i].title);
+      //   myPosts.add(PostWidget(
+      //     title: appModel.posts[i].title,
+      //     image: appModel.posts[i].image,
+      //     date: appModel.posts[i].date,
+      //     onTap: () => context.go('/post/$title'),
+      //   ));
+      // }
 
       return myPosts;
     }
@@ -69,9 +70,7 @@ class _PostsScreenState extends State<PostsScreen> {
                     Expanded(
                       child: GridView.count(
                         controller: _scrollController,
-                        crossAxisCount:
-                            calculateNumberOfPosts(
-                                width as int),
+                        crossAxisCount: calculateNumberOfPosts(width as int),
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                         childAspectRatio: 1,

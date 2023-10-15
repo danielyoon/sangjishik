@@ -2,22 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:image_picker/image_picker.dart';
-import 'package:sangjishik/business_logic/logic/app_model.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
 
-class CreatePostsScreen extends StatefulWidget
-    with GetItStatefulWidgetMixin {
+class CreatePostsScreen extends StatefulWidget with GetItStatefulWidgetMixin {
   CreatePostsScreen({super.key});
 
   @override
-  State<CreatePostsScreen> createState() =>
-      _CreatePostsScreenState();
+  State<CreatePostsScreen> createState() => _CreatePostsScreenState();
 }
 
-class _CreatePostsScreenState
-    extends State<CreatePostsScreen> with GetItStateMixin {
+class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMixin {
   late TextEditingController _titleController;
+
   // late TextEditingController _postController;
   late TextEditingController _tagController;
   late quill.QuillController _postController;
@@ -44,14 +41,14 @@ class _CreatePostsScreenState
   }
 
   void _uploadImage() async {
-    image =
-        await picker.pickImage(source: ImageSource.gallery);
+    image = await picker.pickImage(source: ImageSource.gallery);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> tags = watchOnly((AppModel m) => m.tags);
+    // List<String> tags = watchOnly((AppModel m) => m.tags);
+    List<String> tags = [];
     _tagController.text = tags.toString();
 
     double width = context.widthPx;
@@ -61,9 +58,7 @@ class _CreatePostsScreenState
         width: width / 1.5,
         child: Theme(
           data: Theme.of(context).copyWith(
-            scrollbarTheme: ScrollbarThemeData(
-                thumbColor: MaterialStateProperty.all(
-                    (Colors.transparent))),
+            scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -83,19 +78,15 @@ class _CreatePostsScreenState
                   controller: _titleController,
                 ),
                 VSpace.med,
-                quill.QuillToolbar.basic(
-                    controller: _postController),
+                quill.QuillToolbar.basic(controller: _postController),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.black, width: .6),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(4)),
+                    border: Border.all(color: Colors.black, width: .6),
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
                   ),
                   height: 400,
                   child: Padding(
-                    padding:
-                        EdgeInsets.all($styles.insets.sm),
+                    padding: EdgeInsets.all($styles.insets.sm),
                     child: quill.QuillEditor.basic(
                       controller: _postController,
                       readOnly: false,
@@ -146,18 +137,16 @@ class _CreatePostsScreenState
                     Flexible(
                       child: SizedBox(
                         width: width / 4,
-                        child: StyledElevatedButton(
-                          text: 'Submit',
-                          onPressed: () =>
-                              userService.createPost(
-                                  _titleController.text,
-                                  jsonEncode(_postController
-                                      .document
-                                      .toDelta()
-                                      .toJson()),
-                                  tags,
-                                  image!),
-                        ),
+                        child: StyledElevatedButton(text: 'Submit', onPressed: () => print('TEST')
+                            // userService.createPost(
+                            //     _titleController.text,
+                            //     jsonEncode(_postController
+                            //         .document
+                            //         .toDelta()
+                            //         .toJson()),
+                            //     tags,
+                            //     image!),
+                            ),
                       ),
                     ),
                   ],

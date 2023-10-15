@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:sangjishik/core_packages.dart';
-
-import 'package:sangjishik/business_logic/utils/string_utils.dart';
+import 'package:sangjishik/controller/utils/string_utils.dart';
 
 class StyledTextField extends StatefulWidget {
   final String label;
@@ -88,8 +87,7 @@ class _StyledTextFieldState extends State<StyledTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide:
-                  BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
+              borderSide: BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
             ),
             contentPadding: EdgeInsets.only(
               left: $styles.insets.xs,

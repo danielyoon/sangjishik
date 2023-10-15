@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:sangjishik/business_logic/data/quotes.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/posts/posts_screen.dart';
+import 'package:sangjishik/controller/data/quotes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,9 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double height = context.heightPx;
     return Theme(
       data: Theme.of(context).copyWith(
-        scrollbarTheme: ScrollbarThemeData(
-            thumbColor: MaterialStateProperty.all(
-                (Colors.transparent))),
+        scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
       ),
       child: SingleChildScrollView(
         child: SizedBox(
@@ -56,8 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Padding _quotesWidget(double width) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: $styles.insets.lg),
+      padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

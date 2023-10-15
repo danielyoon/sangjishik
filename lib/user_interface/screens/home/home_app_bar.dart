@@ -1,6 +1,7 @@
+import 'package:sangjishik/controller/logic/login.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/home/login_popup.dart';
-import 'package:sangjishik/business_logic/logic/app_model.dart';
+import 'package:sangjishik/controller/logic/auth_user.dart';
 
 class HomeAppBar extends StatelessWidget with GetItMixin {
   final int currentIndex;
@@ -10,8 +11,8 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    bool? isLoggedIn = watchOnly((AppModel m) => m.isLoggedIn);
-    bool? isAdmin = watchOnly((AppModel m) => m.isAdmin);
+    bool isLoggedIn = watchOnly((Login m) => m.isLoggedIn);
+    bool isAdmin = watchOnly((AuthUser m) => m.isAdmin);
     double width = context.widthPx;
 
     return SizedBox(
@@ -34,7 +35,7 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
                   padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                   child: StyledTextButton(text: 'Login', onPressed: () => showLoginDialog(context)),
                 ),
-                isLoggedIn! && isAdmin!
+                isLoggedIn && isAdmin
                     ? Padding(
                         padding: EdgeInsets.symmetric(horizontal: $styles.insets.sm),
                         child: StyledTextButton(text: 'Create', onPressed: () => onTap!(2)),

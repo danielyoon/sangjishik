@@ -1,5 +1,5 @@
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/business_logic/models/post.dart';
+import 'package:sangjishik/controller/models/post.dart';
 
 class OnePostScreen extends StatefulWidget {
   final String title;
@@ -7,8 +7,7 @@ class OnePostScreen extends StatefulWidget {
   const OnePostScreen({super.key, required this.title});
 
   @override
-  State<OnePostScreen> createState() =>
-      _OnePostScreenState();
+  State<OnePostScreen> createState() => _OnePostScreenState();
 }
 
 class _OnePostScreenState extends State<OnePostScreen> {
@@ -16,8 +15,8 @@ class _OnePostScreenState extends State<OnePostScreen> {
 
   @override
   void initState() {
-    post = appModel.posts
-        .firstWhere((post) => post.title == widget.title);
+    // post = appModel.posts
+    //     .firstWhere((post) => post.title == widget.title);
 
     super.initState();
   }
@@ -40,8 +39,7 @@ class _OnePostScreenState extends State<OnePostScreen> {
     double height = context.heightPx;
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: $styles.insets.xxl),
+      padding: EdgeInsets.symmetric(horizontal: $styles.insets.xxl),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -55,21 +53,14 @@ class _OnePostScreenState extends State<OnePostScreen> {
                   flex: 3,
                   child: Theme(
                     data: Theme.of(context).copyWith(
-                      scrollbarTheme: ScrollbarThemeData(
-                          thumbColor:
-                              MaterialStateProperty.all(
-                                  (Colors.transparent))),
+                      scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
                     ),
                     child: ListView(
-                      padding: EdgeInsets.only(
-                          right: $styles.insets.xxl,
-                          left: $styles.insets.md),
+                      padding: EdgeInsets.only(right: $styles.insets.xxl, left: $styles.insets.md),
                       children: [
                         //TODO: Add Hero tag on Image
                         ConstrainedBox(
-                          constraints: BoxConstraints(
-                              maxWidth: width,
-                              maxHeight: height * 2),
+                          constraints: BoxConstraints(maxWidth: width, maxHeight: height * 2),
                           child: AspectRatio(
                             aspectRatio: 4 / 3,
                             child: Image.network(
@@ -94,15 +85,11 @@ class _OnePostScreenState extends State<OnePostScreen> {
                   flex: 1,
                   child: Theme(
                     data: Theme.of(context).copyWith(
-                      scrollbarTheme: ScrollbarThemeData(
-                          thumbColor:
-                              MaterialStateProperty.all(
-                                  (Colors.transparent))),
+                      scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
                     ),
                     child: ListView(
                       children: [
-                        Text('Comments:',
-                            style: $styles.text.h3),
+                        Text('Comments:', style: $styles.text.h3),
                       ],
                     ),
                   ),
@@ -128,8 +115,7 @@ class TagWidget extends StatelessWidget {
       if (tag == 'Personal') return Colors.green;
       if (tag == 'Bible') return Colors.brown[300];
       if (tag == 'KPOP') return Colors.pinkAccent[100];
-      if (tag == 'Programming')
-        return Colors.blueAccent[200];
+      if (tag == 'Programming') return Colors.blueAccent[200];
       if (tag == 'Fashion') return Colors.amberAccent;
       if (tag == 'Tetris') return Colors.purple[300];
       if (tag == 'Books') return Colors.grey[400];
@@ -144,14 +130,11 @@ class TagWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: getColorFromString(tag),
-        borderRadius:
-            BorderRadius.circular($styles.insets.xxs),
+        borderRadius: BorderRadius.circular($styles.insets.xxs),
       ),
       child: Padding(
         padding: EdgeInsets.all($styles.insets.xxs),
-        child: Text(tag,
-            style: $styles.text.bodyBold
-                .copyWith(color: Colors.white)),
+        child: Text(tag, style: $styles.text.bodyBold.copyWith(color: Colors.white)),
       ),
     );
   }

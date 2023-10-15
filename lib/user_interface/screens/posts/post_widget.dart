@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/business_logic/utils/string_utils.dart';
+import 'package:sangjishik/controller/utils/string_utils.dart';
 
 //FIXME: Add POST and TAG here so this object can be passed on
 class PostWidget extends StatefulWidget {
@@ -85,9 +85,7 @@ class _PostWidgetState extends State<PostWidget> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular($styles.insets.xxs),
-                                    color: isBtnHover
-                                        ? Colors.white
-                                        : Color.fromARGB(255, 235, 235, 230),
+                                    color: isBtnHover ? Colors.white : Color.fromARGB(255, 235, 235, 230),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsets.all($styles.insets.xs),
@@ -97,8 +95,7 @@ class _PostWidgetState extends State<PostWidget> {
                                         'View Post',
                                         style: isBtnHover
                                             ? $styles.text.bodyBold
-                                            : $styles.text.bodyBold
-                                                .copyWith(color: Colors.grey[400]),
+                                            : $styles.text.bodyBold.copyWith(color: Colors.grey[400]),
                                       ),
                                     ),
                                   ),
