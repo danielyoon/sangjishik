@@ -64,7 +64,6 @@ class _StyledTextFieldState extends State<StyledTextField> {
             LengthLimitingTextInputFormatter(widget.maxLength),
             if (widget.textInputFormatter != null) widget.textInputFormatter!,
           ],
-          cursorColor: $styles.colors.primary,
           keyboardType: widget.textInputType,
           onFieldSubmitted: widget.onSubmit,
           onChanged: widget.onChanged,
@@ -87,14 +86,8 @@ class _StyledTextFieldState extends State<StyledTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
             ),
-            contentPadding: EdgeInsets.only(
-              left: $styles.insets.xs,
-              right: $styles.insets.xs,
-              top: $styles.insets.sm,
-              bottom: $styles.insets.sm,
-            ),
+            contentPadding: EdgeInsets.only(),
             isDense: true,
           ),
           textInputAction: widget.textInputAction,

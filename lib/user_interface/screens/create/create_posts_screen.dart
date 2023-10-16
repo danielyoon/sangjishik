@@ -64,20 +64,17 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VSpace.med,
+                VSpace.md,
                 Text(
                   'Create A Post',
-                  style: $styles.text.h2,
                 ),
-                VSpace.med,
+                VSpace.md,
                 StyledTextField(
                   label: 'Title',
-                  style: $styles.text.body,
-                  labelStyle: $styles.text.bodyBold,
                   onChanged: (_) => setState(() {}),
                   controller: _titleController,
                 ),
-                VSpace.med,
+                VSpace.md,
                 quill.QuillToolbar.basic(controller: _postController),
                 Container(
                   decoration: BoxDecoration(
@@ -86,7 +83,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                   ),
                   height: 400,
                   child: Padding(
-                    padding: EdgeInsets.all($styles.insets.sm),
+                    padding: EdgeInsets.all(0),
                     child: quill.QuillEditor.basic(
                       controller: _postController,
                       readOnly: false,
@@ -94,33 +91,27 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                     ),
                   ),
                 ),
-                VSpace.med,
+                VSpace.md,
                 GestureDetector(
                   onTap: () => showTagDialog(context),
                   child: tags.isEmpty
                       ? StyledTextField(
                           label: 'Tag',
-                          style: $styles.text.body,
-                          labelStyle: $styles.text.bodyBold,
                           text: '',
                           enabled: false,
                         )
                       : StyledTextField(
                           label: 'Tag',
                           controller: _tagController,
-                          style: $styles.text.body,
-                          labelStyle: $styles.text.bodyBold,
                           enabled: false,
                         ),
                 ),
-                VSpace.med,
+                VSpace.md,
                 image == null
                     ? GestureDetector(
                         onTap: () => _uploadImage(),
                         child: StyledTextField(
                           label: 'Image',
-                          labelStyle: $styles.text.bodyBold,
-                          style: $styles.text.body,
                           text: '',
                           enabled: false,
                           numLines: 3,
@@ -130,7 +121,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                         width: double.infinity,
                         child: Image.network(image!.path),
                       ),
-                VSpace.med,
+                VSpace.md,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

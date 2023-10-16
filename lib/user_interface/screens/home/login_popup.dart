@@ -173,21 +173,18 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                         BackButton(
                           onPressed: () => _backButtonFunction(),
                         ),
-                        HSpace.med,
+                        HSpace.md,
                         Center(
                           child: Text(
                             verificationTitle,
-                            style: $styles.text.h3,
                             textAlign: TextAlign.center,
                           ),
                         ),
                       ],
                     ),
-                    VSpace.med,
+                    VSpace.md,
                     StyledTextField(
                       label: formMode == FormMode.VERIFY ? 'Verification Code' : 'Forgotten Email',
-                      style: $styles.text.body,
-                      labelStyle: $styles.text.bodyBold,
                       onChanged: (_) => setState(() {}),
                       controller: formMode == FormMode.VERIFY ? _verificationController : _emailController,
                       autoFocus: true,
@@ -196,29 +193,29 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                       VSpace.xs,
                       Text(
                         errorText,
-                        style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
                       ),
                       VSpace.xs,
                     ],
                     VSpace.xs,
-                    VSpace.med,
+                    VSpace.md,
                     isLoading
                         ? Center(
-                            child: CircularProgressIndicator(color: $styles.colors.primary),
+                            child: CircularProgressIndicator(color: kPrimary),
                           )
                         : StyledElevatedButton(
                             text: formMode == FormMode.VERIFY ? 'CREATE ACCOUNT' : 'RESET PASSWORD',
                             onPressed: enableSubmit ? _handleSubmitPressed : null),
-                    VSpace.med,
+                    VSpace.md,
                     if (formMode == FormMode.VERIFY) ...[
                       Row(
                         children: [
-                          Text("Didn't receive email?", style: $styles.text.body),
+                          Text("Didn't receive email?"),
                           HSpace.xs,
                           GestureDetector(
                               // onTap: () => login.sendVerificationEmail(_emailController.text),
-                              child: Text('Send Again',
-                                  style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
+                              child: Text(
+                            'Send Again',
+                          )),
                         ],
                       ),
                     ],
@@ -236,25 +233,20 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                       Center(
                         child: Text(
                           formMode == FormMode.LOGIN ? 'Login' : 'Sign Up',
-                          style: $styles.text.h3,
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      VSpace.med,
+                      VSpace.md,
                       StyledTextField(
                         label: 'Email',
-                        style: $styles.text.body,
-                        labelStyle: $styles.text.bodyBold,
                         onChanged: (_) => setState(() {}),
                         autofillHints: const [AutofillHints.email],
                         controller: _emailController,
                         autoFocus: true,
                       ),
-                      VSpace.med,
+                      VSpace.md,
                       StyledPasswordTextField(
                         label: formMode == FormMode.LOGIN ? 'Password' : 'Would be password',
-                        style: $styles.text.body,
-                        labelStyle: $styles.text.bodyBold,
                         onChanged: (_) => setState(() {}),
                         autofillHints: const [AutofillHints.password],
                         controller: _passwordController,
@@ -265,7 +257,6 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                         VSpace.xs,
                         Text(
                           errorText,
-                          style: $styles.text.bodySmallBold.copyWith(color: Colors.red),
                         ),
                         VSpace.xs,
                       ],
@@ -278,22 +269,21 @@ class _LoginFormState extends State<LoginForm> with LoadingStateMixin {
                           ],
                         ),
                       ],
-                      VSpace.med,
+                      VSpace.md,
                       isLoading
                           ? Center(
-                              child: CircularProgressIndicator(color: $styles.colors.primary),
+                              child: CircularProgressIndicator(color: kPrimary),
                             )
                           : StyledElevatedButton(text: mainBtn, onPressed: enableSubmit ? _handleSubmitPressed : null),
-                      VSpace.med,
+                      VSpace.md,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(bottomText, style: $styles.text.body),
+                          Text(
+                            bottomText,
+                          ),
                           HSpace.xs,
-                          GestureDetector(
-                              onTap: _switchForms,
-                              child:
-                                  Text(signUp, style: $styles.text.bodyBold.copyWith(color: $styles.colors.primary))),
+                          GestureDetector(onTap: _switchForms, child: Text(signUp)),
                         ],
                       ),
                     ],
@@ -371,7 +361,6 @@ class _StyledPasswordTextFieldState extends State<StyledPasswordTextField> {
             LengthLimitingTextInputFormatter(widget.maxLength),
             if (widget.textInputFormatter != null) widget.textInputFormatter!,
           ],
-          cursorColor: $styles.colors.primary,
           keyboardType: widget.textInputType,
           onFieldSubmitted: widget.onSubmit,
           onChanged: widget.onChanged,
@@ -394,14 +383,8 @@ class _StyledPasswordTextFieldState extends State<StyledPasswordTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(color: $styles.colors.primary, width: 1, style: BorderStyle.solid),
             ),
-            contentPadding: EdgeInsets.only(
-              left: $styles.insets.xs,
-              right: $styles.insets.xs,
-              top: $styles.insets.sm,
-              bottom: $styles.insets.sm,
-            ),
+            contentPadding: EdgeInsets.only(),
             isDense: true,
             suffixIcon: GestureDetector(
               onTap: widget.onPressed,

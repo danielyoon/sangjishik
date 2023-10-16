@@ -62,7 +62,6 @@ class _TagPopupState extends State<TagPopup> {
     return AlertDialog(
       title: Text(
         'Tags',
-        style: $styles.text.h3,
         textAlign: TextAlign.center,
       ),
       content: SingleChildScrollView(

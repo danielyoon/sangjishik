@@ -21,17 +21,17 @@ final appRouter = GoRouter(
                 child: HomeScreen(),
               ),
               routes: [
-                GoRoute(
-                  name: 'post',
-                  path: 'post/:title',
-                  pageBuilder: (context, GoRouterState state) {
-                    state.pathParameters.forEach((key, value) {
-                      print('Key: $key, Value: $value');
-                    });
-
-                    return NoTransitionPage(child: OnePostScreen(title: state.pathParameters['title']!));
-                  },
-                ),
+                // GoRoute(
+                //   name: 'post',
+                //   path: 'post/:title',
+                //   pageBuilder: (context, GoRouterState state) {
+                //     state.pathParameters.forEach((key, value) {
+                //       print('Key: $key, Value: $value');
+                //     });
+                //
+                //     return NoTransitionPage(child: OnePostScreen(title: state.pathParameters['title']!));
+                //   },
+                // ),
               ],
             ),
           ],

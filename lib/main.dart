@@ -3,7 +3,6 @@ import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/service/cloudinary.dart';
 import 'package:sangjishik/service/nodejs.dart';
 import 'package:sangjishik/user_interface/app_scaffold.dart';
-import 'package:sangjishik/user_interface/styles/styles.dart';
 import 'package:sangjishik/controller/logic/bootstrap.dart';
 import 'package:sangjishik/controller/logic/token_storage.dart';
 import 'package:sangjishik/controller/logic/login.dart';
@@ -50,5 +49,3 @@ Login get login => GetIt.I.get<Login>();
 TokenStorage get tokens => GetIt.I.get<TokenStorage>();
 
 Cloudinary get cloudinary => GetIt.I.get<Cloudinary>();
-
-AppStyle get $styles => AppScaffold.style;

@@ -19,22 +19,18 @@ class AboutScreen extends StatelessWidget {
               VSpace.xl,
               Text(
                 '상지식',
-                style: $styles.text.h2,
+                style: kHeader,
               ),
-              Text('[sahng-ji-shik]', style: $styles.text.title1),
+              Text('[sahng-ji-shik]', style: kSubHeader),
               VSpace.xs,
-              Text('noun', style: $styles.text.caption),
-              Text(
-                  '1.  상 (Sang) means above, or up top. It can also mean an award.',
-                  style: $styles.text.body),
-              Text('2.  지식 (Ji Shik) means knowledge.',
-                  style: $styles.text.body),
-              Text('3.  상지식 (Sang Ji Shik) means, higher knowledge.',
-                  style: $styles.text.body),
+              Text('noun', style: kCaption),
+              Text('1.  상 (Sang) means above, or up top. It can also mean an award.', style: kBodyText),
+              Text('2.  지식 (Ji Shik) means knowledge.', style: kBodyText),
+              Text('3.  상지식 (Sang Ji Shik) means, higher knowledge.', style: kBodyText),
               VSpace.lg,
               Text(
                   "Hi! My name is Sang Ji (상지), or Daniel. I am currently $age year's old.\n\nEnjoy my weird thoughts.",
-                  style: $styles.text.body),
+                  style: kBodyText),
               VSpace.xl,
             ],
           ),
@@ -48,8 +44,7 @@ class AboutScreen extends StatelessWidget {
     final now = DateTime.now();
     int age = now.year - birthday.year;
 
-    if (now.month < birthday.month ||
-        (now.month == birthday.month && now.day < birthday.day)) {
+    if (now.month < birthday.month || (now.month == birthday.month && now.day < birthday.day)) {
       age--;
     }
 

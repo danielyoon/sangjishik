@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VSpace.med,
+              VSpace.md,
               _quotesWidget(width),
               VSpace.xl,
               // PostsScreen(),
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Padding _quotesWidget(double width) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
+      padding: EdgeInsets.symmetric(horizontal: 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,14 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
             width: (width > 780) ? width / 3 : width / 1.2,
             child: Text(
               qotd['quote'],
-              style: $styles.text.caption,
               softWrap: true,
             ),
           ),
           VSpace.sm,
           Text(
             '      -  ${qotd['author']}',
-            style: $styles.text.caption,
           ),
         ],
       ),

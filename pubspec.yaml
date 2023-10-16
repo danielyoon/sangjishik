@@ -36,8 +36,5 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
-
-  fonts:
-    - family: BeautifulPeople
-      fonts:
-        - asset: assets/fonts/BeautifulPeoplePersonalUse-dE0g.ttf
+  assets:
+    - assets/images/
