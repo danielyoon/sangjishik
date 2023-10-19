@@ -21,44 +21,36 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
-        title: Padding(
-          padding: EdgeInsets.all(0),
-          child: GestureDetector(
-              onTap: () => onTap!(0),
-              child: (width > 780)
-                  ? Image.asset(
-                      'assets/images/logo-bw.png',
-                      height: 300,
-                      width: width / 6,
-                    )
-                  : Center(
-                      child: Image.asset(
-                        'assets/images/icon-bw.png',
-                        height: 300,
-                        width: width / 6,
-                      ),
-                    )),
-        ),
+        centerTitle: (width > 700) ? false : true,
+        title: GestureDetector(
+            onTap: () => onTap!(0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 45),
+              child: Image.asset(
+                'assets/images/logo-bw.png',
+                fit: BoxFit.scaleDown,
+              ),
+            )),
         actions: (width > 780)
             ? [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0),
-                  child: StyledTextButton(text: 'About', onPressed: () => onTap!(1)),
+                  padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                  child: CustomTextButton(text: 'About', onPressed: () => onTap!(1)),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0),
-                  child: StyledTextButton(text: 'Login', onPressed: () => showLoginDialog(context)),
+                  padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                  child: CustomTextButton(text: 'Login', onPressed: () => showLoginPopup(context)),
                 ),
                 isLoggedIn && isAdmin
                     ? Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0),
-                        child: StyledTextButton(text: 'Create', onPressed: () => onTap!(2)),
+                        padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                        child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2)),
                       )
                     : Container(),
               ]
             : [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
                   child: IconButton(
                     icon: Icon(Icons.menu),
                     splashRadius: 1,

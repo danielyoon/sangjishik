@@ -17,5 +17,5 @@ double kExtraExtraLarge = 64;
 TextStyle kHeader = GoogleFonts.inter(fontSize: kMedium, fontWeight: FontWeight.w800);
 TextStyle kSubHeader = GoogleFonts.inter(fontSize: kSmall, fontWeight: FontWeight.w800);
 TextStyle kCaption = GoogleFonts.inter(fontSize: kExtraSmall, fontWeight: FontWeight.w800);
-TextStyle kBodyText = GoogleFonts.inter(fontSize: kSmall);
+TextStyle kBodyText = GoogleFonts.inter(fontSize: kSmall, fontWeight: FontWeight.w500);
 TextStyle kButton = GoogleFonts.inter(fontSize: kSmall, fontWeight: FontWeight.w600);

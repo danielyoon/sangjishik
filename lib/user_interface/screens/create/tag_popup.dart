@@ -79,11 +79,11 @@ class _TagPopupState extends State<TagPopup> {
         ),
       ),
       actions: [
-        StyledTextButton(
+        CustomTextButton(
           text: 'Cancel',
           onPressed: _cancel,
         ),
-        StyledTextButton(
+        CustomTextButton(
           text: 'Submit',
           onPressed: _submit,
         ),

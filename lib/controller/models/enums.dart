@@ -1,3 +1,3 @@
-enum FormMode { LOGIN, SIGNUP, VERIFY, PASSWORD }
+enum FormMode { LOGIN, SIGNUP, VERIFY, PASSWORD, NEW }
 
 enum LoginVerification { WRONG, NONEXISTENT, NETWORK, PASS }

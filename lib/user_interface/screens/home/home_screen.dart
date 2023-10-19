@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Padding _quotesWidget(double width) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 0),
+      padding: EdgeInsets.symmetric(horizontal: kLarge),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

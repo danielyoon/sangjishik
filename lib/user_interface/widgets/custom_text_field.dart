@@ -2,31 +2,26 @@ import 'package:flutter/services.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/controller/utils/string_utils.dart';
 
-class StyledTextField extends StatefulWidget {
+class CustomTextField extends StatefulWidget {
   final String label;
-  final String? text;
-  final TextStyle? style;
-  final TextStyle? labelStyle;
   final int numLines;
   final int? maxLength;
   final void Function(String value)? onChanged;
   final void Function(String value)? onSubmit;
   final String? hintText;
-  final bool? enabled;
+  final bool enabled;
   final FocusNode? focusNode;
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final List<String>? autofillHints;
   final bool autoFocus;
   final TextInputFormatter? textInputFormatter;
-  final TextInputAction? textInputAction;
+  final bool obscureText;
+  final VoidCallback? onPressed;
 
-  const StyledTextField({
-    Key? key,
+  const CustomTextField({
+    super.key,
     this.label = '',
-    this.text,
-    this.style,
-    this.labelStyle,
     this.numLines = 1,
     this.maxLength,
     this.onChanged,
@@ -35,26 +30,27 @@ class StyledTextField extends StatefulWidget {
     this.enabled = true,
     this.focusNode,
     this.controller,
+    this.textInputType = TextInputType.text,
     this.autofillHints,
     this.autoFocus = false,
-    this.textInputType = TextInputType.text,
     this.textInputFormatter,
-    this.textInputAction,
-  }) : super(key: key);
+    this.obscureText = false,
+    this.onPressed,
+  });
 
   @override
-  State<StyledTextField> createState() => _StyledTextFieldState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
-class _StyledTextFieldState extends State<StyledTextField> {
+class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (StringUtils.isNotEmpty(widget.label)) ...[
-          Text(widget.label, style: widget.labelStyle),
-          VSpace.xs,
+          Text(widget.label, style: kCaption),
+          VSpace.xxs,
         ],
         TextFormField(
           controller: widget.controller,
@@ -67,30 +63,40 @@ class _StyledTextFieldState extends State<StyledTextField> {
           keyboardType: widget.textInputType,
           onFieldSubmitted: widget.onSubmit,
           onChanged: widget.onChanged,
-          initialValue: widget.text,
           enabled: widget.enabled,
-          style: widget.style,
           focusNode: widget.focusNode,
           autofocus: widget.autoFocus,
           minLines: widget.numLines,
           maxLines: widget.numLines,
+          cursorColor: Colors.black,
+          obscureText: widget.obscureText,
+          style: kBodyText,
           decoration: InputDecoration(
             hintText: widget.hintText ?? '',
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(color: Colors.grey, width: 1, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(kExtraExtraSmall),
+              borderSide: BorderSide(color: Colors.black, width: 1, style: BorderStyle.solid),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(color: Colors.grey, width: 1, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(kExtraExtraSmall),
+              borderSide: BorderSide(color: Colors.black, width: 1, style: BorderStyle.solid),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
+              borderRadius: BorderRadius.circular(kExtraExtraSmall),
+              borderSide: BorderSide(color: Colors.black, width: 1, style: BorderStyle.solid),
             ),
-            contentPadding: EdgeInsets.only(),
+            contentPadding: EdgeInsets.all(kExtraSmall + 2),
             isDense: true,
+            suffixIcon: widget.obscureText || widget.label == 'Password'
+                ? GestureDetector(
+                    onTap: widget.onPressed,
+                    child: Icon(
+                      widget.obscureText ? Icons.check : Icons.close,
+                      color: widget.obscureText ? Colors.green : Colors.red,
+                    ),
+                  )
+                : null,
           ),
-          textInputAction: widget.textInputAction,
         ),
       ],
     );

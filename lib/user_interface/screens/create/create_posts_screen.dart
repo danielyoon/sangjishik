@@ -69,11 +69,11 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                   'Create A Post',
                 ),
                 VSpace.md,
-                StyledTextField(
-                  label: 'Title',
-                  onChanged: (_) => setState(() {}),
-                  controller: _titleController,
-                ),
+                // StyledTextField(
+                //   label: 'Title',
+                //   onChanged: (_) => setState(() {}),
+                //   controller: _titleController,
+                // ),
                 VSpace.md,
                 quill.QuillToolbar.basic(controller: _postController),
                 Container(
@@ -92,35 +92,35 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                   ),
                 ),
                 VSpace.md,
-                GestureDetector(
-                  onTap: () => showTagDialog(context),
-                  child: tags.isEmpty
-                      ? StyledTextField(
-                          label: 'Tag',
-                          text: '',
-                          enabled: false,
-                        )
-                      : StyledTextField(
-                          label: 'Tag',
-                          controller: _tagController,
-                          enabled: false,
-                        ),
-                ),
+                // GestureDetector(
+                //   onTap: () => showTagDialog(context),
+                //   child: tags.isEmpty
+                //       ? StyledTextField(
+                //           label: 'Tag',
+                //           text: '',
+                //           enabled: false,
+                //         )
+                //       : StyledTextField(
+                //           label: 'Tag',
+                //           controller: _tagController,
+                //           enabled: false,
+                //         ),
+                // ),
                 VSpace.md,
-                image == null
-                    ? GestureDetector(
-                        onTap: () => _uploadImage(),
-                        child: StyledTextField(
-                          label: 'Image',
-                          text: '',
-                          enabled: false,
-                          numLines: 3,
-                        ),
-                      )
-                    : SizedBox(
-                        width: double.infinity,
-                        child: Image.network(image!.path),
-                      ),
+                // image == null
+                //     ? GestureDetector(
+                //         onTap: () => _uploadImage(),
+                //         child: StyledTextField(
+                //           label: 'Image',
+                //           text: '',
+                //           enabled: false,
+                //           numLines: 3,
+                //         ),
+                //       )
+                //     : SizedBox(
+                //         width: double.infinity,
+                //         child: Image.network(image!.path),
+                //       ),
                 VSpace.md,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -128,7 +128,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
                     Flexible(
                       child: SizedBox(
                         width: width / 4,
-                        child: StyledElevatedButton(text: 'Submit', onPressed: () => print('TEST')
+                        child: CustomPrimaryButton(text: 'Submit', onPressed: () => print('TEST')
                             // userService.createPost(
                             //     _titleController.text,
                             //     jsonEncode(_postController
