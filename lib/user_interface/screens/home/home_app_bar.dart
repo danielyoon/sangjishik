@@ -22,15 +22,18 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         centerTitle: (width > 700) ? false : true,
-        title: GestureDetector(
-            onTap: () => onTap!(0),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 45),
-              child: Image.asset(
-                'assets/images/logo-bw.png',
-                fit: BoxFit.scaleDown,
-              ),
-            )),
+        title: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+              onTap: () => onTap!(0),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: 45),
+                child: Image.asset(
+                  'assets/images/logo-transp.png',
+                  fit: BoxFit.scaleDown,
+                ),
+              )),
+        ),
         actions: (width > 780)
             ? [
                 Padding(
@@ -49,6 +52,7 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
                     : Container(),
               ]
             : [
+                //TODO: Create side bar menu
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
                   child: IconButton(

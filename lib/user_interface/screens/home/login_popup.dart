@@ -31,6 +31,22 @@ class _LoginPopupState extends State<LoginPopup> {
     });
   }
 
+  void _backToPreviousForm() {
+    if (formMode == FormMode.PASSWORD) formMode = FormMode.LOGIN;
+  }
+
+  void _toggleLoginForms() {
+    if (formMode == FormMode.LOGIN) {
+      formMode = FormMode.SIGNUP;
+    } else {
+      formMode = FormMode.LOGIN;
+    }
+  }
+
+  void submitForm() async {
+    print('Hi!');
+  }
+
   @override
   void initState() {
     super.initState();
@@ -50,36 +66,14 @@ class _LoginPopupState extends State<LoginPopup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Stack(
-        children: [
-          Center(
-            child: Text(
-              formMode.title,
-              style: kHeader,
-            ),
-          ),
-          Positioned(
-            right: -10,
-            top: -10,
-            child: IconButton(
-              onPressed: () => appRouter.pop(),
-              icon: Icon(
-                Icons.cancel,
-                size: kSmall,
-                color: Colors.redAccent,
-              ),
-              splashRadius: .1,
-            ),
-          ),
-        ],
-      ),
+      titlePadding: EdgeInsets.zero,
+      title: PopupTitle(formMode: formMode, onPressed: _backToPreviousForm),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomTextField(
             controller: _emailController,
             label: 'Email',
-            enabled: true,
             autoFocus: true,
             autofillHints: const [AutofillHints.email],
             onChanged: (_) => setState(() {}),
@@ -88,62 +82,119 @@ class _LoginPopupState extends State<LoginPopup> {
           CustomTextField(
             controller: _passwordController,
             label: 'Password',
-            enabled: true,
             autofillHints: const [AutofillHints.password],
             obscureText: obscurePassword,
             onPressed: _obscurePassword,
             onChanged: (_) => setState(() {}),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: CustomTextButton(
-              text: 'FORGOT PASSWORD?',
-              style: kBodyText.copyWith(fontSize: kExtraExtraSmall + 2),
-              onPressed: () => print('PASSWORD!'),
-            ),
-          ),
-          VSpace.xxs,
+          formMode == FormMode.LOGIN
+              ? Align(
+                  alignment: Alignment.centerRight,
+                  child: CustomTextButton(
+                    text: 'FORGOT PASSWORD?',
+                    style: kBodyText.copyWith(fontSize: kExtraExtraSmall + 2),
+                    onPressed: () => formMode = FormMode.PASSWORD,
+                  ),
+                )
+              : Container(),
+          formMode == FormMode.LOGIN ? VSpace.xxs : VSpace.lg,
           CustomPrimaryButton(
-            text: 'LOGIN',
-            onPressed: () => print('HI!'),
+            text: formMode.button,
+            onPressed: () => submitForm(),
           ),
           VSpace.sm,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'No account?',
-                style: kBodyText.copyWith(fontSize: kExtraSmall),
-              ),
-              HSpace.xs,
-              CustomTextButton(
-                onPressed: () => print('Something'),
-                text: 'Sign Up',
-                style: kCaption,
-              ),
-            ],
-          ),
+          formMode != FormMode.NEW && formMode != FormMode.PASSWORD
+              ? LoginToggle(formMode: formMode, onPressed: _toggleLoginForms)
+              : Container(),
         ],
       ),
     );
   }
 }
 
-extension FormModeExtension on FormMode {
-  String get title {
-    switch (this) {
-      case FormMode.LOGIN:
-        return 'Login';
-      case FormMode.SIGNUP:
-        return 'Sign Up';
-      case FormMode.VERIFY:
-        return 'Verify Code';
-      case FormMode.PASSWORD:
-        return 'Forgot Password';
-      case FormMode.NEW:
-        return 'Create Password';
-      default:
-        return '';
-    }
+class LoginToggle extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const LoginToggle({
+    super.key,
+    required this.formMode,
+    required this.onPressed,
+  });
+
+  final FormMode formMode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          formMode.extra,
+          style: kBodyText.copyWith(fontSize: kExtraSmall),
+        ),
+        HSpace.xs,
+        CustomTextButton(
+          onPressed: () => onPressed(),
+          text: formMode.extra2,
+          style: kCaption,
+        ),
+      ],
+    );
+  }
+}
+
+class PopupTitle extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const PopupTitle({
+    super.key,
+    required this.formMode,
+    required this.onPressed,
+  });
+
+  final FormMode formMode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: kMedium),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  formMode.title,
+                  style: kHeader,
+                ),
+              ),
+            ],
+          ),
+        ),
+        formMode != FormMode.LOGIN && formMode != FormMode.SIGNUP
+            ? Positioned(
+                left: 0,
+                top: 19,
+                child: CustomBackButton(
+                  onPressed: () => onPressed(),
+                ),
+              )
+            : Container(),
+        Positioned(
+          right: 0,
+          top: 0,
+          child: IconButton(
+            onPressed: () => appRouter.pop(),
+            icon: Icon(
+              Icons.cancel,
+              size: kSmall,
+              color: Colors.redAccent,
+            ),
+            splashRadius: .1,
+          ),
+        ),
+      ],
+    );
   }
 }
