@@ -2,7 +2,8 @@ import 'package:sangjishik/controller/models/enums.dart';
 import 'package:sangjishik/core_packages.dart';
 
 Future<void> showLoginPopup<T>(BuildContext context) async {
-  return showDialog(context: context, builder: (context) => LoginPopup());
+  return showDialog(
+      context: context, builder: (context) => LoginPopup());
 }
 
 class LoginPopup extends StatefulWidget {
@@ -14,10 +15,9 @@ class LoginPopup extends StatefulWidget {
 
 class _LoginPopupState extends State<LoginPopup> {
   FormMode _formMode = FormMode.LOGIN;
-
   FormMode get formMode => _formMode;
-
-  set formMode(FormMode formMode) => setState(() => _formMode = formMode);
+  set formMode(FormMode formMode) =>
+      setState(() => _formMode = formMode);
 
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
@@ -25,8 +25,10 @@ class _LoginPopupState extends State<LoginPopup> {
 
   bool obscurePassword = true;
 
-  //TODO: Add Tooltip global key
-  //https://api.flutter.dev/flutter/material/Tooltip-class.html
+  String _errorText = '';
+  String get errorText => _errorText;
+  set errorText(String errorText) =>
+      setState(() => _errorText = errorText);
 
   void _obscurePassword() {
     setState(() {
@@ -52,7 +54,7 @@ class _LoginPopupState extends State<LoginPopup> {
   }
 
   void submitForm() async {
-    print('Hi!');
+    errorText = 'test';
   }
 
   @override
@@ -60,7 +62,8 @@ class _LoginPopupState extends State<LoginPopup> {
     super.initState();
     _emailController = TextEditingController(text: '');
     _passwordController = TextEditingController(text: '');
-    _verificationController = TextEditingController(text: '');
+    _verificationController =
+        TextEditingController(text: '');
   }
 
   @override
@@ -75,25 +78,37 @@ class _LoginPopupState extends State<LoginPopup> {
   Widget build(BuildContext context) {
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
-      title: PopupTitle(formMode: formMode, onPressed: _backToPreviousForm),
+      title: PopupTitle(
+          formMode: formMode,
+          onPressed: _backToPreviousForm),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP || formMode == FormMode.PASSWORD
+          formMode == FormMode.LOGIN ||
+                  formMode == FormMode.SIGNUP ||
+                  formMode == FormMode.PASSWORD
               ? CustomTextField(
                   controller: _emailController,
                   label: 'Email',
                   autoFocus: true,
-                  autofillHints: const [AutofillHints.email],
+                  autofillHints: const [
+                    AutofillHints.email
+                  ],
                   onChanged: (_) => setState(() {}),
                 )
               : Container(),
-          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP ? VSpace.sm : Container(),
-          formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD
+          formMode == FormMode.LOGIN ||
+                  formMode == FormMode.SIGNUP
+              ? VSpace.sm
+              : Container(),
+          formMode != FormMode.VERIFY &&
+                  formMode != FormMode.PASSWORD
               ? CustomTextField(
                   controller: _passwordController,
                   label: 'Password',
-                  autofillHints: const [AutofillHints.password],
+                  autofillHints: const [
+                    AutofillHints.password
+                  ],
                   obscureText: obscurePassword,
                   onPressed: _obscurePassword,
                   onChanged: (_) => setState(() {}),
@@ -111,19 +126,49 @@ class _LoginPopupState extends State<LoginPopup> {
                   alignment: Alignment.centerRight,
                   child: CustomTextButton(
                     text: 'FORGOT PASSWORD?',
-                    style: kBodyText.copyWith(fontSize: kExtraExtraSmall + 2),
-                    onPressed: () => formMode = FormMode.PASSWORD,
+                    style: kBodyText.copyWith(
+                        fontSize: kExtraExtraSmall + 2),
+                    onPressed: () =>
+                        formMode = FormMode.PASSWORD,
                   ),
                 )
               : Container(),
-          formMode == FormMode.LOGIN ? VSpace.xxs : VSpace.lg,
+          formMode == FormMode.LOGIN
+              ? VSpace.xxs
+              : VSpace.lg,
+          if (errorText.isNotEmpty) ...[
+            Container(
+              width: 280,
+              padding: EdgeInsets.symmetric(
+                  horizontal: kExtraSmall,
+                  vertical: kExtraExtraSmall),
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(
+                      kExtraExtraSmall)),
+              child: Row(
+                children: [
+                  //TODO: Probably will have to set hard-coded ICON here for color purposes
+                  Icon(Icons.error),
+                  HSpace.xs,
+                  Expanded(
+                    child: Text(errorText),
+                  )
+                ],
+              ),
+            ),
+            VSpace.sm,
+          ],
           CustomPrimaryButton(
             text: formMode.button,
             onPressed: () => submitForm(),
           ),
           VSpace.sm,
-          formMode != FormMode.NEW && formMode != FormMode.PASSWORD
-              ? LoginToggle(formMode: formMode, onPressed: _toggleLoginForms)
+          formMode != FormMode.NEW &&
+                  formMode != FormMode.PASSWORD
+              ? LoginToggle(
+                  formMode: formMode,
+                  onPressed: _toggleLoginForms)
               : Container(),
         ],
       ),
@@ -191,7 +236,8 @@ class PopupTitle extends StatelessWidget {
             ],
           ),
         ),
-        formMode != FormMode.LOGIN && formMode != FormMode.SIGNUP
+        formMode != FormMode.LOGIN &&
+                formMode != FormMode.SIGNUP
             ? Positioned(
                 left: 0,
                 top: 19,

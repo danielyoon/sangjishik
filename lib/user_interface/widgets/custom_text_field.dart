@@ -39,7 +39,8 @@ class CustomTextField extends StatefulWidget {
   });
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextField> createState() =>
+      _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
@@ -57,8 +58,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
           autofillHints: widget.autofillHints,
           textCapitalization: TextCapitalization.sentences,
           inputFormatters: [
-            LengthLimitingTextInputFormatter(widget.maxLength),
-            if (widget.textInputFormatter != null) widget.textInputFormatter!,
+            LengthLimitingTextInputFormatter(
+                widget.maxLength),
+            if (widget.textInputFormatter != null)
+              widget.textInputFormatter!,
           ],
           keyboardType: widget.textInputType,
           onFieldSubmitted: widget.onSubmit,
@@ -74,30 +77,44 @@ class _CustomTextFieldState extends State<CustomTextField> {
           decoration: InputDecoration(
             hintText: widget.hintText ?? '',
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kExtraExtraSmall),
-              borderSide: BorderSide(color: Colors.black, width: 1, style: BorderStyle.solid),
+              borderRadius:
+                  BorderRadius.circular(kExtraExtraSmall),
+              borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kExtraExtraSmall),
-              borderSide: BorderSide(color: Colors.black, width: 1, style: BorderStyle.solid),
+              borderRadius:
+                  BorderRadius.circular(kExtraExtraSmall),
+              borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kExtraExtraSmall),
-              borderSide: BorderSide(color: Colors.black, width: 1, style: BorderStyle.solid),
+              borderRadius:
+                  BorderRadius.circular(kExtraExtraSmall),
+              borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                  style: BorderStyle.solid),
             ),
             contentPadding: EdgeInsets.all(kExtraSmall + 2),
             isDense: true,
-            suffixIcon: widget.obscureText || widget.label == 'Password'
-                ? Tooltip(
-                    message: '',
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: widget.onPressed,
-                        child: Icon(
-                          widget.obscureText ? Icons.check : Icons.close,
-                          color: widget.obscureText ? Colors.green : Colors.red,
-                        ),
+            suffixIcon: widget.obscureText ||
+                    widget.label == 'Password'
+                ? MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: widget.onPressed,
+                      child: Icon(
+                        widget.obscureText
+                            ? Icons.check
+                            : Icons.close,
+                        color: widget.obscureText
+                            ? Colors.green
+                            : Colors.red,
                       ),
                     ),
                   )
@@ -108,5 +125,3 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 }
-
-//TODO: Add Custom Tooltip for suffixIcon
