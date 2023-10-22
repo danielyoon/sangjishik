@@ -25,6 +25,9 @@ class _LoginPopupState extends State<LoginPopup> {
 
   bool obscurePassword = true;
 
+  //TODO: Add Tooltip global key
+  //https://api.flutter.dev/flutter/material/Tooltip-class.html
+
   void _obscurePassword() {
     setState(() {
       obscurePassword = !obscurePassword;
@@ -32,13 +35,18 @@ class _LoginPopupState extends State<LoginPopup> {
   }
 
   void _backToPreviousForm() {
-    if (formMode == FormMode.PASSWORD) formMode = FormMode.LOGIN;
+    _emailController.clear();
+    formMode = FormMode.LOGIN;
   }
 
   void _toggleLoginForms() {
     if (formMode == FormMode.LOGIN) {
+      _emailController.clear();
+      _passwordController.clear();
       formMode = FormMode.SIGNUP;
     } else {
+      _emailController.clear();
+      _passwordController.clear();
       formMode = FormMode.LOGIN;
     }
   }
@@ -71,22 +79,33 @@ class _LoginPopupState extends State<LoginPopup> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CustomTextField(
-            controller: _emailController,
-            label: 'Email',
-            autoFocus: true,
-            autofillHints: const [AutofillHints.email],
-            onChanged: (_) => setState(() {}),
-          ),
-          VSpace.sm,
-          CustomTextField(
-            controller: _passwordController,
-            label: 'Password',
-            autofillHints: const [AutofillHints.password],
-            obscureText: obscurePassword,
-            onPressed: _obscurePassword,
-            onChanged: (_) => setState(() {}),
-          ),
+          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP || formMode == FormMode.PASSWORD
+              ? CustomTextField(
+                  controller: _emailController,
+                  label: 'Email',
+                  autoFocus: true,
+                  autofillHints: const [AutofillHints.email],
+                  onChanged: (_) => setState(() {}),
+                )
+              : Container(),
+          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP ? VSpace.sm : Container(),
+          formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD
+              ? CustomTextField(
+                  controller: _passwordController,
+                  label: 'Password',
+                  autofillHints: const [AutofillHints.password],
+                  obscureText: obscurePassword,
+                  onPressed: _obscurePassword,
+                  onChanged: (_) => setState(() {}),
+                )
+              : Container(),
+          formMode == FormMode.VERIFY
+              ? CustomTextField(
+                  controller: _verificationController,
+                  label: 'Verification Code',
+                  onChanged: (_) => setState(() {}),
+                )
+              : Container(),
           formMode == FormMode.LOGIN
               ? Align(
                   alignment: Alignment.centerRight,

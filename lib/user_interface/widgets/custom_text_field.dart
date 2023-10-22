@@ -88,11 +88,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
             contentPadding: EdgeInsets.all(kExtraSmall + 2),
             isDense: true,
             suffixIcon: widget.obscureText || widget.label == 'Password'
-                ? GestureDetector(
-                    onTap: widget.onPressed,
-                    child: Icon(
-                      widget.obscureText ? Icons.check : Icons.close,
-                      color: widget.obscureText ? Colors.green : Colors.red,
+                ? Tooltip(
+                    message: '',
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: widget.onPressed,
+                        child: Icon(
+                          widget.obscureText ? Icons.check : Icons.close,
+                          color: widget.obscureText ? Colors.green : Colors.red,
+                        ),
+                      ),
                     ),
                   )
                 : null,
@@ -102,3 +108,5 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 }
+
+//TODO: Add Custom Tooltip for suffixIcon
