@@ -24,6 +24,7 @@ dependencies:
   http: ^1.1.0
   image_picker: ^1.0.1
   intl: ^0.18.1
+  loading_animation_widget: ^1.2.0+4
   shared_preferences: ^2.0.15
   sized_context: ^1.0.0+1
 

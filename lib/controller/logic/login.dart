@@ -12,7 +12,6 @@ class Login extends ChangeNotifier {
     /*  What outcomes are there?
     * Wrong password
     * Email does not exist
-    * Network error
     * Pass
     * */
 
@@ -21,18 +20,40 @@ class Login extends ChangeNotifier {
   }
 
   Future<bool> createAccount(String email, String password) async {
+    /*  What outcomes are there?
+    * Email already exists
+    * Pass
+    * */
+    return false;
+  }
+
+  Future<bool> forgotPassword(String email) async {
+    /*  What outcomes are there?
+    * Email doesn't exist
+    * Pass
+    * */
     return true;
   }
 
-  Future<bool> verifyEmailAddress() async {
+  Future<bool> verifyCode(String verification) async {
+    /*  What outcomes are there?
+    * Wrong
+    * Pass
+    * */
     return false;
   }
 
-  Future<bool> forgotPassword() async {
-    return false;
+  Future<void> sendVerificationEmail(String email) async {
+    /*  What outcomes are there?
+    * Pass
+    * */
   }
 
-  Future<bool> sendVerificationEmail() async {
+  Future<bool> createNewPassword(String password) async {
+    /*  What outcomes are there?
+    * Too short
+    * Pass
+    * */
     return false;
   }
 }
