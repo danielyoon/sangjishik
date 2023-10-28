@@ -44,12 +44,14 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
                   padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
                   child: CustomTextButton(text: 'Login', onPressed: () => showLoginPopup(context)),
                 ),
-                isLoggedIn && isAdmin
-                    ? Padding(
-                        padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
-                        child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2)),
-                      )
-                    : Container(),
+                // isLoggedIn && isAdmin
+                //     ? Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                //         child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2)))
+                //     : Container(),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                    child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2))),
               ]
             : [
                 //TODO: Create side bar menu

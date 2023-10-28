@@ -1,23 +1,25 @@
-import 'dart:convert';
-
-import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:flutter_quill/flutter_quill.dart' hide Text;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sangjishik/controller/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
 
-class CreatePostsScreen extends StatefulWidget with GetItStatefulWidgetMixin {
-  CreatePostsScreen({super.key});
+class CreatePostsScreen extends StatefulWidget {
+  const CreatePostsScreen({super.key});
 
   @override
   State<CreatePostsScreen> createState() => _CreatePostsScreenState();
 }
 
-class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMixin {
+class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingStateMixin {
   late TextEditingController _titleController;
-
-  // late TextEditingController _postController;
   late TextEditingController _tagController;
-  late quill.QuillController _postController;
+  late QuillController _postController;
+
+  List<String> selectedTags = [];
+
+  final FocusNode _focusNode = FocusNode();
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
@@ -26,125 +28,183 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with GetItStateMi
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: '');
-    // _postController = TextEditingController(text: '');
-    _postController = quill.QuillController.basic();
     _tagController = TextEditingController(text: '');
+    _postController = QuillController.basic();
   }
 
   @override
   void dispose() {
     _titleController.dispose();
-    // _postController.dispose();
-    _postController.dispose();
     _tagController.dispose();
+    _postController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
-  void _uploadImage() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
+  void chooseImage() async {
+    image = await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+
     setState(() {});
   }
 
+  bool get enableSubmit {
+    return true;
+  }
+
+  void submitBlogPost() async {}
+
   @override
   Widget build(BuildContext context) {
-    // List<String> tags = watchOnly((AppModel m) => m.tags);
-    List<String> tags = [];
-    _tagController.text = tags.toString();
-
     double width = context.widthPx;
-    return Align(
-      alignment: Alignment.topCenter,
-      child: SizedBox(
-        width: width / 1.5,
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                VSpace.md,
-                Text(
-                  'Create A Post',
-                ),
-                VSpace.md,
-                // StyledTextField(
-                //   label: 'Title',
-                //   onChanged: (_) => setState(() {}),
-                //   controller: _titleController,
-                // ),
-                VSpace.md,
-                quill.QuillToolbar.basic(controller: _postController),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: .6),
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                  ),
-                  height: 400,
-                  child: Padding(
-                    padding: EdgeInsets.all(0),
-                    child: quill.QuillEditor.basic(
-                      controller: _postController,
-                      readOnly: false,
-                      autoFocus: false,
-                    ),
-                  ),
-                ),
-                VSpace.md,
-                // GestureDetector(
-                //   onTap: () => showTagDialog(context),
-                //   child: tags.isEmpty
-                //       ? StyledTextField(
-                //           label: 'Tag',
-                //           text: '',
-                //           enabled: false,
-                //         )
-                //       : StyledTextField(
-                //           label: 'Tag',
-                //           controller: _tagController,
-                //           enabled: false,
-                //         ),
-                // ),
-                VSpace.md,
-                // image == null
-                //     ? GestureDetector(
-                //         onTap: () => _uploadImage(),
-                //         child: StyledTextField(
-                //           label: 'Image',
-                //           text: '',
-                //           enabled: false,
-                //           numLines: 3,
-                //         ),
-                //       )
-                //     : SizedBox(
-                //         width: double.infinity,
-                //         child: Image.network(image!.path),
-                //       ),
-                VSpace.md,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      child: SizedBox(
-                        width: width / 4,
-                        child: CustomPrimaryButton(text: 'Submit', onPressed: () => print('TEST')
-                            // userService.createPost(
-                            //     _titleController.text,
-                            //     jsonEncode(_postController
-                            //         .document
-                            //         .toDelta()
-                            //         .toJson()),
-                            //     tags,
-                            //     image!),
+    double height = context.heightPx;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+          scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
+          textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: kLarge),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VSpace.md,
+              Text('Create a Post', style: kHeader),
+              VSpace.sm,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: QuillProvider(
+                      configurations: QuillConfigurations(
+                        controller: _postController,
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: QuillToolbar(
+                              configurations: QuillToolbarConfigurations(showAlignmentButtons: true),
                             ),
+                          ),
+                          VSpace.sm,
+                          Container(
+                            width: double.infinity,
+                            height: height / 1.5,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1),
+                              borderRadius: BorderRadius.circular(kExtraExtraSmall),
+                            ),
+                            child: QuillEditor(
+                              focusNode: _focusNode,
+                              scrollController: ScrollController(),
+                              configurations: QuillEditorConfigurations(
+                                  placeholder: "Let's start writing!",
+                                  padding: EdgeInsets.all(kSmall),
+                                  textSelectionThemeData: TextSelectionThemeData(cursorColor: Colors.black)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                VSpace.xl,
-              ],
-            ),
+                  ),
+                  (width > 1200) ? HSpace.md : Container(),
+                  (width > 1200)
+                      ? Expanded(
+                          child: Column(
+                            children: [
+                              CustomTextField(
+                                controller: _titleController,
+                                label: 'Title',
+                                autoFocus: true,
+                                onChanged: (_) => setState(() {}),
+                              ),
+                              VSpace.sm,
+                              GestureDetector(
+                                onTap: () async {
+                                  selectedTags = (await showTagPopup(context))!;
+
+                                  _tagController.text = selectedTags.join(', ');
+                                  setState(() {});
+                                },
+                                child: CustomTextField(
+                                  controller: _tagController,
+                                  label: 'Tags',
+                                  enabled: false,
+                                ),
+                              ),
+                              VSpace.sm,
+                              GestureDetector(
+                                onTap: () => chooseImage(),
+                                child: (image == null)
+                                    ? CustomTextField(
+                                        label: 'Image',
+                                        hintText: 'Click to upload an image',
+                                        enabled: false,
+                                      )
+                                    : Image.network(image!.path),
+                              ),
+                              VSpace.lg,
+                              isLoading
+                                  ? const CustomLoadingAnimation()
+                                  : CustomPrimaryButton(
+                                      text: 'SUBMIT',
+                                      onPressed: enableSubmit ? submitBlogPost : null,
+                                    ),
+                            ],
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+              (width < 1200)
+                  ? Column(
+                      children: [
+                        VSpace.md,
+                        CustomTextField(
+                          controller: _titleController,
+                          label: 'Title',
+                          autoFocus: true,
+                          onChanged: (_) => setState(() {}),
+                        ),
+                        VSpace.sm,
+                        GestureDetector(
+                          onTap: () async {
+                            selectedTags = (await showTagPopup(context))!;
+
+                            _tagController.text = selectedTags.join(', ');
+                            setState(() {});
+                          },
+                          child: CustomTextField(
+                            controller: _tagController,
+                            label: 'Tags',
+                            enabled: false,
+                          ),
+                        ),
+                        VSpace.sm,
+                        GestureDetector(
+                          onTap: () => chooseImage(),
+                          child: (image == null)
+                              ? CustomTextField(
+                                  label: 'Image',
+                                  hintText: 'Click to upload an image',
+                                  enabled: false,
+                                )
+                              : Image.network(image!.path),
+                        ),
+                        VSpace.lg,
+                        isLoading
+                            ? const CustomLoadingAnimation()
+                            : CustomPrimaryButton(
+                                text: 'SUBMIT',
+                                onPressed: enableSubmit ? submitBlogPost : null,
+                              ),
+                        VSpace.lg,
+                      ],
+                    )
+                  : Container(),
+            ],
           ),
         ),
       ),

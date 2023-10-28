@@ -1,9 +1,9 @@
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/controller/data/tags.dart';
 
-void showTagDialog<T>(BuildContext context) async => showDialog(
-      context: context,
-      builder: (context) => TagPopup(),
-    );
+Future<List<String>?> showTagPopup<T>(BuildContext context) async {
+  return showDialog<List<String>>(context: context, barrierDismissible: false, builder: (context) => TagPopup());
+}
 
 class TagPopup extends StatefulWidget {
   const TagPopup({super.key});
@@ -13,81 +13,120 @@ class TagPopup extends StatefulWidget {
 }
 
 class _TagPopupState extends State<TagPopup> {
-  List<String> items = [
-    'Personal',
-    'Bible',
-    'KPOP',
-    'Programming',
-    'Fashion',
-    'Tetris',
-    'Books',
-    'Food',
-    'History',
-    'Random',
-    'Funny',
-  ];
+  final List<String> _selectedTags = [];
 
-  final List<String> _selectedItems = [];
+  List<Widget> createTagRows() {
+    List<Widget> tagRows = [];
+    List<int> keys = tags.keys.toList();
 
-  void _itemChange(String itemValue, bool isSelected) {
-    setState(() {
-      if (isSelected) {
-        _selectedItems.add(itemValue);
+    for (int i = 0; i < keys.length; i += 2) {
+      List<Widget> rowChildren = [
+        TagTile(
+          title: tags[keys[i]]['tag'],
+          onPressed: () {
+            toggleTag(tags[keys[i]]['tag']);
+          },
+          color: tags[keys[i]]['color'],
+          icon: tags[keys[i]]['icon'],
+        ),
+      ];
+
+      if (i + 1 < keys.length) {
+        rowChildren.add(HSpace.sm);
+        rowChildren.add(TagTile(
+          title: tags[keys[i + 1]]['tag'],
+          onPressed: () {
+            toggleTag(tags[keys[i + 1]]['tag']);
+          },
+          color: tags[keys[i + 1]]['color'],
+          icon: tags[keys[i + 1]]['icon'],
+        ));
       } else {
-        _selectedItems.remove(itemValue);
+        rowChildren.add(HSpace.sm);
+        rowChildren.add(TagTile(title: ''));
       }
-    });
+
+      tagRows.add(Row(children: rowChildren));
+
+      if (i + 2 < keys.length) {
+        tagRows.add(VSpace.sm);
+      }
+    }
+
+    return tagRows;
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    // for (int i = 0; i < appModel.tags.length; i++) {
-    //   _itemChange(appModel.tags[i], true);
-    // }
+  void toggleTag(String tag) {
+    if (_selectedTags.contains(tag)) {
+      _selectedTags.remove(tag);
+    } else {
+      _selectedTags.add(tag);
+    }
+    setState(() {});
   }
 
-  void _cancel() {
-    Navigator.pop(context);
-  }
-
-  void _submit() {
-    // appModel.tags = _selectedItems;
-    Navigator.pop(context);
+  void closePopup() {
+    appRouter.pop(_selectedTags);
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(
-        'Tags',
-        textAlign: TextAlign.center,
-      ),
-      content: SingleChildScrollView(
-        child: Column(
-          children: items
-              .map(
-                (item) => CheckboxListTile(
-                  value: _selectedItems.contains(item),
-                  title: Text(item),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  onChanged: (isChecked) => _itemChange(item, isChecked!),
-                ),
-              )
-              .toList(),
+      titlePadding: EdgeInsets.zero,
+      title: Padding(
+        padding: EdgeInsets.only(top: kMedium),
+        child: Center(
+          child: Text('TAGS', style: kHeader),
         ),
       ),
-      actions: [
-        CustomTextButton(
-          text: 'Cancel',
-          onPressed: _cancel,
-        ),
-        CustomTextButton(
-          text: 'Submit',
-          onPressed: _submit,
-        ),
-      ],
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
+            children: createTagRows(),
+          ),
+          VSpace.sm,
+          CustomPrimaryButton(text: 'POP!', onPressed: () => closePopup()),
+        ],
+      ),
+    );
+  }
+}
+
+class TagTile extends StatefulWidget {
+  final String title;
+  final VoidCallback? onPressed;
+  final Color? color;
+  final IconData? icon;
+
+  const TagTile({super.key, required this.title, this.onPressed, this.color, this.icon});
+
+  @override
+  State<TagTile> createState() => _TagTileState();
+}
+
+class _TagTileState extends State<TagTile> {
+  bool pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListTile(
+        title: Text(widget.title),
+        leading: Icon(widget.icon, color: pressed ? Colors.white : Colors.black),
+        titleTextStyle: kBodyText,
+        selectedColor: Colors.white,
+        selectedTileColor: widget.color,
+        selected: pressed,
+        enabled: (widget.title.isEmpty ? false : true),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kExtraSmall)),
+        onTap: () {
+          setState(() {
+            pressed = !pressed;
+          });
+          widget.onPressed?.call();
+        },
+      ),
     );
   }
 }
