@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/screens/posts/posts_screen.dart';
+import 'package:sangjishik/user_interface/screens/home/post_grid.dart';
 import 'package:sangjishik/controller/data/quotes.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,39 +38,39 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SingleChildScrollView(
         child: SizedBox(
           height: height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              VSpace.md,
-              _quotesWidget(width),
-              VSpace.xl,
-              // PostsScreen(),
-            ],
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: kLarge),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VSpace.md,
+                _quotesWidget(width),
+                VSpace.xl,
+                PostGrid(),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Padding _quotesWidget(double width) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: kLarge),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: (width > 780) ? width / 3 : width / 1.2,
-            child: Text(
-              qotd['quote'],
-              softWrap: true,
-            ),
+  Column _quotesWidget(double width) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: (width > 780) ? width / 3 : width / 1.2,
+          child: Text(
+            qotd['quote'],
+            softWrap: true,
           ),
-          VSpace.sm,
-          Text(
-            '      -  ${qotd['author']}',
-          ),
-        ],
-      ),
+        ),
+        VSpace.sm,
+        Text(
+          '      -  ${qotd['author']}',
+        ),
+      ],
     );
   }
 }

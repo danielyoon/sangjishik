@@ -51,6 +51,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
     return true;
   }
 
+  //TODO: Create function to POST blogpost
   void submitBlogPost() async {}
 
   @override

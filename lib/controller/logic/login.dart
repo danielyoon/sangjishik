@@ -8,6 +8,7 @@ class Login extends ChangeNotifier {
 
   NodeJs get nodejs => GetIt.I.get<NodeJs>();
 
+  //TODO: Connect to nodejs
   Future<LoginVerification> loginWithEmail(String email, String password) async {
     /*  What outcomes are there?
     * Wrong password

@@ -2,7 +2,6 @@
 // import 'package:sangjishik/core_packages.dart';
 // import 'package:sangjishik/controller/utils/string_utils.dart';
 //
-// //FIXME: Add POST and TAG here so this object can be passed on
 // class PostWidget extends StatefulWidget {
 //   final String image;
 //   final String title;

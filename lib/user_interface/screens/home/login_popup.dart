@@ -94,6 +94,7 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
     bool success;
 
     if (formMode == FormMode.LOGIN) {
+      //TODO: Finish test cases for login process
       LoginVerification loginSuccess =
           await load(() async => login.loginWithEmail(_emailController.text, _passwordController.text));
     }
