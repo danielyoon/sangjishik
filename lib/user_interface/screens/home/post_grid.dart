@@ -1,4 +1,5 @@
 import 'package:flutter/gestures.dart';
+import 'package:sangjishik/controller/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
 
 import '../../../controller/data/temp_posts.dart';
@@ -25,7 +26,7 @@ class PostGrid extends StatelessWidget {
             crossAxisCount: getCrossAxisCount(),
             crossAxisSpacing: kMedium,
             mainAxisSpacing: kMedium,
-            childAspectRatio: 1.1,
+            childAspectRatio: 1.3,
             children: tempPosts.map((post) {
               return GridTile(
                 child: PostWidget(
@@ -75,11 +76,12 @@ class _PostWidgetState extends State<PostWidget> {
             color: isHover ? Color.fromARGB(75, 192, 184, 171) : Colors.transparent,
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Expanded(
-                flex: 8,
+                flex: 10,
                 child: Padding(
-                  padding: EdgeInsets.all(kSmall),
+                  padding: EdgeInsets.only(left: kSmall, right: kSmall, top: kSmall, bottom: kExtraSmall),
                   child: Image.network(
                     widget.image,
                     fit: BoxFit.fill,
@@ -89,7 +91,26 @@ class _PostWidgetState extends State<PostWidget> {
               ),
               Flexible(
                 flex: 2,
-                child: Text(widget.title),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: kSmall),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: '${widget.title}\n',
+                              style: kSubHeader,
+                            ),
+                            TextSpan(text: StringUtils.formatDateTime(widget.date), style: kGreyText),
+                          ],
+                        ),
+                      ),
+                      isHover ? Padding(padding: EdgeInsets.only(right: kMedium), child: Text('Visit')) : Container(),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

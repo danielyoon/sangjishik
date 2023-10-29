@@ -19,3 +19,4 @@ TextStyle kSubHeader = GoogleFonts.inter(fontSize: kSmall, fontWeight: FontWeigh
 TextStyle kCaption = GoogleFonts.inter(fontSize: kExtraSmall, fontWeight: FontWeight.w800);
 TextStyle kBodyText = GoogleFonts.inter(fontSize: kSmall, fontWeight: FontWeight.w500);
 TextStyle kButton = GoogleFonts.inter(fontSize: kSmall, fontWeight: FontWeight.w600);
+TextStyle kGreyText = GoogleFonts.inter(fontSize: kExtraSmall + 2, color: kGrey);
