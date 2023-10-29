@@ -33,13 +33,16 @@ class _HomeScreenState extends State<HomeScreen> {
     double height = context.heightPx;
     return Theme(
       data: Theme.of(context).copyWith(
-        scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
+        scrollbarTheme: ScrollbarThemeData(
+            thumbColor: MaterialStateProperty.all(
+                (Colors.transparent))),
       ),
       child: SingleChildScrollView(
         child: SizedBox(
           height: height,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: kLarge),
+            padding:
+                EdgeInsets.symmetric(horizontal: kLarge),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 _quotesWidget(width),
                 VSpace.xl,
                 PostGrid(),
+                VSpace.lg,
               ],
             ),
           ),

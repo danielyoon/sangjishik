@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:sangjishik/controller/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
-
-import '../../../controller/data/temp_posts.dart';
+import 'package:sangjishik/controller/data/temp_posts.dart';
 
 class PostGrid extends StatelessWidget {
   const PostGrid({super.key});
@@ -21,25 +20,26 @@ class PostGrid extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: kLarge),
-          child: GridView.count(
-            crossAxisCount: getCrossAxisCount(),
-            crossAxisSpacing: kMedium,
-            mainAxisSpacing: kMedium,
-            childAspectRatio: 1.3,
-            children: tempPosts.map((post) {
-              return GridTile(
-                child: PostWidget(
-                  image: post['image'],
-                  title: post['title'],
-                  date: post['date'],
-                  onPressed: () {
-                    // Handle the tap event
-                  },
-                ),
-              );
-            }).toList(), // Convert the Iterable back to a List
-          )),
+        padding: EdgeInsets.symmetric(horizontal: kLarge),
+        child: GridView.count(
+          crossAxisCount: getCrossAxisCount(),
+          crossAxisSpacing: kMedium,
+          mainAxisSpacing: kMedium,
+          childAspectRatio: 1,
+          children: tempPosts.map((post) {
+            return GridTile(
+              child: PostWidget(
+                image: post['image'],
+                title: post['title'],
+                date: post['date'],
+                onPressed: () {
+                  // Handle the tap event
+                },
+              ),
+            );
+          }).toList(), // Convert the Iterable back to a List
+        ),
+      ),
     );
   }
 }
@@ -50,7 +50,12 @@ class PostWidget extends StatefulWidget {
   final DateTime date;
   final VoidCallback onPressed;
 
-  const PostWidget({super.key, required this.image, required this.title, required this.date, required this.onPressed});
+  const PostWidget(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.date,
+      required this.onPressed});
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
@@ -58,6 +63,7 @@ class PostWidget extends StatefulWidget {
 
 class _PostWidgetState extends State<PostWidget> {
   bool isHover = false;
+  bool isBtnHover = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +78,22 @@ class _PostWidgetState extends State<PostWidget> {
         onTap: widget.onPressed,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(kExtraSmall),
-            color: isHover ? Color.fromARGB(75, 192, 184, 171) : Colors.transparent,
+            borderRadius:
+                BorderRadius.circular(kExtraSmall),
+            color: isHover
+                ? Color.fromARGB(75, 192, 184, 171)
+                : Colors.transparent,
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
               Expanded(
                 flex: 10,
                 child: Padding(
-                  padding: EdgeInsets.only(left: kSmall, right: kSmall, top: kSmall, bottom: kExtraSmall),
+                  padding: EdgeInsets.only(
+                      left: kSmall,
+                      right: kSmall,
+                      top: kSmall,
+                      bottom: kExtraSmall),
                   child: Image.network(
                     widget.image,
                     fit: BoxFit.fill,
@@ -92,9 +104,11 @@ class _PostWidgetState extends State<PostWidget> {
               Flexible(
                 flex: 2,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kSmall),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: kSmall),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
                     children: [
                       RichText(
                         text: TextSpan(
@@ -103,11 +117,64 @@ class _PostWidgetState extends State<PostWidget> {
                               text: '${widget.title}\n',
                               style: kSubHeader,
                             ),
-                            TextSpan(text: StringUtils.formatDateTime(widget.date), style: kGreyText),
+                            TextSpan(
+                                text: StringUtils
+                                    .formatDateTime(
+                                        widget.date),
+                                style: kGreyText),
                           ],
                         ),
                       ),
-                      isHover ? Padding(padding: EdgeInsets.only(right: kMedium), child: Text('Visit')) : Container(),
+                      isHover
+                          ? MouseRegion(
+                              onEnter: (PointerEnterEvent
+                                      event) =>
+                                  setState(() {
+                                isBtnHover = true;
+                              }),
+                              onExit: (PointerExitEvent
+                                      event) =>
+                                  setState(() {
+                                isBtnHover = false;
+                              }),
+                              child: GestureDetector(
+                                onTap: () =>
+                                    print('View Post!'),
+                                child: Container(
+                                  padding:
+                                      EdgeInsets.symmetric(
+                                          horizontal:
+                                              kSmall,
+                                          vertical:
+                                              kExtraSmall),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(
+                                            kExtraExtraSmall),
+                                    color: isBtnHover
+                                        ? Colors.white
+                                        : Color.fromARGB(
+                                            255,
+                                            235,
+                                            235,
+                                            230),
+                                    // color: Colors.white,
+                                  ),
+                                  child: Text(
+                                    'Visit',
+                                    style:
+                                        kBodyText.copyWith(
+                                      color: isBtnHover
+                                          ? Colors.black
+                                          : Colors.black
+                                              .withOpacity(
+                                                  .2),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
