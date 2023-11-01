@@ -69,9 +69,9 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VSpace.md,
+              Gap(kMedium),
               Text('Create a Post', style: kHeader),
-              VSpace.sm,
+              Gap(kSmall),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -89,7 +89,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                               configurations: QuillToolbarConfigurations(showAlignmentButtons: true),
                             ),
                           ),
-                          VSpace.sm,
+                          Gap(kSmall),
                           Container(
                             width: double.infinity,
                             height: height / 1.5,
@@ -110,7 +110,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                       ),
                     ),
                   ),
-                  (width > 1200) ? HSpace.md : Container(),
+                  (width > 1200) ? Gap(kMedium) : Container(),
                   (width > 1200)
                       ? Expanded(
                           child: Column(
@@ -121,7 +121,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                                 autoFocus: true,
                                 onChanged: (_) => setState(() {}),
                               ),
-                              VSpace.sm,
+                              Gap(kSmall),
                               GestureDetector(
                                 onTap: () async {
                                   selectedTags = (await showTagPopup(context))!;
@@ -135,7 +135,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                                   enabled: false,
                                 ),
                               ),
-                              VSpace.sm,
+                              Gap(kSmall),
                               GestureDetector(
                                 onTap: () => chooseImage(),
                                 child: (image == null)
@@ -146,7 +146,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                                       )
                                     : Image.network(image!.path),
                               ),
-                              VSpace.lg,
+                              Gap(kLarge),
                               isLoading
                                   ? const CustomLoadingAnimation()
                                   : CustomPrimaryButton(
@@ -162,14 +162,14 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
               (width < 1200)
                   ? Column(
                       children: [
-                        VSpace.md,
+                        Gap(kMedium),
                         CustomTextField(
                           controller: _titleController,
                           label: 'Title',
                           autoFocus: true,
                           onChanged: (_) => setState(() {}),
                         ),
-                        VSpace.sm,
+                        Gap(kSmall),
                         GestureDetector(
                           onTap: () async {
                             selectedTags = (await showTagPopup(context))!;
@@ -183,7 +183,7 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                             enabled: false,
                           ),
                         ),
-                        VSpace.sm,
+                        Gap(kSmall),
                         GestureDetector(
                           onTap: () => chooseImage(),
                           child: (image == null)
@@ -194,14 +194,14 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                                 )
                               : Image.network(image!.path),
                         ),
-                        VSpace.lg,
+                        Gap(kLarge),
                         isLoading
                             ? const CustomLoadingAnimation()
                             : CustomPrimaryButton(
                                 text: 'SUBMIT',
                                 onPressed: enableSubmit ? submitBlogPost : null,
                               ),
-                        VSpace.lg,
+                        Gap(kLarge),
                       ],
                     )
                   : Container(),

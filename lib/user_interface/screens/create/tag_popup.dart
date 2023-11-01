@@ -32,7 +32,7 @@ class _TagPopupState extends State<TagPopup> {
       ];
 
       if (i + 1 < keys.length) {
-        rowChildren.add(HSpace.sm);
+        rowChildren.add(Gap(kSmall));
         rowChildren.add(TagTile(
           title: tags[keys[i + 1]]['tag'],
           onPressed: () {
@@ -42,14 +42,14 @@ class _TagPopupState extends State<TagPopup> {
           icon: tags[keys[i + 1]]['icon'],
         ));
       } else {
-        rowChildren.add(HSpace.sm);
+        rowChildren.add(Gap(kSmall));
         rowChildren.add(TagTile(title: ''));
       }
 
       tagRows.add(Row(children: rowChildren));
 
       if (i + 2 < keys.length) {
-        tagRows.add(VSpace.sm);
+        tagRows.add(Gap(kSmall));
       }
     }
 
@@ -85,7 +85,7 @@ class _TagPopupState extends State<TagPopup> {
           Column(
             children: createTagRows(),
           ),
-          VSpace.sm,
+          Gap(kSmall),
           CustomPrimaryButton(text: 'POP!', onPressed: () => closePopup()),
         ],
       ),

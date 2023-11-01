@@ -175,7 +175,7 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
                   }),
                 )
               : Container(),
-          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP ? VSpace.sm : Container(),
+          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP ? Gap(kSmall) : Container(),
           formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD
               ? CustomTextField(
                   controller: _passwordController,
@@ -207,7 +207,7 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
                   ),
                 )
               : Container(),
-          formMode == FormMode.LOGIN ? VSpace.xxs : VSpace.md,
+          formMode == FormMode.LOGIN ? Gap(kExtraExtraSmall) : Gap(kMedium),
           if (errorText.isNotEmpty) ...[
             Container(
               width: 280,
@@ -217,14 +217,14 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
               child: Row(
                 children: [
                   errorIcon,
-                  HSpace.xs,
+                  Gap(kExtraSmall),
                   Expanded(
                     child: Text(errorText, style: kCaption),
                   )
                 ],
               ),
             ),
-            VSpace.sm,
+            Gap(kSmall),
           ],
           isLoading
               ? const CustomLoadingAnimation()
@@ -232,7 +232,7 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
                   text: formMode.button,
                   onPressed: enableSubmit ? submitForm : null,
                 ),
-          VSpace.sm,
+          Gap(kSmall),
           formMode != FormMode.NEW && formMode != FormMode.PASSWORD
               ? LoginToggle(formMode: formMode, onPressed: _toggleLoginForms)
               : Container(),
@@ -262,7 +262,7 @@ class LoginToggle extends StatelessWidget {
           formMode.extra,
           style: kBodyText.copyWith(fontSize: kExtraSmall),
         ),
-        HSpace.xs,
+        Gap(kExtraSmall),
         CustomTextButton(
           onPressed: () => onPressed(),
           text: formMode.extra2,

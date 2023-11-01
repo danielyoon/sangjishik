@@ -16,22 +16,22 @@ class AboutScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VSpace.xl,
+              Gap(kExtraLarge),
               Text(
                 '상지식',
                 style: kHeader,
               ),
               Text('[sahng-ji-shik]', style: kSubHeader),
-              VSpace.xs,
+              Gap(kExtraSmall),
               Text('noun', style: kCaption),
               Text('1.  상 (Sang) means above, or up top. It can also mean an award.', style: kBodyText),
               Text('2.  지식 (Ji Shik) means knowledge.', style: kBodyText),
               Text('3.  상지식 (Sang Ji Shik) means, higher knowledge.', style: kBodyText),
-              VSpace.lg,
+              Gap(kLarge),
               Text(
                   "Hi! My name is Sang Ji (상지), or Daniel. I am currently $age year's old.\n\nEnjoy my weird thoughts.",
                   style: kBodyText),
-              VSpace.xl,
+              Gap(kExtraLarge),
             ],
           ),
         ),
