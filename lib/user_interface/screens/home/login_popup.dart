@@ -100,10 +100,6 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
     }
 
     if (formMode == FormMode.SIGNUP) {
-      if (obscurePassword && !doubleCheck || obscurePassword && doubleCheck) {
-        _doubleCheckPassword();
-        return;
-      }
       success = await load(() => login.createAccount(_emailController.text, _passwordController.text));
 
       if (success) {
@@ -175,8 +171,8 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
                   }),
                 )
               : Container(),
-          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP ? Gap(kSmall) : Container(),
-          formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD
+          formMode == FormMode.LOGIN ? Gap(kSmall) : Container(),
+          formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD && formMode != FormMode.SIGNUP
               ? CustomTextField(
                   controller: _passwordController,
                   label: 'Password',

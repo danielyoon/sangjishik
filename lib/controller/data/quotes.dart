@@ -220,11 +220,11 @@ Map<int, dynamic> quotes = {
   50: {
     'quote':
         'When a good person dies, there should be an impact on the world. Somebody should notice. Somebody should be upset.',
-    'author': 'Allison Cameron (House M.D.)'
+    'author': 'Allison Cameron (House M.D.)',
   },
   51: {
     'quote': 'To me, lies are love. And in my own way, I thought I was expressing love.',
-    'author': 'Ai Hoshino (Oshi No Ko)'
+    'author': 'Ai Hoshino (Oshi No Ko)',
   },
   52: {
     'quote': 'The only way to do great work is to love what you do.',
@@ -245,34 +245,37 @@ Map<int, dynamic> quotes = {
   56: {
     'quote':
         "I've always said that I don't respect people who don't proselytize. I don't respect that at all. If you believe that there's a heaven and a hell, and people could be going to hell or not getting eternal life, and you think that it's not really worth telling them this because it would make it socially awkward - how much do you have to hate somebody to not proselytize? How much do you have to hate somebody to believe everlasting life is possible and not tell them that?",
-    'author': 'Penn Jillette'
+    'author': 'Penn Jillette',
   },
   57: {
     'quote': 'I guess it comes down to a simple choice, really: Get busy living, or get busy dying.',
-    'author': 'Andy Dufresne (Shawshank Redemption)'
+    'author': 'Andy Dufresne (Shawshank Redemption)',
   },
   58: {
     'quote': 'Take my hand. Take my whole life, too.',
     'author': "Elvis Presley (Can't Help Falling In Love)",
   },
-  59: {'quote': 'If you see me in a fight with a bear, pray for the bear.', 'author': 'Kobe Bryant'},
+  59: {
+    'quote': 'If you see me in a fight with a bear, pray for the bear.',
+    'author': 'Kobe Bryant',
+  },
   60: {
     'quote': 'Good, better, best. Never let it rest. Until your good is better and your better is best.',
-    'author': 'Tim Duncan'
+    'author': 'Tim Duncan',
   },
   61: {
     'quote': 'I love stating the obvious; often times we think ourselves too highly to accept simple answers.',
-    'author': 'Daniel Yoon'
+    'author': 'Daniel Yoon',
   },
   62: {
     'quote':
         "You don't know how lucky you are being a monkey. Because consciousness is a terrible curse. I think. I feel. I suffer. And all I ask in return is the opportunity to do my work. And they won't allow it... because I raise issues.",
-    'author': 'Craig Schwartz (Being John Malkovich)'
+    'author': 'Craig Schwartz (Being John Malkovich)',
   },
   63: {
     'quote':
         "They say people can change, but is that really true? If they decide they want to fly, will they grow wings? I don't think so. You don't change yourself, you change how you do things. You have to make your own way. You have to create a way to fly, even while you stay the same.",
-    'author': 'Sora (No Game, No Life)'
+    'author': 'Sora (No Game, No Life)',
   },
   64: {
     'quote': "Only idiots start fights they can't win.",
@@ -284,7 +287,7 @@ Map<int, dynamic> quotes = {
   },
   66: {
     'quote': "'That's why we'll never win.' If that's what you’re thinking, you're doomed to fail.",
-    'author': 'Sora (No Game, No Life)'
+    'author': 'Sora (No Game, No Life)',
   },
   67: {
     'quote':
@@ -305,7 +308,10 @@ Map<int, dynamic> quotes = {
     'quote': 'The inner machinations of my mind are an enigma.',
     'author': 'Patrick Star (Spongebob Squarepants)',
   },
-  71: {'quote': "If grace is an ocean, we're all sinking.", 'author': 'John Mark McMillan (How He Loves)'},
+  71: {
+    'quote': "If grace is an ocean, we're all sinking.",
+    'author': 'John Mark McMillan (How He Loves)',
+  },
   72: {
     'quote': 'No power of hell, no scheme of man, can ever pluck, me from His hand.',
     'author': 'Stuart Townend (In Christ Alone)',
@@ -342,5 +348,9 @@ Map<int, dynamic> quotes = {
   80: {
     'quote': 'I do not need a reason to be angry with God',
     'author': 'Jamie Sullivan (A Walk To Remember)',
+  },
+  81: {
+    'quote': "Don't let the noise of others' opinions drown out your own inner voice",
+    'author': 'Steve Jobs',
   },
 };

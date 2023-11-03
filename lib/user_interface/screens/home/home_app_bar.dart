@@ -15,6 +15,7 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
     bool isAdmin = watchOnly((AuthUser m) => m.isAdmin);
     double width = context.widthPx;
 
+    //TODO: If user is logged in, turn login into logout
     return SizedBox(
       height: 55,
       child: AppBar(
