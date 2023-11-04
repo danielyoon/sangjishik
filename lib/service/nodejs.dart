@@ -8,30 +8,26 @@ class NodeJs {
   final _baseUrl = 'sangjishik.com';
   final Map<String, String> _headers = {};
 
-  Future<Map<String, dynamic>?> createPost(String title, String post, List<String> tags, String image) async {
-    Map<String, dynamic>? data;
-    Uri url = Uri.https(_baseUrl, '/users/create-post');
+  // Future<Map<String, dynamic>?> createPost(String title, String post, List<String> tags, String image) async {
+  //   Map<String, dynamic>? data;
+  //   Uri url = Uri.https(_baseUrl, '/users/create-post');
+  //
+  //   _headers['Authorization'] = 'Bearer ${tokens.token.jwtToken}';
+  //   http.Response response = await client.post(
+  //     url,
+  //     body: {'title': title, 'post': post, 'tags': tags.toString(), 'image': image},
+  //   );
+  //
+  //   data = jsonDecode(response.body);
+  //
+  //   return data;
+  // }
 
-    _headers['Authorization'] = 'Bearer ${tokens.token.jwtToken}';
-    http.Response response = await client.post(
-      url,
-      body: {'title': title, 'post': post, 'tags': tags.toString(), 'image': image},
-    );
-
-    data = jsonDecode(response.body);
-
-    return data;
-  }
-
-  Future<Map<String, dynamic>?> loginWithEmail(String email, String password) async {
+  Future<http.Response> loginWithEmail(String email, String password) async {
     Uri url = Uri.https(_baseUrl, '/users/login-with-email');
     http.Response response = await client.post(url, body: {'email': email, 'password': password});
 
-    if (response.statusCode != 200) return null;
-
-    Map<String, dynamic> data = jsonDecode(response.body);
-
-    return data;
+    return response;
   }
 
   Future<Map<String, dynamic>?> loginWithToken(String token) async {

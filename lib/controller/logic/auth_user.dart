@@ -116,7 +116,10 @@ import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/controller/models/user.dart';
 
 class AuthUser extends ChangeNotifier {
-  static late User? user;
-  // bool isAdmin = user?.role == 'Admin' || user?.role != null ? true : false;
-  bool isAdmin = false;
+  late User user;
+
+  void setUser(User user) {
+    this.user = user;
+    notifyListeners();
+  }
 }

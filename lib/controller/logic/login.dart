@@ -1,23 +1,44 @@
+import 'dart:convert';
+
+import 'package:http/http.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/service/nodejs.dart';
 import 'package:sangjishik/controller/models/enums.dart';
 
-class Login extends ChangeNotifier {
-  bool isLoggedIn = false;
-  late String email;
+import 'package:sangjishik/controller/models/user.dart';
+import 'package:sangjishik/controller/data/token.dart';
 
+class Login extends ChangeNotifier {
   NodeJs get nodejs => GetIt.I.get<NodeJs>();
 
-  //TODO: Connect to nodejs
   Future<LoginVerification> loginWithEmail(String email, String password) async {
     /*  What outcomes are there?
     * Wrong password
     * Email does not exist
     * Pass
     * */
+    try {
+      Response response = await nodejs.loginWithEmail(email, password);
 
-    isLoggedIn = false;
-    return LoginVerification.WRONG;
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        User user = User.fromJson(data);
+
+        Token token = Token(data['jwtToken'], data['refreshToken']);
+        tokens.updateToken(token);
+
+        auth.setUser(user);
+
+        return LoginVerification.PASS;
+      }
+
+      if (response.statusCode == 401) return LoginVerification.WRONG;
+
+      return LoginVerification.NONEXISTENT;
+    } catch (e) {
+      return LoginVerification.NETWORK;
+    }
   }
 
   Future<bool> createAccount(String email, String password) async {

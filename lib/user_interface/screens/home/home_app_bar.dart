@@ -11,8 +11,6 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoggedIn = watchOnly((Login m) => m.isLoggedIn);
-    bool isAdmin = watchOnly((AuthUser m) => m.isAdmin);
     double width = context.widthPx;
 
     //TODO: If user is logged in, turn login into logout
