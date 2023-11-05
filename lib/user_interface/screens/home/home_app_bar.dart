@@ -6,8 +6,17 @@ import 'package:sangjishik/controller/logic/auth_user.dart';
 class HomeAppBar extends StatelessWidget with GetItMixin {
   final int currentIndex;
   final ValueChanged<int>? onTap;
+  final VoidCallback openMenu;
+  final bool showLoginMenu;
+  final AnimationController animationController;
 
-  HomeAppBar({super.key, this.currentIndex = 0, required this.onTap});
+  HomeAppBar(
+      {super.key,
+      this.currentIndex = 0,
+      required this.onTap,
+      required this.openMenu,
+      required this.showLoginMenu,
+      required this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +66,21 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
                     : Container(),
               ]
             : [
-                //TODO: Create side bar menu
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
-                  child: IconButton(
-                    icon: Icon(Icons.menu),
-                    splashRadius: 1,
-                    onPressed: () => print('MENU!'),
+                  padding: EdgeInsets.symmetric(horizontal: kExtraSmall, vertical: kExtraSmall),
+                  child: GestureDetector(
+                    onTap: () {
+                      if (animationController.isCompleted) {
+                        animationController.reverse();
+                      } else {
+                        animationController.forward();
+                      }
+                      openMenu.call();
+                    },
+                    child: AnimatedIcon(
+                      icon: AnimatedIcons.menu_close,
+                      progress: animationController,
+                    ),
                   ),
                 ),
               ],
