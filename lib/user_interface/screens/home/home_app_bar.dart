@@ -1,6 +1,6 @@
-import 'package:sangjishik/controller/logic/login.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/home/login_popup.dart';
+import 'package:sangjishik/controller/models/user.dart';
 import 'package:sangjishik/controller/logic/auth_user.dart';
 
 class HomeAppBar extends StatelessWidget with GetItMixin {
@@ -12,8 +12,9 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
   @override
   Widget build(BuildContext context) {
     double width = context.widthPx;
+    User? currentUser = watchOnly((AuthUser x) => (x.user));
+    bool isAdmin = watchOnly((AuthUser x) => x.isAdmin);
 
-    //TODO: If user is logged in, turn login into logout
     return SizedBox(
       height: 55,
       child: AppBar(
@@ -24,14 +25,15 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
         title: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
-              onTap: () => onTap!(0),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 45),
-                child: Image.asset(
-                  'assets/images/logo-transp.png',
-                  fit: BoxFit.scaleDown,
-                ),
-              )),
+            onTap: () => onTap!(0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 45),
+              child: Image.asset(
+                'assets/images/logo-transp.png',
+                fit: BoxFit.scaleDown,
+              ),
+            ),
+          ),
         ),
         actions: (width > 780)
             ? [
@@ -39,18 +41,20 @@ class HomeAppBar extends StatelessWidget with GetItMixin {
                   padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
                   child: CustomTextButton(text: 'About', onPressed: () => onTap!(1)),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
-                  child: CustomTextButton(text: 'Login', onPressed: () => showLoginPopup(context)),
-                ),
-                // isLoggedIn && isAdmin
-                //     ? Padding(
-                //         padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
-                //         child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2)))
-                //     : Container(),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
-                    child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2))),
+                currentUser == null
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                        child: CustomTextButton(text: 'Login', onPressed: () => showLoginPopup(context)),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                        child: CustomTextButton(text: 'Logout', onPressed: () => print('LOGOUT!')),
+                      ),
+                isAdmin
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(horizontal: kExtraSmall),
+                        child: CustomTextButton(text: 'Create', onPressed: () => onTap!(2)))
+                    : Container(),
               ]
             : [
                 //TODO: Create side bar menu

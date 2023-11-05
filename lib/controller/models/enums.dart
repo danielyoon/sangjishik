@@ -25,7 +25,7 @@ extension FormModeExtension on FormMode {
       case FormMode.LOGIN:
         return 'SUBMIT';
       case FormMode.SIGNUP:
-        return 'JOIN';
+        return 'SIGN UP';
       case FormMode.VERIFY:
         return 'VERIFY';
       case FormMode.PASSWORD:

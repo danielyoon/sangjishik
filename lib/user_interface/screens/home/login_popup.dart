@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:sangjishik/controller/models/enums.dart';
 import 'package:sangjishik/controller/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/controller/utils/debouncer.dart';
 
 Future<void> showLoginPopup<T>(BuildContext context) async {
   return showDialog(context: context, builder: (context) => LoginPopup());
@@ -20,6 +21,8 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
   FormMode get formMode => _formMode;
 
   set formMode(FormMode formMode) => setState(() => _formMode = formMode);
+
+  Debouncer debouncer = Debouncer(delay: Duration(milliseconds: 300));
 
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
@@ -81,9 +84,16 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
   }
 
   bool get enableSubmit {
-    if (formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP) {
+    if (formMode == FormMode.LOGIN) {
       return EmailValidator.validate(_emailController.text) && _passwordController.text.length > 5;
     }
+
+    if (formMode == FormMode.SIGNUP || formMode == FormMode.PASSWORD) {
+      return EmailValidator.validate(_emailController.text);
+    }
+
+    if (formMode == FormMode.VERIFY) return _verificationController.text.isNotEmpty;
+    if (formMode == FormMode.NEW) return _passwordController.text.length > 5;
 
     return false;
   }
@@ -91,49 +101,108 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
   void submitForm() async {
     if (enableSubmit == false) return;
     setErrorProperties(text: '');
-    bool success;
+    LoginVerification success;
 
-    if (formMode == FormMode.LOGIN) {
-      //TODO: Finish test cases for login process
-      LoginVerification loginSuccess =
-          await load(() async => login.loginWithEmail(_emailController.text, _passwordController.text));
-    }
+    debouncer.run(() async {
+      if (formMode == FormMode.LOGIN) {
+        success = await load(() async => login.loginWithEmail(_emailController.text, _passwordController.text));
+        if (success == LoginVerification.PASS) appRouter.pop();
 
-    if (formMode == FormMode.SIGNUP) {
-      success = await load(() => login.createAccount(_emailController.text, _passwordController.text));
+        if (success == LoginVerification.WRONG || success == LoginVerification.NONEXISTENT) {
+          setErrorProperties(
+              text: 'Please double check your email or password!',
+              icon: Icon(Icons.error, color: Colors.redAccent),
+              color: Colors.redAccent);
+        }
 
-      if (success) {
-        formMode = FormMode.VERIFY;
-      } else {
-        setErrorProperties(
-            text: 'Your email may already exist!',
-            icon: Icon(Icons.error, color: Colors.redAccent),
-            color: Colors.redAccent);
+        if (success == LoginVerification.NETWORK) {
+          setErrorProperties(
+              text: 'Please check your internet connection.',
+              icon: Icon(Icons.warning, color: Colors.yellowAccent),
+              color: Colors.yellowAccent);
+        }
       }
-    }
 
-    if (formMode == FormMode.PASSWORD) {
-      success = await load(() => login.forgotPassword(_emailController.text));
+      if (formMode == FormMode.SIGNUP) {
+        success = await load(() async => login.createAccount(_emailController.text));
 
-      if (success) formMode = FormMode.VERIFY;
-    }
+        if (success == LoginVerification.PASS) {
+          formMode = FormMode.VERIFY;
+          return;
+        } else {
+          setErrorProperties(
+              text: 'Double check your email address!',
+              icon: Icon(Icons.error, color: Colors.redAccent),
+              color: Colors.redAccent);
+        }
 
-    if (formMode == FormMode.VERIFY) {
-      success = await load(() => login.verifyCode(_verificationController.text));
-
-      if (success && _passwordController.text.isNotEmpty) formMode = FormMode.NEW;
-      if (success) appRouter.pop();
-    }
-
-    if (formMode == FormMode.NEW) {
-      if (obscurePassword && !doubleCheck || obscurePassword && doubleCheck) {
-        _doubleCheckPassword();
-        return;
+        if (success == LoginVerification.NETWORK) {
+          setErrorProperties(
+              text: 'Please check your internet connection.',
+              icon: Icon(Icons.warning, color: Colors.yellowAccent),
+              color: Colors.yellowAccent);
+        }
       }
-      success = await load(() => login.createNewPassword(_passwordController.text));
 
-      if (success) appRouter.pop();
-    }
+      if (formMode == FormMode.PASSWORD) {
+        success = await load(() async => login.forgotPassword(_emailController.text));
+
+        if (success == LoginVerification.PASS) {
+          formMode = FormMode.VERIFY;
+          return;
+        } else {
+          setErrorProperties(
+              text: 'Double check your email address!',
+              icon: Icon(Icons.error, color: Colors.redAccent),
+              color: Colors.redAccent);
+        }
+
+        if (success == LoginVerification.NETWORK) {
+          setErrorProperties(
+              text: 'Please check your internet connection.',
+              icon: Icon(Icons.warning, color: Colors.yellowAccent),
+              color: Colors.yellowAccent);
+        }
+      }
+
+      if (formMode == FormMode.VERIFY) {
+        success = await load(() async => login.verifyCode(_emailController.text, _verificationController.text));
+
+        if (success == LoginVerification.PASS) {
+          formMode = FormMode.NEW;
+          return;
+        } else {
+          setErrorProperties(
+              text: 'Wrong verification code!',
+              icon: Icon(Icons.error, color: Colors.redAccent),
+              color: Colors.redAccent);
+        }
+
+        if (success == LoginVerification.NETWORK) {
+          setErrorProperties(
+              text: 'Please check your internet connection.',
+              icon: Icon(Icons.warning, color: Colors.yellowAccent),
+              color: Colors.yellowAccent);
+        }
+      }
+
+      if (formMode == FormMode.NEW) {
+        if (obscurePassword && !doubleCheck || obscurePassword && doubleCheck) {
+          _doubleCheckPassword();
+          return;
+        }
+        success = await load(() async => login.createNewPassword(_emailController.text, _passwordController.text));
+
+        if (success == LoginVerification.PASS) {
+          appRouter.pop();
+        } else {
+          setErrorProperties(
+              text: 'Please check your internet connection.',
+              icon: Icon(Icons.warning, color: Colors.yellowAccent),
+              color: Colors.yellowAccent);
+        }
+      }
+    });
   }
 
   @override
@@ -154,85 +223,90 @@ class _LoginPopupState extends State<LoginPopup> with LoadingStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    double width = context.widthPx;
+
     return AlertDialog(
       titlePadding: EdgeInsets.zero,
       title: PopupTitle(formMode: formMode, onPressed: _backToPreviousForm),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP || formMode == FormMode.PASSWORD
-              ? CustomTextField(
-                  controller: _emailController,
-                  label: 'Email',
-                  autoFocus: true,
-                  autofillHints: const [AutofillHints.email],
-                  onChanged: (_) => setState(() {
-                    setErrorProperties(text: '');
-                  }),
-                )
-              : Container(),
-          formMode == FormMode.LOGIN ? Gap(kSmall) : Container(),
-          formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD && formMode != FormMode.SIGNUP
-              ? CustomTextField(
-                  controller: _passwordController,
-                  label: 'Password',
-                  autofillHints: const [AutofillHints.password],
-                  obscureText: obscurePassword,
-                  onPressed: _obscurePassword,
-                  onChanged: (_) => setState(() {
-                    setErrorProperties(text: '');
-                  }),
-                )
-              : Container(),
-          formMode == FormMode.VERIFY
-              ? CustomTextField(
-                  controller: _verificationController,
-                  label: 'Verification Code',
-                  onChanged: (_) => setState(() {
-                    setErrorProperties(text: '');
-                  }),
-                )
-              : Container(),
-          formMode == FormMode.LOGIN
-              ? Align(
-                  alignment: Alignment.centerRight,
-                  child: CustomTextButton(
-                    text: 'FORGOT PASSWORD?',
-                    style: kBodyText.copyWith(fontSize: kExtraExtraSmall + 2),
-                    onPressed: () => formMode = FormMode.PASSWORD,
-                  ),
-                )
-              : Container(),
-          formMode == FormMode.LOGIN ? Gap(kExtraExtraSmall) : Gap(kMedium),
-          if (errorText.isNotEmpty) ...[
-            Container(
-              width: 280,
-              padding: EdgeInsets.symmetric(horizontal: kExtraSmall, vertical: kExtraExtraSmall),
-              decoration: BoxDecoration(
-                  border: Border.all(color: errorColor), borderRadius: BorderRadius.circular(kExtraExtraSmall)),
-              child: Row(
-                children: [
-                  errorIcon,
-                  Gap(kExtraSmall),
-                  Expanded(
-                    child: Text(errorText, style: kCaption),
+      content: SizedBox(
+        width: width * .2,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            formMode == FormMode.LOGIN || formMode == FormMode.SIGNUP || formMode == FormMode.PASSWORD
+                ? CustomTextField(
+                    controller: _emailController,
+                    label: 'Email',
+                    autoFocus: true,
+                    autofillHints: const [AutofillHints.email],
+                    onChanged: (_) => setState(() {
+                      setErrorProperties(text: '');
+                    }),
                   )
-                ],
-              ),
-            ),
-            Gap(kSmall),
-          ],
-          isLoading
-              ? const CustomLoadingAnimation()
-              : CustomPrimaryButton(
-                  text: formMode.button,
-                  onPressed: enableSubmit ? submitForm : null,
+                : Container(),
+            formMode == FormMode.LOGIN ? Gap(kSmall) : Container(),
+            formMode != FormMode.VERIFY && formMode != FormMode.PASSWORD && formMode != FormMode.SIGNUP
+                ? CustomTextField(
+                    controller: _passwordController,
+                    label: 'Password',
+                    autofillHints: const [AutofillHints.password],
+                    obscureText: obscurePassword,
+                    onPressed: _obscurePassword,
+                    onChanged: (_) => setState(() {
+                      setErrorProperties(text: '');
+                    }),
+                  )
+                : Container(),
+            formMode == FormMode.VERIFY
+                ? CustomTextField(
+                    controller: _verificationController,
+                    label: 'Verification Code',
+                    onChanged: (_) => setState(() {
+                      setErrorProperties(text: '');
+                    }),
+                  )
+                : Container(),
+            formMode == FormMode.LOGIN
+                ? Align(
+                    alignment: Alignment.centerRight,
+                    child: CustomTextButton(
+                      text: 'FORGOT PASSWORD?',
+                      style: kBodyText.copyWith(fontSize: kExtraExtraSmall + 2),
+                      onPressed: () => formMode = FormMode.PASSWORD,
+                    ),
+                  )
+                : Container(),
+            formMode == FormMode.LOGIN ? Gap(kExtraExtraSmall) : Gap(kMedium),
+            if (errorText.isNotEmpty) ...[
+              Container(
+                width: width,
+                padding: EdgeInsets.symmetric(horizontal: kExtraSmall, vertical: kExtraExtraSmall),
+                decoration: BoxDecoration(
+                    border: Border.all(color: errorColor), borderRadius: BorderRadius.circular(kExtraExtraSmall)),
+                child: Row(
+                  children: [
+                    errorIcon,
+                    Gap(kExtraSmall),
+                    Expanded(
+                      child: Text(errorText, style: kCaption),
+                    )
+                  ],
                 ),
-          Gap(kSmall),
-          formMode != FormMode.NEW && formMode != FormMode.PASSWORD
-              ? LoginToggle(formMode: formMode, onPressed: _toggleLoginForms)
-              : Container(),
-        ],
+              ),
+              Gap(kSmall),
+            ],
+            isLoading
+                ? const CustomLoadingAnimation()
+                : CustomPrimaryButton(
+                    text: formMode.button,
+                    onPressed: enableSubmit ? submitForm : null,
+                  ),
+            Gap(kSmall),
+            formMode != FormMode.NEW && formMode != FormMode.PASSWORD
+                ? LoginToggle(formMode: formMode, onPressed: _toggleLoginForms)
+                : Container(),
+          ],
+        ),
       ),
     );
   }

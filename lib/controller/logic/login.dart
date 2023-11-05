@@ -12,18 +12,14 @@ class Login extends ChangeNotifier {
   NodeJs get nodejs => GetIt.I.get<NodeJs>();
 
   Future<LoginVerification> loginWithEmail(String email, String password) async {
-    /*  What outcomes are there?
-    * Wrong password
-    * Email does not exist
-    * Pass
-    * */
     try {
       Response response = await nodejs.loginWithEmail(email, password);
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(response.body);
 
-        User user = User.fromJson(data);
+        Map<String, dynamic> userJson = data['user'];
+        User user = User.fromJson(userJson);
 
         Token token = Token(data['jwtToken'], data['refreshToken']);
         tokens.updateToken(token);
@@ -41,41 +37,77 @@ class Login extends ChangeNotifier {
     }
   }
 
-  Future<bool> createAccount(String email, String password) async {
-    /*  What outcomes are there?
-    * Email already exists
-    * Pass
-    * */
-    return false;
+  Future<LoginVerification> createAccount(String email) async {
+    try {
+      Response response = await nodejs.createAccount(email);
+
+      if (response.statusCode == 200) return LoginVerification.PASS;
+      if (response.statusCode == 404) return LoginVerification.NONEXISTENT;
+
+      return LoginVerification.WRONG;
+    } catch (e) {
+      return LoginVerification.NETWORK;
+    }
   }
 
-  Future<bool> forgotPassword(String email) async {
-    /*  What outcomes are there?
-    * Email doesn't exist
-    * Pass
-    * */
-    return true;
+  Future<LoginVerification> forgotPassword(String email) async {
+    try {
+      Response response = await nodejs.forgotPassword(email);
+
+      if (response.statusCode == 200) return LoginVerification.PASS;
+      if (response.statusCode == 404) return LoginVerification.NONEXISTENT;
+
+      return LoginVerification.NETWORK;
+    } catch (e) {
+      return LoginVerification.NETWORK;
+    }
   }
 
-  Future<bool> verifyCode(String verification) async {
-    /*  What outcomes are there?
-    * Wrong
-    * Pass
-    * */
-    return false;
+  Future<LoginVerification> verifyCode(String email, String verification) async {
+    try {
+      Response response = await nodejs.verifyCode(email, verification);
+
+      if (response.statusCode == 200) return LoginVerification.PASS;
+
+      return LoginVerification.WRONG;
+    } catch (e) {
+      return LoginVerification.NETWORK;
+    }
   }
 
-  Future<void> sendVerificationEmail(String email) async {
-    /*  What outcomes are there?
-    * Pass
-    * */
+  Future<LoginVerification> sendVerificationEmail(String email) async {
+    try {
+      Response response = await nodejs.sendVerificationEmail(email);
+
+      if (response.statusCode == 200) return LoginVerification.PASS;
+
+      return LoginVerification.NETWORK;
+    } catch (e) {
+      return LoginVerification.NETWORK;
+    }
   }
 
-  Future<bool> createNewPassword(String password) async {
-    /*  What outcomes are there?
-    * Too short
-    * Pass
-    * */
-    return false;
+  Future<LoginVerification> createNewPassword(String email, String password) async {
+    try {
+      Response response = await nodejs.createNewPassword(email, password);
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        Map<String, dynamic> userJson = data['user'];
+        User user = User.fromJson(userJson);
+
+        Token token = Token(data['jwtToken'], data['refreshToken']);
+        tokens.updateToken(token);
+
+        auth.setUser(user);
+
+        return LoginVerification.PASS;
+      }
+
+      return LoginVerification.WRONG;
+    } catch (e) {
+      return LoginVerification.NETWORK;
+    }
   }
 }
