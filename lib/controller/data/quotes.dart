@@ -353,4 +353,9 @@ Map<int, dynamic> quotes = {
     'quote': "Don't let the noise of others' opinions drown out your own inner voice",
     'author': 'Steve Jobs',
   },
+  82: {
+    'quote': "When asked, 'What is more important: prayer or reading the Bible?' I ask, 'What is more important: "
+        "breathing in or breathing out?'",
+    'author': 'Charles Spurgeon',
+  },
 };

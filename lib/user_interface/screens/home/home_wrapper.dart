@@ -38,6 +38,8 @@ class _HomeWrapperState extends State<HomeWrapper> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     void onTap(int index) {
       widget.navigationShell.goBranch(index, initialLocation: index == widget.navigationShell.currentIndex);
+
+      if (showLoginMenu) toggleMenuBar();
     }
 
     return Stack(
@@ -62,7 +64,7 @@ class _HomeWrapperState extends State<HomeWrapper> with SingleTickerProviderStat
           bottom: 0,
           right: showLoginMenu ? 0 : -MediaQuery.of(context).size.width,
           left: showLoginMenu ? 0 : MediaQuery.of(context).size.width,
-          child: LoginMenu(),
+          child: LoginMenu(onTap: onTap),
         ),
       ],
     );
