@@ -18,6 +18,11 @@ class PostGrid extends StatelessWidget {
       return 4;
     }
 
+    void navigateToPost(String title) {
+      String url = StringUtils.replaceSpacesWithHyphens(title);
+      appRouter.go('/post/$url');
+    }
+
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: kLarge),
@@ -32,7 +37,7 @@ class PostGrid extends StatelessWidget {
                 image: post['image'],
                 title: post['title'],
                 date: post['date'],
-                onPressed: () => print('TEST!'),
+                onPressed: navigateToPost,
               ),
             );
           }).toList(), // Convert the Iterable back to a List
@@ -46,7 +51,7 @@ class PostWidget extends StatefulWidget {
   final String image;
   final String title;
   final DateTime date;
-  final VoidCallback onPressed;
+  final Function(String) onPressed;
 
   const PostWidget({super.key, required this.image, required this.title, required this.date, required this.onPressed});
 
@@ -68,7 +73,7 @@ class _PostWidgetState extends State<PostWidget> {
         isHover = false;
       }),
       child: GestureDetector(
-        onTap: widget.onPressed,
+        onTap: () => widget.onPressed(widget.title),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(kExtraSmall),
@@ -120,7 +125,7 @@ class _PostWidgetState extends State<PostWidget> {
                                   isBtnHover = false;
                                 }),
                                 child: GestureDetector(
-                                  onTap: widget.onPressed,
+                                  onTap: () => widget.onPressed(widget.title),
                                   child: Opacity(
                                     opacity: isHover ? 1.0 : 0.0,
                                     child: Container(

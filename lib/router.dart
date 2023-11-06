@@ -5,7 +5,7 @@ import 'package:sangjishik/user_interface/screens/create/create_posts_screen.dar
 import 'package:sangjishik/user_interface/screens/home/home_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_wrapper.dart';
 import 'package:sangjishik/user_interface/screens/home/mobile_login_screen.dart';
-import 'package:sangjishik/user_interface/screens/posts/one_post_screen.dart';
+import 'package:sangjishik/user_interface/screens/posts/post_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -21,18 +21,16 @@ final appRouter = GoRouter(
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: HomeScreen(),
               ),
-              routes: const [
-                // GoRoute(
-                //   name: 'post',
-                //   path: 'post/:title',
-                //   pageBuilder: (context, GoRouterState state) {
-                //     state.pathParameters.forEach((key, value) {
-                //       print('Key: $key, Value: $value');
-                //     });
-                //
-                //     return NoTransitionPage(child: OnePostScreen(title: state.pathParameters['title']!));
-                //   },
-                // ),
+              routes: [
+                GoRoute(
+                  path: 'post/:title',
+                  pageBuilder: (context, state) {
+                    final title = state.pathParameters['title'];
+                    return NoTransitionPage(
+                      child: PostScreen(title: title!),
+                    );
+                  },
+                ),
               ],
             ),
           ],
@@ -71,6 +69,12 @@ final appRouter = GoRouter(
 );
 
 String? _handleRedirect(BuildContext context, GoRouterState state) {
+  bool isAdmin = auth.isAdmin;
+  double width = context.widthPx;
+
+  if (state.location == '/create' && !isAdmin) return '/';
+  if (state.location == '/login' && width > 799) return '/';
+
   debugPrint('Navigate to: ${state.location}');
   return null;
 }
