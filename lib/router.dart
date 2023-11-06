@@ -4,6 +4,7 @@ import 'package:sangjishik/user_interface/screens/about/about_screen.dart';
 import 'package:sangjishik/user_interface/screens/create/create_posts_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_wrapper.dart';
+import 'package:sangjishik/user_interface/screens/home/mobile_login_screen.dart';
 import 'package:sangjishik/user_interface/screens/posts/one_post_screen.dart';
 
 final appRouter = GoRouter(
@@ -20,7 +21,7 @@ final appRouter = GoRouter(
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: HomeScreen(),
               ),
-              routes: [
+              routes: const [
                 // GoRoute(
                 //   name: 'post',
                 //   path: 'post/:title',
@@ -56,6 +57,14 @@ final appRouter = GoRouter(
             ),
           ],
         ),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/login',
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: MobileLoginScreen(),
+            ),
+          ),
+        ]),
       ],
     ),
   ],

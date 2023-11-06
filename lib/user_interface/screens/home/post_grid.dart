@@ -132,8 +132,8 @@ class _PostWidgetState extends State<PostWidget> {
                                       child: Text(
                                         'Visit',
                                         style: kBodyText.copyWith(
-                                          color: isBtnHover ? Colors.black : Colors.black.withOpacity(.2),
-                                        ),
+                                            color: isBtnHover ? Colors.black : Colors.black.withOpacity(.2),
+                                            fontWeight: FontWeight.w800),
                                       ),
                                     ),
                                   ),

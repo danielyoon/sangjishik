@@ -1,20 +1,27 @@
 import 'package:sangjishik/core_packages.dart';
+import 'package:sangjishik/controller/logic/auth_user.dart';
+import 'package:sangjishik/controller/models/user.dart';
+import 'package:sangjishik/user_interface/screens/home/logout_popup.dart';
 
-class LoginMenu extends StatefulWidget {
+class LoginMenu extends StatefulWidget with GetItStatefulWidgetMixin {
   final ValueChanged<int>? onTap;
 
-  const LoginMenu({super.key, this.onTap});
+  LoginMenu({super.key, this.onTap});
 
   @override
   State<LoginMenu> createState() => _LoginMenuState();
 }
 
-class _LoginMenuState extends State<LoginMenu> {
+class _LoginMenuState extends State<LoginMenu> with GetItStateMixin {
   @override
   Widget build(BuildContext context) {
     double width = context.widthPx;
     double height = context.heightPx;
 
+    User? currentUser = watchOnly((AuthUser x) => (x.user));
+    bool isAdmin = watchOnly((AuthUser x) => x.isAdmin);
+
+    //TODO: Setup logout popup
     return Container(
       width: width,
       height: height,
@@ -32,17 +39,25 @@ class _LoginMenuState extends State<LoginMenu> {
             ),
             Gap(kLarge),
             //TODO: Setup mobile login screen
-            CustomTextButton(
-              text: 'Login',
-              style: kHeader.copyWith(color: Colors.black, fontSize: kLarge),
-              onPressed: () => print('LOGIN'),
-            ),
+            currentUser == null
+                ? CustomTextButton(
+                    text: 'Login',
+                    style: kHeader.copyWith(color: Colors.black, fontSize: kLarge),
+                    onPressed: () => widget.onTap!(3),
+                  )
+                : CustomTextButton(
+                    text: 'Logout',
+                    style: kHeader.copyWith(color: Colors.redAccent, fontSize: kLarge),
+                    onPressed: () => showLogoutPopup(context),
+                  ),
             Gap(kLarge),
-            CustomTextButton(
-              text: 'Create',
-              style: kHeader.copyWith(color: Colors.black, fontSize: kLarge),
-              onPressed: () => widget.onTap!(2),
-            ),
+            isAdmin
+                ? CustomTextButton(
+                    text: 'Create',
+                    style: kHeader.copyWith(color: Colors.black, fontSize: kLarge),
+                    onPressed: () => widget.onTap!(2),
+                  )
+                : Container(),
           ],
         ),
       ),

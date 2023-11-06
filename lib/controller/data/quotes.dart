@@ -346,11 +346,11 @@ Map<int, dynamic> quotes = {
     'author': 'Eikichi Onizuka (Great Teacher Onizuka)',
   },
   80: {
-    'quote': 'I do not need a reason to be angry with God',
+    'quote': 'I do not need a reason to be angry with God.',
     'author': 'Jamie Sullivan (A Walk To Remember)',
   },
   81: {
-    'quote': "Don't let the noise of others' opinions drown out your own inner voice",
+    'quote': "Don't let the noise of others' opinions drown out your own inner voice.",
     'author': 'Steve Jobs',
   },
   82: {

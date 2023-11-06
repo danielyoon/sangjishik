@@ -5,10 +5,11 @@ class AuthUser extends ChangeNotifier {
   User? user;
   bool isAdmin = false;
 
-  void setUser(User user) {
+  void setUser(User? user) {
     this.user = user;
 
-    isAdmin = user.role == 'Admin';
+    if (user != null) isAdmin = user.role == 'Admin';
+    if (user == null) isAdmin = false;
     notifyListeners();
   }
 }
