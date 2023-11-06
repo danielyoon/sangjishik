@@ -110,4 +110,23 @@ class Login extends ChangeNotifier {
       return LoginVerification.NETWORK;
     }
   }
+
+  Future<LoginVerification> loginWithToken(String token) async {
+    Response response = await nodejs.loginWithToken(token);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+
+      Map<String, dynamic> userJson = data['user'];
+      User user = User.fromJson(userJson);
+
+      Token token = Token(data['jwtToken'], data['refreshToken']);
+      tokens.updateToken(token);
+
+      auth.setUser(user);
+
+      return LoginVerification.PASS;
+    }
+    return LoginVerification.WRONG;
+  }
 }

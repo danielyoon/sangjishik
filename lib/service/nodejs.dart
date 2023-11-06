@@ -24,6 +24,10 @@ class NodeJs {
   Future<http.Response> createNewPassword(String email, String password) {
     return APIService.post('/users/update-password', {'email': email, 'password': password});
   }
+
+  Future<http.Response> loginWithToken(String token) {
+    return APIService.post('/users/login-with-token', {'token': token});
+  }
 }
 
 class APIService {

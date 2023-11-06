@@ -358,4 +358,8 @@ Map<int, dynamic> quotes = {
         "breathing in or breathing out?'",
     'author': 'Charles Spurgeon',
   },
+  83: {
+    'quote': "Don't become any lonelier, Ji-pyeong, okay?",
+    'author': 'Grandma (Start-Up)',
+  },
 };
