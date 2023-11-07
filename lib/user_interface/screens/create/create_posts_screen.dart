@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sangjishik/controller/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
+import 'package:sangjishik/controller/utils/debouncer.dart';
 
 class CreatePostsScreen extends StatefulWidget {
   const CreatePostsScreen({super.key});
@@ -23,6 +26,20 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
+
+  Debouncer debouncer = Debouncer(delay: Duration(milliseconds: 300));
+
+  String errorText = '';
+  Widget errorIcon = Icon(Icons.error, color: Colors.redAccent);
+  Color errorColor = Colors.redAccent;
+
+  void setErrorProperties({String? text, Widget? icon, Color? color}) {
+    setState(() {
+      if (text != null) errorText = text;
+      if (icon != null) errorIcon = icon;
+      if (color != null) errorColor = color;
+    });
+  }
 
   @override
   void initState() {
@@ -48,11 +65,39 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
   }
 
   bool get enableSubmit {
-    return true;
+    if (_titleController.text.isNotEmpty &&
+        _tagController.text.isNotEmpty &&
+        image != null &&
+        !_postController.document.isEmpty()) return true;
+
+    return false;
   }
 
-  //TODO: Create function to POST blogpost
-  void submitBlogPost() async {}
+  void submitBlogPost() async {
+    if (enableSubmit == false) return;
+    setErrorProperties(text: '');
+    bool success;
+
+    debouncer.run(() async {
+      success = await load(() async => auth.createPost(
+          _titleController.text, _tagController.text, image!, jsonEncode(_postController.document.toDelta().toJson())));
+
+      if (success) {
+        setErrorProperties(text: 'Success!', icon: Icon(Icons.check, color: Colors.green), color: Colors.green);
+        _titleController.clear();
+        _tagController.clear();
+        _postController.clear();
+        image = null;
+        return;
+      } else {
+        setErrorProperties(
+            text: 'Something must be wrong somewhere?',
+            icon: Icon(Icons.error, color: Colors.redAccent),
+            color: Colors.redAccent);
+        return;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +239,26 @@ class _CreatePostsScreenState extends State<CreatePostsScreen> with LoadingState
                                 )
                               : Image.network(image!.path),
                         ),
-                        Gap(kLarge),
+                        Gap(kMedium),
+                        if (errorText.isNotEmpty) ...[
+                          Container(
+                            width: width,
+                            padding: EdgeInsets.symmetric(horizontal: kExtraSmall, vertical: kExtraExtraSmall),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: errorColor),
+                                borderRadius: BorderRadius.circular(kExtraExtraSmall)),
+                            child: Row(
+                              children: [
+                                errorIcon,
+                                Gap(kExtraSmall),
+                                Expanded(
+                                  child: Text(errorText, style: kCaption),
+                                )
+                              ],
+                            ),
+                          ),
+                          Gap(kSmall),
+                        ],
                         isLoading
                             ? const CustomLoadingAnimation()
                             : CustomPrimaryButton(

@@ -28,18 +28,20 @@ class NodeJs {
   Future<http.Response> loginWithToken(String token) {
     return APIService.post('/users/login-with-token', {'token': token});
   }
+
+  Future<http.Response> createPost(String title, String tags, String image, String post, String token) {
+    return APIService.post('/posts/create-post', {'title': title, 'tags': tags, 'image': image, 'post': post},
+        headers: {'Authorization': 'Bearer $token'});
+  }
 }
 
 class APIService {
   static var client = http.Client();
   static const _baseUrl = 'sangjishik.com';
 
-  static Future<http.Response> post<T>(String path, Map<String, dynamic> body) async {
+  static Future<http.Response> post<T>(String path, Map<String, dynamic> body, {Map<String, String>? headers}) async {
     Uri url = Uri.https(_baseUrl, path);
-    http.Response response = await client.post(
-      url,
-      body: body,
-    );
+    http.Response response = await client.post(url, body: body, headers: headers ?? {});
     return response;
   }
 }
