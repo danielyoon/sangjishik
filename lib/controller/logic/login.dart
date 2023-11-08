@@ -6,7 +6,7 @@ import 'package:sangjishik/service/nodejs.dart';
 import 'package:sangjishik/controller/models/enums.dart';
 
 import 'package:sangjishik/controller/models/user.dart';
-import 'package:sangjishik/controller/data/token.dart';
+import 'package:sangjishik/controller/models/token.dart';
 
 class Login extends ChangeNotifier {
   NodeJs get nodejs => GetIt.I.get<NodeJs>();
@@ -128,5 +128,12 @@ class Login extends ChangeNotifier {
       return LoginVerification.PASS;
     }
     return LoginVerification.WRONG;
+  }
+
+  Future<bool> logout(String token) async {
+    Response response = await nodejs.logout(token);
+
+    if (response.statusCode == 200) return true;
+    return false;
   }
 }

@@ -29,9 +29,21 @@ class NodeJs {
     return APIService.post('/users/login-with-token', {'token': token});
   }
 
+  Future<http.Response> logout(String token) {
+    return APIService.post('/users/logout', {'token': token}, headers: {'Authorization': 'Bearer $token'});
+  }
+
   Future<http.Response> createPost(String title, String tags, String image, String post, String token) {
     return APIService.post('/posts/create-post', {'title': title, 'tags': tags, 'image': image, 'post': post},
         headers: {'Authorization': 'Bearer $token'});
+  }
+
+  Future<http.Response> getPosts() {
+    return APIService.get('/posts/get-posts');
+  }
+
+  Future<http.Response> refreshToken(String token) {
+    return APIService.post('/users/refresh-token', {'token': token});
   }
 }
 
@@ -42,6 +54,13 @@ class APIService {
   static Future<http.Response> post<T>(String path, Map<String, dynamic> body, {Map<String, String>? headers}) async {
     Uri url = Uri.https(_baseUrl, path);
     http.Response response = await client.post(url, body: body, headers: headers ?? {});
+    return response;
+  }
+
+  static Future<http.Response> get<T>(String path) async {
+    Uri url = Uri.https(_baseUrl, path);
+    http.Response response = await client.get(url);
+
     return response;
   }
 }

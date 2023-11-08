@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sangjishik/controller/data/token.dart';
+import 'package:sangjishik/controller/models/token.dart';
 
 class TokenStorage {
   late Token token;

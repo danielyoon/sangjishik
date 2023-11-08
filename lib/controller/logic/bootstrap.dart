@@ -7,7 +7,7 @@ class Bootstrap {
   Future<void> init() async {
     await tokens.init();
     await Cloudinary.init();
-    // await userService.getPosts();
+    await posts.getPosts();
 
     String token = tokens.token.refreshToken;
 

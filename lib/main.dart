@@ -2,11 +2,11 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/service/cloudinary.dart';
 import 'package:sangjishik/service/nodejs.dart';
-import 'package:sangjishik/user_interface/app_scaffold.dart';
 import 'package:sangjishik/controller/logic/bootstrap.dart';
 import 'package:sangjishik/controller/logic/token_storage.dart';
 import 'package:sangjishik/controller/logic/login.dart';
 import 'package:sangjishik/controller/logic/auth_user.dart';
+import 'package:sangjishik/controller/logic/posts.dart';
 
 void main() async {
   usePathUrlStrategy();
@@ -38,6 +38,7 @@ void registerSingletons() {
   GetIt.I.registerLazySingleton<TokenStorage>(() => TokenStorage());
   GetIt.I.registerLazySingleton<NodeJs>(() => NodeJs());
   GetIt.I.registerLazySingleton<Cloudinary>(() => Cloudinary());
+  GetIt.I.registerLazySingleton<Posts>(() => Posts());
 }
 
 Bootstrap get bootstrap => GetIt.I.get<Bootstrap>();
@@ -49,3 +50,5 @@ Login get login => GetIt.I.get<Login>();
 TokenStorage get tokens => GetIt.I.get<TokenStorage>();
 
 Cloudinary get cloudinary => GetIt.I.get<Cloudinary>();
+
+Posts get posts => GetIt.I.get<Posts>();
