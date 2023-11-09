@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:sangjishik/controller/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/controller/data/temp_posts.dart';
+import 'package:sangjishik/controller/models/post.dart';
 
 class PostGrid extends StatelessWidget {
   const PostGrid({super.key});
@@ -18,8 +18,8 @@ class PostGrid extends StatelessWidget {
       return 4;
     }
 
-    void navigateToPost(String title) {
-      String url = StringUtils.replaceSpacesWithHyphens(title);
+    void navigateToPost(Post post) {
+      String url = StringUtils.replaceSpacesWithHyphens(post.title);
       appRouter.go('/post/$url');
     }
 
@@ -31,12 +31,10 @@ class PostGrid extends StatelessWidget {
           crossAxisSpacing: kMedium,
           mainAxisSpacing: kMedium,
           childAspectRatio: 1.4,
-          children: tempPosts.map((post) {
+          children: posts.posts.map((post) {
             return GridTile(
               child: PostWidget(
-                image: post['image'],
-                title: post['title'],
-                date: post['date'],
+                post: post,
                 onPressed: navigateToPost,
               ),
             );
@@ -48,12 +46,10 @@ class PostGrid extends StatelessWidget {
 }
 
 class PostWidget extends StatefulWidget {
-  final String image;
-  final String title;
-  final DateTime date;
-  final Function(String) onPressed;
+  final Post post;
+  final Function(Post) onPressed;
 
-  const PostWidget({super.key, required this.image, required this.title, required this.date, required this.onPressed});
+  const PostWidget({super.key, required this.post, required this.onPressed});
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
@@ -73,7 +69,7 @@ class _PostWidgetState extends State<PostWidget> {
         isHover = false;
       }),
       child: GestureDetector(
-        onTap: () => widget.onPressed(widget.title),
+        onTap: () => widget.onPressed(widget.post),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(kExtraSmall),
@@ -86,7 +82,7 @@ class _PostWidgetState extends State<PostWidget> {
                 child: Padding(
                   padding: EdgeInsets.only(left: kSmall, right: kSmall, top: kSmall, bottom: kExtraSmall),
                   child: Image.network(
-                    widget.image,
+                    widget.post.image,
                     fit: BoxFit.fill,
                     width: double.infinity,
                   ),
@@ -105,10 +101,10 @@ class _PostWidgetState extends State<PostWidget> {
                           text: TextSpan(
                             children: <TextSpan>[
                               TextSpan(
-                                text: '${widget.title}\n',
+                                text: '${widget.post.title}\n',
                                 style: kBodyText,
                               ),
-                              TextSpan(text: StringUtils.formatDateTime(widget.date), style: kGreyText),
+                              TextSpan(text: widget.post.date, style: kGreyText),
                             ],
                           ),
                         ),
@@ -125,7 +121,7 @@ class _PostWidgetState extends State<PostWidget> {
                                   isBtnHover = false;
                                 }),
                                 child: GestureDetector(
-                                  onTap: () => widget.onPressed(widget.title),
+                                  onTap: () => widget.onPressed(widget.post),
                                   child: Opacity(
                                     opacity: isHover ? 1.0 : 0.0,
                                     child: Container(

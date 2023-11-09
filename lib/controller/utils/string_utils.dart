@@ -9,7 +9,27 @@ class StringUtils {
     return inputString.replaceAll(' ', '-');
   }
 
-  static String formatDateTime(DateTime dateTime) {
-    return DateFormat('MMM dd yyyy').format(dateTime);
+  static String replaceHyphensWithSpaces(String inputString) {
+    return inputString.replaceAll('-', ' ');
+  }
+
+  static String formatDateString(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+
+    DateFormat outputFormat = DateFormat('MMM dd, yyyy');
+    String formattedDate = outputFormat.format(dateTime);
+
+    return formattedDate;
+  }
+
+  static List<String> formatTags(String tags) {
+    String trim = tags.trim();
+
+    if (trim.endsWith(',')) {
+      trim = trim.substring(0, trim.length - 1);
+    }
+
+    List<String> newTags = trim.split(', ');
+    return newTags;
   }
 }

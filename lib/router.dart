@@ -1,3 +1,4 @@
+import 'package:sangjishik/controller/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/user_interface/app_scaffold.dart';
 import 'package:sangjishik/user_interface/screens/about/about_screen.dart';
@@ -6,6 +7,7 @@ import 'package:sangjishik/user_interface/screens/home/home_screen.dart';
 import 'package:sangjishik/user_interface/screens/home/home_wrapper.dart';
 import 'package:sangjishik/user_interface/screens/home/mobile_login_screen.dart';
 import 'package:sangjishik/user_interface/screens/posts/post_screen.dart';
+import 'package:sangjishik/controller/models/post.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -26,8 +28,11 @@ final appRouter = GoRouter(
                   path: 'post/:title',
                   pageBuilder: (context, state) {
                     final title = state.pathParameters['title'];
+
+                    Post post = posts.posts
+                        .firstWhere((element) => element.title == StringUtils.replaceHyphensWithSpaces(title!));
                     return NoTransitionPage(
-                      child: PostScreen(title: title!),
+                      child: PostScreen(post: post),
                     );
                   },
                 ),

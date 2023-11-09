@@ -36,6 +36,8 @@ class _HomeWrapperState extends State<HomeWrapper> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    double width = context.widthPx;
+
     void onTap(int index) {
       widget.navigationShell.goBranch(index, initialLocation: index == widget.navigationShell.currentIndex);
 
@@ -62,9 +64,9 @@ class _HomeWrapperState extends State<HomeWrapper> with SingleTickerProviderStat
           curve: Curves.easeInOut,
           top: 55,
           bottom: 0,
-          right: showLoginMenu ? 0 : -MediaQuery.of(context).size.width,
-          left: showLoginMenu ? 0 : MediaQuery.of(context).size.width,
-          child: LoginMenu(onTap: onTap),
+          right: showLoginMenu ? 0 : -width,
+          left: showLoginMenu ? 0 : width,
+          child: Visibility(visible: width < 799, child: LoginMenu(onTap: onTap)),
         ),
       ],
     );

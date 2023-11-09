@@ -1,18 +1,17 @@
+import 'package:sangjishik/controller/utils/string_utils.dart';
+
 class Post {
-  final String title, post, image;
+  final String title, post, image, date;
   final List<String> tags;
   final int id;
-  final DateTime date;
-  final List<Map<String, String>>? comments;
 
-  Post(this.title, this.post, this.image, this.tags, this.id, this.date, this.comments);
+  Post(this.title, this.post, this.image, this.tags, this.id, this.date);
 
   Post.fromJson(Map<String, dynamic> json)
-      : id = json['id'] ?? '',
+      : id = json['count'] ?? 0,
         title = json['title'] ?? '',
         post = json['post'] ?? '',
         image = json['image'] ?? '',
-        tags = json['tags'] ?? [],
-        date = json['date'] ?? '',
-        comments = json['comments'];
+        tags = StringUtils.formatTags(json['tags']) ?? [],
+        date = StringUtils.formatDateString(json['dateCreated']) ?? '';
 }

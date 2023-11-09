@@ -16,10 +16,9 @@ class Posts extends ChangeNotifier {
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
 
-      print(data);
-      print('Should be nothing to print!');
-
-      //TODO: Parse data here.
+      for (int i = 0; i < data.length; i++) {
+        posts.add(Post.fromJson(data[0]));
+      }
     }
   }
 }
