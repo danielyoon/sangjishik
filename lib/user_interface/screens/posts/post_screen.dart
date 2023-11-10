@@ -31,14 +31,13 @@ class PostScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Gap(kExtraLarge),
+                Gap(kLarge),
                 Text(post.title, style: kHeader),
                 Gap(kMedium),
-                //TODO: Test with image from phone cause I want all images to be self-produced!
                 Image.network(
                   post.image,
                   width: double.infinity,
-                  height: height * .5,
+                  height: height * .65,
                   fit: BoxFit.fill,
                 ),
                 Gap(kMedium),
@@ -53,6 +52,7 @@ class PostScreen extends StatelessWidget {
                         readOnly: true, textSelectionThemeData: TextSelectionThemeData(cursorColor: Colors.black)),
                   ),
                 ),
+                Gap(kLarge),
               ],
             ),
           ),

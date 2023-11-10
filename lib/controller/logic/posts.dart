@@ -17,7 +17,7 @@ class Posts extends ChangeNotifier {
       List<dynamic> data = jsonDecode(response.body);
 
       for (int i = 0; i < data.length; i++) {
-        posts.add(Post.fromJson(data[0]));
+        posts.add(Post.fromJson(data[i]));
       }
     }
   }
