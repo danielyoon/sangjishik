@@ -27,19 +27,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return quotes[randomIndex];
   }
 
+  //FIXME: To all modules with buttons, add keyboard 'Enter' button detection
+
+  //TODO: Create a TODO // FIX List screen
   @override
   Widget build(BuildContext context) {
     double width = context.widthPx;
     double height = context.heightPx;
     return Theme(
       data: Theme.of(context).copyWith(
-        scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
+        scrollbarTheme: ScrollbarThemeData(
+            thumbColor: MaterialStateProperty.all(
+                (Colors.transparent))),
       ),
       child: SingleChildScrollView(
         child: SizedBox(
           height: height,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: kLarge),
+            padding:
+                EdgeInsets.symmetric(horizontal: kLarge),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
