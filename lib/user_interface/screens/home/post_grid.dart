@@ -30,7 +30,7 @@ class PostGrid extends StatelessWidget {
           crossAxisCount: getCrossAxisCount(),
           crossAxisSpacing: kMedium,
           mainAxisSpacing: kMedium,
-          childAspectRatio: 1.4,
+          childAspectRatio: (width < 450) ? .7 : 1.4,
           children: posts.posts.map((post) {
             return GridTile(
               child: PostWidget(
