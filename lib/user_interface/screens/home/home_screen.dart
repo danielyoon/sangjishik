@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //FIXME: To all modules with buttons, add keyboard 'Enter' button detection
+  //FIXME: Tab button should also move focusNodes around
 
   //TODO: Create a TODO // FIX List screen
   @override
@@ -36,16 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
     double height = context.heightPx;
     return Theme(
       data: Theme.of(context).copyWith(
-        scrollbarTheme: ScrollbarThemeData(
-            thumbColor: MaterialStateProperty.all(
-                (Colors.transparent))),
+        scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all((Colors.transparent))),
       ),
       child: SingleChildScrollView(
         child: SizedBox(
           height: height,
           child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: kLarge),
+            padding: EdgeInsets.symmetric(horizontal: kLarge),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

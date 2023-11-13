@@ -33,7 +33,7 @@ class AuthUser extends ChangeNotifier {
 
     CloudinaryResponse cloudinaryResponse = await cloudinary.uploadImage(image.path);
 
-    Response response = await nodejs.createPost(title, tags, cloudinaryResponse.url, post, tokens.token.jwtToken);
+    Response response = await nodejs.createPost(title, tags, cloudinaryResponse.secureUrl, post, tokens.token.jwtToken);
     return response.statusCode == 200;
   }
 
