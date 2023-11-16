@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/screens/home/post_grid.dart';
+import 'package:sangjishik/ui/screens/home/post_grid.dart';
 import 'package:sangjishik/controller/data/quotes.dart';
 
 class HomeScreen extends StatefulWidget {

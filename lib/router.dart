@@ -1,12 +1,12 @@
 import 'package:sangjishik/controller/utils/string_utils.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/app_scaffold.dart';
-import 'package:sangjishik/user_interface/screens/about/about_screen.dart';
-import 'package:sangjishik/user_interface/screens/create/create_posts_screen.dart';
-import 'package:sangjishik/user_interface/screens/home/home_screen.dart';
-import 'package:sangjishik/user_interface/screens/home/home_wrapper.dart';
-import 'package:sangjishik/user_interface/screens/home/mobile_login_screen.dart';
-import 'package:sangjishik/user_interface/screens/posts/post_screen.dart';
+import 'package:sangjishik/ui/app_scaffold.dart';
+import 'package:sangjishik/ui/screens/about/about_screen.dart';
+import 'package:sangjishik/ui/screens/create/create_posts_screen.dart';
+import 'package:sangjishik/ui/screens/home/home_screen.dart';
+import 'package:sangjishik/ui/screens/home/home_wrapper.dart';
+import 'package:sangjishik/ui/screens/home/mobile_login_screen.dart';
+import 'package:sangjishik/ui/screens/posts/post_screen.dart';
 import 'package:sangjishik/controller/models/post.dart';
 
 final appRouter = GoRouter(

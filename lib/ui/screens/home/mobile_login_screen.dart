@@ -3,7 +3,7 @@ import 'package:sangjishik/controller/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/controller/models/enums.dart';
 import 'package:sangjishik/controller/utils/debouncer.dart';
-import 'package:sangjishik/user_interface/screens/home/login_popup.dart';
+import 'package:sangjishik/ui/screens/home/login_popup.dart';
 
 class MobileLoginScreen extends StatefulWidget {
   const MobileLoginScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:sangjishik/core_packages.dart';
 import 'package:sangjishik/controller/logic/auth_user.dart';
 import 'package:sangjishik/controller/models/user.dart';
-import 'package:sangjishik/user_interface/screens/home/logout_popup.dart';
+import 'package:sangjishik/ui/screens/home/logout_popup.dart';
 
 class LoginMenu extends StatefulWidget with GetItStatefulWidgetMixin {
   final ValueChanged<int>? onTap;

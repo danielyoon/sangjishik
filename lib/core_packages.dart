@@ -6,5 +6,5 @@ export 'package:get_it/get_it.dart';
 export 'package:get_it_mixin/get_it_mixin.dart';
 export 'package:sized_context/sized_context.dart';
 export 'package:sangjishik/main.dart';
-export 'package:sangjishik/user_interface/widgets/widgets.dart';
-export 'package:sangjishik/user_interface/constants.dart';
+export 'package:sangjishik/ui/widgets/widgets.dart';
+export 'package:sangjishik/ui/constants.dart';

@@ -1,6 +1,6 @@
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/screens/home/home_app_bar.dart';
-import 'package:sangjishik/user_interface/screens/home/login_menu.dart';
+import 'package:sangjishik/ui/screens/home/home_app_bar.dart';
+import 'package:sangjishik/ui/screens/home/login_menu.dart';
 
 class HomeWrapper extends StatefulWidget {
   final StatefulNavigationShell navigationShell;

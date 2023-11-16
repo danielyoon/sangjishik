@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sangjishik/controller/utils/loading_state_mixin.dart';
 import 'package:sangjishik/core_packages.dart';
-import 'package:sangjishik/user_interface/screens/create/tag_popup.dart';
+import 'package:sangjishik/ui/screens/create/tag_popup.dart';
 import 'package:sangjishik/controller/utils/debouncer.dart';
 
 class CreatePostsScreen extends StatefulWidget {
