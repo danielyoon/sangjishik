@@ -1,16 +1,22 @@
-# sangjishik
+# Welcome to sangjishik 👋
 
-My personal blog
+> Frontend for my blog!
 
-## Getting Started
+### 🏠 [Homepage](www.sangjishik.com)
 
-This project is a starting point for a Flutter application.
+### ✨ [Demo](www.sangjishik.com)
 
-A few resources to get you started if this is your first Flutter project:
+## Author
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+👤 **Daniel Yoon**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Website: www.sangjishik.com
+* Github: [@danielyoon](https://github.com/danielyoon)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
